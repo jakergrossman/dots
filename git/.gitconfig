@@ -1,0 +1,11 @@
+[alias]
+    # shorter commands
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --oneline --all --decorate --graph
+
+[user]
+    email = jake.r.grossman@gmail.com
+    name = jakergrossman
