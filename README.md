@@ -9,8 +9,17 @@ zsh     > oh-my-zsh plugins and themes, shell settings
 
 # usage
 i use [stow](https://www.gnu.org/software/stow/) to manage my dotfiles
+
 ```
 git clone https://github.com/jakergrossman/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 stow vim # and any other packages
+```
+
+in order to use vim, you must first initialize the submodules for the plugins
+with the following commands:
+
+```
+git submodule init
+git submodule update
 ```
