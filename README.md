@@ -11,7 +11,7 @@ zsh     > oh-my-zsh plugins and themes, shell settings
 i use [stow](https://www.gnu.org/software/stow/) to manage my dotfiles
 
 ```
-git clone https://github.com/jakergrossman/dotfiles.git ~/dotfiles
+git clone https://github.com/jakergrossman/jakergrossman.git ~/jakergrossman
 cd ~/dotfiles
 ```
 
@@ -28,4 +28,3 @@ then, install selected modules with the following command
 ```
 stow vim # and any other packages
 ```
-
