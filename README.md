@@ -17,8 +17,7 @@ git clone https://github.com/jakergrossman/jakergrossman.git ~/jakergrossman
 cd ~/dotfiles
 ```
 
-in order to use this vim configuration, you must first initialize the submodules for the plugins
-with the following commands:
+in order to setup the required submodules, run the following commands:
 
 ```
 git submodule init

@@ -2,7 +2,7 @@
 set EDITOR=vim
 
 # if stack is installed
-if [ -x $(which stack) ]; then
+if [ -x "$(which stack)" ]; then
     alias ghci="stack ghci"
 fi
 
