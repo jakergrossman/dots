@@ -1,5 +1,6 @@
 # dotfiles
 ```
+fonts       > custom fonts
 git         > git config and aliases
 vim         > vim editor config
 vim-minimal > mininal vim editor config
