@@ -14,4 +14,7 @@ alias gc='git commit'
 alias gd='git diff'
 alias go='git checkout'
 
-# alias 
+# create new note
+note() {
+    vim "+Note $*"
+}
