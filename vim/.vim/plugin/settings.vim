@@ -7,8 +7,8 @@ filetype plugin indent on
 set showmatch           " show matching brackets
 set ignorecase          " do case insensitive matching
 set incsearch           " incremental searching for partial matches
-set number              " line numbers
-set relativenumber      " relative line numbers
+" set number            " line numbers
+" set relativenumber    " relative line numbers
 set undolevels=999      " i mess up a lot
 set hlsearch            " hightlight search
 set tabstop=4           " tab size
