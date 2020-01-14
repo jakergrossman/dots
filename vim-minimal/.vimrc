@@ -32,3 +32,9 @@ set term=xterm-256color
 
 " use jk as escape
 inoremap jk <Esc>
+
+" set default fold method
+set foldmethod=indent
+
+" set default fold level
+set foldlevel=2
