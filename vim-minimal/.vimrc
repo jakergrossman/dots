@@ -6,9 +6,6 @@ syntax on
 " use utf-8
 set encoding=utf-8
 
-" line numbers
-set number
-
 " tab size
 set tabstop=4
 
