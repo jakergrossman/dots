@@ -1,9 +1,9 @@
 if v:progname == 'vi'
     set noloadplugins
+
 endif
 
-let mapleader="\<Space>"
-let maplocalleader="\\"
+map <Space> <Leader>
 
 if &loadplugins
     if has('packages')

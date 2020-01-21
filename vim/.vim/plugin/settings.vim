@@ -34,6 +34,7 @@ set signcolumn=yes      " always show sign column for git icons
 set updatetime=300      " set low so gitgutter updates reasonably quickly
 set foldmethod=indent   " set fold method
 set foldlevelstart=1    " set default fold level v low
+set backspace=indent,eol,start
 
 set term=xterm-256color
 
