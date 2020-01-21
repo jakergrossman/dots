@@ -29,3 +29,13 @@ if [ -x "$(which fzf-tmux)" ]; then
       [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
     }
 fi
+
+# fd [FUZZY PATTERN] - cd to the selected directory
+if [ -x "$(which fzf)" ]; then
+    fd() {
+      local dir
+      dir=$(find ${1:-.} -path '*/\.*' -prune \
+                      -o -type d -print 2> /dev/null | fzf +m) &&
+      cd "$dir"
+    }
+fi
