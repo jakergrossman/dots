@@ -3,7 +3,8 @@ if v:progname == 'vi'
 
 endif
 
-map <Space> <Leader>
+let mapleader="\<Space>"
+let maplocalleader="\\"
 
 if &loadplugins
     if has('packages')
