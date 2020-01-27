@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-set nocompatible        " disable vi compatability
+set nocompatible        " disable vi compatibility
 set encoding=utf-8      " use utf-8
 syntax on               " syntax highlighting
 filetype plugin indent on
@@ -9,7 +9,7 @@ set ignorecase          " do case insensitive matching
 set incsearch           " incremental searching for partial matches
 " set number            " line numbers
 " set relativenumber    " relative line numbers
-set undolevels=999      " i mess up a lot
+set undolevels=999      " set undo levels
 set hlsearch            " hightlight search
 set tabstop=4           " tab size
 set shiftwidth=4        " indentation size
@@ -24,7 +24,7 @@ set smarttab            " better tabs
 set ttimeout            " set timeout
 set ttimeoutlen=100
 set synmaxcol=500       " syntax limit
-set laststatus=2        " always show the status line'
+set laststatus=2        " always show the status line
 set ruler               " show cursor position
 set noswapfile          " turn off swapfiles
 set nobackup
@@ -33,7 +33,7 @@ set noshowmode          " turn of mode showing, let lightline handle it
 set signcolumn=yes      " always show sign column for git icons
 set updatetime=300      " set low so gitgutter updates reasonably quickly
 set foldmethod=indent   " set fold method
-set foldlevelstart=1    " set default fold level v low
+set foldlevelstart=5    " set default fold level
 set backspace=indent,eol,start
 
 set term=xterm-256color
