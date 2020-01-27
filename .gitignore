@@ -1,4 +1,4 @@
 # don't keep .netrwhist to keep repo pure
 vim/.vim/.netrwhist
-
+vim/.vim/undodir
 .uuid

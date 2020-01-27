@@ -36,6 +36,9 @@ set foldmethod=indent   " set fold method
 set foldlevelstart=5    " set default fold level
 set backspace=indent,eol,start
 
+set undofile " persistent undo
+set undodir=~/.vim/undodir " set persistent undo dir
+
 set term=xterm-256color
 
 " plugin config -----------------------
