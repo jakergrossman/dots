@@ -28,3 +28,6 @@
 [submodule "vim-haskell-indent"]
 	path = vim/.vim/pack/bundle/start/vim-haskell-indent
 	url = https://github.com/itchyny/vim-haskell-indent
+[submodule "emmet-vim"]
+	path = vim/.vim/pack/bundle/start/emmet-vim
+	url = https://github.com/mattn/emmet-vim

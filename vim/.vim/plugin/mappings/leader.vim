@@ -28,3 +28,9 @@ nnoremap <Leader>h :bunload<CR>
 " close current buffer
 nnoremap <Leader><BS> :bdelete<CR>
 
+" turn off highlight
+nnoremap <Leader>i :nohl<CR>
+
+" emmet expand abbreviation
+nmap <Leader>e $<Plug>(emmet-expand-abbr)
+vmap <Leader>e $<Plug>(emmet-expand-abbr)
