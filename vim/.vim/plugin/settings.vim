@@ -14,7 +14,6 @@ set hlsearch            " hightlight search
 set tabstop=4           " tab size
 set shiftwidth=4        " indentation size
 set softtabstop=4       " tabs/spaces interop
-set expandtab           " expand tabs to spaces
 set termguicolors       " enable true colors
 set wildmenu            " enabled wildmenu
 set splitbelow          " natural splits
