@@ -34,3 +34,7 @@ nnoremap <Leader>i :nohl<CR>
 " emmet expand abbreviation
 nmap <Leader>e $<Plug>(emmet-expand-abbr)
 vmap <Leader>e $<Plug>(emmet-expand-abbr)
+
+" copy to clipboard
+nmap <Leader>c "*yy
+vmap <Leader>c "*y
