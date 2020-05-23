@@ -2,13 +2,10 @@ scriptencoding utf-8
 
 set nocompatible        " disable vi compatibility
 set encoding=utf-8      " use utf-8
-syntax on               " syntax highlighting
-filetype plugin indent on
 set showmatch           " show matching brackets
 set ignorecase          " do case insensitive matching
 set incsearch           " incremental searching for partial matches
-" set number            " line numbers
-" set relativenumber    " relative line numbers
+set number              " line numbers
 set undolevels=999      " set undo levels
 set hlsearch            " hightlight search
 set tabstop=4           " tab size
@@ -55,3 +52,6 @@ let g:git_gutter_map_keys=0
 
 " vim-haskell-indent
 let g:haskell_indent_disable=1 " let vim-haskell-indent handle indentation
+
+" emmet-vim
+let g:user_emmet_leader_key=','

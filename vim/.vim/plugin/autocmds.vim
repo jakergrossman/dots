@@ -14,8 +14,5 @@ if has('autocmd')
             autocmd BufEnter,FocusGained,VimEnter,WinEnter * call autocmds#focus_statusline()
             autocmd FocusLost,WinLeave * call autocmds#blur_statusline()
         endif
-
-        " make working directory relative to current file
-        autocmd BufEnter * silent! lcd %:p:h
     augroup end
 endif

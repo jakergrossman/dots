@@ -3,10 +3,9 @@
 fonts       > custom fonts
 git         > git config and aliases
 vim         > vim editor config
-vim-minimal > mininal vim editor config
-nvim        > nvim editor config (requires that the vim config be installed)
 tmux        > terminal multiplexer
 zsh         > oh-my-zsh plugins and themes, shell settings
+kitty       > kitty terminal emulator settings
 ```
 
 # usage
