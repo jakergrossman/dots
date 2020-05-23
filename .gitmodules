@@ -1,33 +1,15 @@
 [submodule "base16-vim"]
 	path = vim/.vim/pack/bundle/start/base16-vim
 	url = https://github.com/chriskempson/base16-vim
-[submodule "gv"]
-	path = vim/.vim/pack/bundle/start/gv
-	url = https://github.com/junegunn/gv.vim
-[submodule "haskell-vim"]
-	path = vim/.vim/pack/bundle/start/haskell-vim
-	url = https://github.com/neovimhaskell/haskell-vim
-[submodule "pinnacle"]
-	path = vim/.vim/pack/bundle/start/pinnacle
-	url = https://github.com/wincent/pinnacle
-[submodule "taboo"]
-	path = vim/.vim/pack/bundle/start/taboo
-	url = https://github.com/gcmt/taboo.vim
 [submodule "vim-commentary"]
 	path = vim/.vim/pack/bundle/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
-[submodule "vim-fugitive"]
-	path = vim/.vim/pack/bundle/start/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
 [submodule "vim-gitgutter"]
 	path = vim/.vim/pack/bundle/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 [submodule "vim-polyglot"]
 	path = vim/.vim/pack/bundle/start/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
-[submodule "vim-haskell-indent"]
-	path = vim/.vim/pack/bundle/start/vim-haskell-indent
-	url = https://github.com/itchyny/vim-haskell-indent
 [submodule "emmet-vim"]
 	path = vim/.vim/pack/bundle/start/emmet-vim
 	url = https://github.com/mattn/emmet-vim

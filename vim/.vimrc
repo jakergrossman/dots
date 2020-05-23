@@ -9,14 +9,10 @@ let maplocalleader="\\"
 if &loadplugins
     if has('packages')
         packadd! base16-vim
-        packadd! haskell-vim
         packadd! vim-commentary
         packadd! vim-gitgutter
         packadd! vim-polyglot
-        packadd! gv
-        packadd! taboo
-        packadd! vim-fugitive
-        packadd! vim-haskell-indent
+        packadd! emmet-vim
     else
         " Use Pathogen for plug-in loading.
         source $HOME/.vim/pack/bundle/opt/vim-pathogen/autoload/pathogen.vim
