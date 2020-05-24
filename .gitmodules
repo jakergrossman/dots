@@ -13,3 +13,6 @@
 [submodule "emmet-vim"]
 	path = vim/.vim/pack/bundle/start/emmet-vim
 	url = https://github.com/mattn/emmet-vim
+[submodule "pinnacle"]
+	path = vim/.vim/pack/bundle/start/pinnacle
+	url = https://github.com/wincent/pinnacle
