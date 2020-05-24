@@ -29,7 +29,7 @@ set nowb
 set noshowmode          " turn of mode showing, let lightline handle it
 set signcolumn=yes      " always show sign column for git icons
 set updatetime=300      " set low so gitgutter updates reasonably quickly
-set foldmethod=indent   " set fold method
+set foldmethod=marker   " set fold method
 set foldlevelstart=5    " set default fold level
 set backspace=indent,eol,start
 
