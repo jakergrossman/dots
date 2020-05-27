@@ -16,3 +16,6 @@
 [submodule "pinnacle"]
 	path = vim/.vim/pack/bundle/start/pinnacle
 	url = https://github.com/wincent/pinnacle
+[submodule "zsh-vim-mode"]
+	path = zsh/.oh-my-zsh/custom/plugins/zsh-vim-mode
+	url = https://github.com/softmoth/zsh-vim-mode
