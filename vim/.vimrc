@@ -13,6 +13,7 @@ if &loadplugins
         packadd! vim-gitgutter
         packadd! vim-polyglot
         packadd! emmet-vim
+        packadd! vim-tmux-navigator
     else
         " Use Pathogen for plug-in loading.
         source $HOME/.vim/pack/bundle/opt/vim-pathogen/autoload/pathogen.vim
