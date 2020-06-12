@@ -3,7 +3,7 @@ scriptencoding utf-8
 set nocompatible        " disable vi compatibility
 set encoding=utf-8      " use utf-8
 set showmatch           " show matching brackets
-set ignorecase          " do case insensitive matching
+set noignorecase        " do case sensitive matching
 set incsearch           " incremental searching for partial matches
 set number              " line numbers
 set undolevels=999      " set undo levels
@@ -29,7 +29,7 @@ set nowb
 set noshowmode          " turn of mode showing, let lightline handle it
 set signcolumn=yes      " always show sign column for git icons
 set updatetime=300      " set low so gitgutter updates reasonably quickly
-set foldmethod=marker   " set fold method
+set foldmethod=indent   " set fold method
 set foldlevelstart=5    " set default fold level
 set backspace=indent,eol,start
 
@@ -54,5 +54,5 @@ let g:git_gutter_map_keys=0
 " vim-haskell-indent
 let g:haskell_indent_disable=1 " let vim-haskell-indent handle indentation
 
-" emmet-vim
-let g:user_emmet_leader_key=','
+" don't use emmet globally
+let g:user_emmet_install_global = 0

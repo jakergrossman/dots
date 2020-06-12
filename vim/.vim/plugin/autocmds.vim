@@ -14,5 +14,8 @@ if has('autocmd')
             autocmd BufEnter,FocusGained,VimEnter,WinEnter * call autocmds#focus_statusline()
             autocmd FocusLost,WinLeave * call autocmds#blur_statusline()
         endif
+
+        " enable emmet for html/css
+        autocmd FileType html,css EmmetInstall
     augroup end
 endif
