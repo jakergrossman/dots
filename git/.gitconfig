@@ -6,6 +6,12 @@
     br = branch
     hist = log --oneline --all --decorate --graph
 
+    # re-index project tags
+    ctags = !.git/hooks/ctags
+
 [user]
     email = jake.r.grossman@gmail.com
     name = jakergrossman
+
+[init]
+	templatedir = ~/.git_template

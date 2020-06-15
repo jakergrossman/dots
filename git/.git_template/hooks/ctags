@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# cause script to immediately exit
+# when it encounters an error
+set -e
+PATH="/usr/local/bin:$PATH"
+
+# delete $$.tags on exit in case
+# script encounters an error
+# before the mv call later
+trap 'rm -f "$$.tags"' EXIT
+
+# pipe `git ls-files` into ctags
+git ls-files | \
+    ctags --tag-relative -R -f "$$.tags"
+
+# move temp file to final location
+mv "$$.tags" ".git/tags"
