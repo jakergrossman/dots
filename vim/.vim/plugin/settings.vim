@@ -31,10 +31,10 @@ set signcolumn=yes      " always show sign column for git icons
 set updatetime=300      " set low so gitgutter updates reasonably quickly
 set foldmethod=indent   " set fold method
 set foldlevelstart=5    " set default fold level
-set backspace=indent,eol,start
-set tagrelative " relative tags
-set tags^=./.git/tags;$HOME " look for git tags in the .git folder
+set notagrelative       " relative tags
+set tags^=./.git/tags;~ " look for git tags in the .git folder
 set rtp+=/usr/local/opt/fzf " add fzf to &runtime path
+set backspace=indent,eol,start
 
 set undofile " persistent undo
 set undodir=~/.vim/undodir " set persistent undo dir
