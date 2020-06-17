@@ -14,7 +14,8 @@ if &loadplugins
         packadd! vim-polyglot
         packadd! emmet-vim
         packadd! vim-tmux-navigator
-        packadd! fzf.vim
+        packadd! fzf/plugin/ " minimal vim wrapper bundled with fzf
+        packadd! fzf.vim     " 'default' implementations from https://github.com/junegunn/fzf
     else
         " Use Pathogen for plug-in loading.
         source $HOME/.vim/pack/bundle/opt/vim-pathogen/autoload/pathogen.vim
