@@ -15,3 +15,7 @@
 
 [init]
 	templatedir = ~/.git_template
+
+[filter "tabspace"]
+    smudge = gexpand --tabs=4 --initial
+    clean = gunexpand --tabs=4 --first-only
