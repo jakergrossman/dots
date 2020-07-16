@@ -16,6 +16,6 @@ if has('autocmd')
         endif
 
         " enable emmet for html/css
-        autocmd FileType html,css EmmetInstall
+        autocmd FileType html,html+django,css EmmetInstall
     augroup end
 endif
