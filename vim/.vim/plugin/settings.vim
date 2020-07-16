@@ -1,11 +1,13 @@
 scriptencoding utf-8
 
 set nocompatible        " disable vi compatibility
+set nowrap
 set encoding=utf-8      " use utf-8
 set showmatch           " show matching brackets
 set noignorecase        " do case sensitive matching
 set incsearch           " incremental searching for partial matches
 set number              " line numbers
+set relativenumber      " relative line numbers
 set undolevels=999      " set undo levels
 set hlsearch            " hightlight search
 set tabstop=4           " tab size
