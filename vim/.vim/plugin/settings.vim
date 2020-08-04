@@ -28,7 +28,6 @@ set ruler               " show cursor position
 set noswapfile          " turn off swapfiles
 set nobackup
 set nowb
-set noshowmode          " turn of mode showing, let lightline handle it
 set signcolumn=yes      " always show sign column for git icons
 set updatetime=300      " set low so gitgutter updates reasonably quickly
 set foldmethod=indent   " set fold method

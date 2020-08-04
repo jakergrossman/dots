@@ -1,6 +1,5 @@
 if v:progname == 'vi'
     set noloadplugins
-
 endif
 
 let mapleader="\<Space>"
@@ -8,10 +7,8 @@ let maplocalleader="\\"
 
 if &loadplugins
     if has('packages')
-        packadd! base16-vim
         packadd! vim-commentary
         packadd! vim-gitgutter
-        packadd! vim-polyglot
         packadd! emmet-vim
         packadd! vim-tmux-navigator
         packadd! fzf/plugin/ " minimal vim wrapper bundled with fzf
