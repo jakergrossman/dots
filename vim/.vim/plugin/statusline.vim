@@ -20,7 +20,7 @@ if has("statusline")
     set statusline+=l                            " l (literal)
     set statusline+=[                            " left bracket
     set statusline+=%l                           " current line number
-    set statusline+=/                            " seperator
+    set statusline+=/                            " separator
     set statusline+=%L                           " total lines in file
     set statusline+=]                            " right bracket
     set statusline+=\                            " space

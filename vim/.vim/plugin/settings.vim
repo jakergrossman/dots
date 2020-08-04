@@ -42,21 +42,15 @@ set undodir=~/.vim/undodir " set persistent undo dir
 
 set term=xterm-256color
 
+colorscheme apprentice
+
 " plugin config -----------------------
-
-" taboo
-let g:taboo_tabline=0 " let lightline handle tablines
-let g:taboo_renamed_tab_format='%l%m'
-
 " gitgutter
 let g:gitgutter_sign_added='+'
 let g:gitgutter_sign_modified='~'
 let g:gitgutter_sign_removed='-'
 let g:git_gutter_sign_modified_removed='~'
 let g:git_gutter_map_keys=0
-
-" vim-haskell-indent
-let g:haskell_indent_disable=1 " let vim-haskell-indent handle indentation
 
 " don't use emmet globally
 let g:user_emmet_install_global = 0

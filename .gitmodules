@@ -16,3 +16,6 @@
 [submodule "vim-tmux-navigator"]
 	path = vim/.vim/pack/bundle/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "apprentice"]
+	path = vim/.vim/pack/bundle/start/Apprentice
+	url = https://github.com/romainl/Apprentice
