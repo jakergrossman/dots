@@ -1,21 +1,21 @@
 [submodule "vim-commentary"]
-	path = vim/.vim/pack/bundle/start/vim-commentary
+	path = vim/.vim/pack/bundle/opt/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "vim-gitgutter"]
-	path = vim/.vim/pack/bundle/start/vim-gitgutter
+	path = vim/.vim/pack/bundle/opt/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 [submodule "vim-polyglot"]
-	path = vim/.vim/pack/bundle/start/vim-polyglot
+	path = vim/.vim/pack/bundle/opt/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
 [submodule "emmet-vim"]
-	path = vim/.vim/pack/bundle/start/emmet-vim
+	path = vim/.vim/pack/bundle/opt/emmet-vim
 	url = https://github.com/mattn/emmet-vim
 [submodule "zsh-vim-mode"]
 	path = zsh/.oh-my-zsh/custom/plugins/zsh-vim-mode
 	url = https://github.com/softmoth/zsh-vim-mode
 [submodule "vim-tmux-navigator"]
-	path = vim/.vim/pack/bundle/start/vim-tmux-navigator
+	path = vim/.vim/pack/bundle/opt/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule "apprentice"]
-	path = vim/.vim/pack/bundle/start/Apprentice
+	path = vim/.vim/pack/bundle/opt/Apprentice
 	url = https://github.com/romainl/Apprentice
