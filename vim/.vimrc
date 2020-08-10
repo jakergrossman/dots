@@ -7,6 +7,7 @@ let maplocalleader="\\"
 
 if &loadplugins
     if has('packages')
+        packadd! Apprentice
         packadd! vim-polyglot
         packadd! vim-commentary
         packadd! vim-gitgutter
