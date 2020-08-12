@@ -36,3 +36,44 @@ function! statusline#fenc() abort
         return ''
     endif
 endfunction
+
+" status line constructor
+function! statusline#get_statusline(is_condensed) abort
+    let l:status='%{statusline#outerpadding()}'   " leading space
+    let l:status.='%{statusline#relpath()}'       " relative path to file
+
+    if a:is_condensed
+        " condensed statusline only has leading space and relative path
+        return l:status
+    endif
+
+    let l:status.='\ '                            " space
+
+    " File type and encoding (needs to be all one line):
+    " %(                   " start item group
+    " [                    " left bracket (literal)
+    " %Y                   " filetype
+    " %M                   " modified flag: ,+/,- (modified/unmodifiable)
+    " %R                   " read-only flag: ,RO
+    " %{statusline#fenc()} " file encoding if not UTF-8
+    " ]                    " right bracket (literal)
+    " %)                   " end item group
+    let l:status.='%([%Y%M%R%{statusline#fenc()}]%)'
+
+    let l:status.='%='                           " split point for left and right
+    let l:status.='\ '                           " space
+    let l:status.='l'                            " l (literal)
+    let l:status.='['                            " left bracket
+    let l:status.='%l'                           " current line number
+    let l:status.='/'                            " separator
+    let l:status.='%L'                           " total lines in file
+    let l:status.=']'                            " right bracket
+    let l:status.='\ '                           " space
+    let l:status.='\c'                           " c (literal)
+    let l:status.='['                            " left bracket
+    let l:status.='%v'                           " virtual column number
+    let l:status.=']'                            " right bracket
+    let l:status.='%{statusline#outerpadding()}' " outer padding
+
+    return l:status
+endfunction
