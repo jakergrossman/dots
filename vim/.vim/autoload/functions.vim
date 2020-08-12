@@ -1,25 +1,26 @@
-" creates a new note with the current timestamp, inspired by https://vimways.org/2019/personal-notetaking-in-vim/
 function! functions#edit(...)
+    " check if a filename was passed as an argument
+    let l:has_filename = len(a:000) > 0
+
     " build the file name
-    let l:sep=''
-    if len(a:000) > 0
-        let l:sep='-'
+    let l:fname=expand('%:p:h') . '/' . strftime("%F-%H%M")
+
+    if l:has_filename
+        let l:fname.=join(a:000, '-')
     endif
-    let l:fname=expand('%:p:h') . '/' . strftime("%F-%H%M") . l:sep . join(a:000, '-') . '.md'
+
+    let l:fname.='.md'
 
     " edit the new file
     exec "e " . l:fname
 
-    " enter the title and timestamp in the new file
-    if len(a:000) > 0 " arguments exist
-        let l:sep=' '
-    else
-        let l:sep=''
+    " build and write timestamp
+    let l:timestamp=strftime('%Y-%m-%d %H:%M')
+    exec 'call append(0, "' . l:timestamp . '")'
+
+    if l:has_filename
+        " build and write header
+        let l:header='# ' . join(a:000, ' ')
+        exec 'call append(0, "' . l:header . '")'
     endif
-
-    " build header
-    let l:header=strftime('%Y-%m-%d %H:%M') . l:sep . join(a:000, l:sep)
-
-    " write header to first line of file
-    exec "call setline('.', '" . l:header . "')"
 endfunc
