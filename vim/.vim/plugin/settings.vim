@@ -1,6 +1,5 @@
 scriptencoding utf-8
 
-set nocompatible        " disable vi compatibility
 set nowrap
 set encoding=utf-8      " use utf-8
 set showmatch           " show matching brackets
@@ -34,7 +33,6 @@ set foldmethod=indent   " set fold method
 set foldlevelstart=5    " set default fold level
 set notagrelative       " relative tags
 set tags^=./.git/tags;~ " look for git tags in the .git folder
-set rtp+=/usr/local/opt/fzf " add fzf to &runtime path
 set backspace=indent,eol,start
 
 set undofile " persistent undo
