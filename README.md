@@ -9,22 +9,20 @@ kitty       > kitty terminal emulator settings
 ```
 
 # usage
-i use [stow](https://www.gnu.org/software/stow/) to manage my dotfiles
-
+cloning:
 ```
-git clone https://github.com/jakergrossman/jakergrossman.git ~/jakergrossman
-cd ~/dotfiles
-```
-
-in order to setup the required submodules, run the following commands:
-
-```
-git submodule init
-git submodule update
+git clone https://github.com/jakergrossman/jakergrossman.git
+cd jakergrossman
 ```
 
-then, install selected modules with the following command
+then, install selected modules with the `install.sh` script:
 
 ```
-stow vim # and any other packages
+Usage: ./install.sh [-h|-m] [-vdn] module1 module2 ...
+    -h        Show this help dialog.
+    -v        Show verbose output.
+    -d        Remove modules instead of installing them.
+    -n        Print the actions that would be executed,
+              but do not execute them.
+    -m        Print a list of modules.
 ```
