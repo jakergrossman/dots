@@ -11,17 +11,21 @@ fi
 modules=$(find . -mindepth 1 -maxdepth 1 -type d | sed 's/^\.\///' | grep '^[^.].*')
 
 # check for options
-while getopts "hvdnm" opt; do
+while getopts "hvfdnm" opt; do
     case ${opt} in
         h  ) # help flag
             echo "Usage: ./install.sh [-h|-m] [-vdn] module1 module2 ..."
             echo "    -h        Show this help dialog."
             echo "    -v        Show verbose output."
+            echo "    -f        Force execution of action"
             echo "    -d        Remove modules instead of installing them."
             echo "    -n        Print the actions that would be executed,"
             echo "              but do not execute them."
             echo "    -m        Print a list of modules."
             exit
+            ;;
+        f  ) # force link
+            force=true
             ;;
         v  ) # verbose output
             verbose=true
@@ -91,8 +95,9 @@ do
                     unlink "$file_dest"
                 fi
             else
-                # check that there is neither a file nor a link already
-                if [ -f "$file_dest" ] || [ -L "$file_dest" ]; then
+                # check that there is neither a file nor a link already,
+                # or if the force flag is enabled
+                if [ ! "$force" ] && ([ -f "$file_dest" ] || [ -L "$file_dest" ]); then
                     # if so, and verbosity is enabled, tell the user
                     if [ "$verbose" ]; then
                         echo "$file_dest already exists, skipping"
@@ -104,8 +109,11 @@ do
                 # make dir if it doesn't exist
                 mkdir --parents $(dirname $HOME/"${file#$module/}")
 
-                # link file silently
-                ln -s "$(pwd)/$file" "$file_dest"
+                if [ "$force" ]; then
+                    ln -sf "$(pwd)/$file" "$file_dest"
+                else
+                    ln -s "$(pwd)/$file" "$file_dest"
+                fi
             fi
         fi
 
