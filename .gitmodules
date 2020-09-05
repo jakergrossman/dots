@@ -22,3 +22,6 @@
 [submodule "vim-pathogen"]
 	path = vim/.vim/pack/bundle/opt/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
+[submodule "stepmania.vim"]
+	path = vim/.vim/pack/bundle/opt/stepmania.vim
+	url = git@github.com:jakergrossman/stepmania.vim.git

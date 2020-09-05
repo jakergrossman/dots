@@ -13,6 +13,7 @@ if &loadplugins
         packadd! vim-gitgutter
         packadd! emmet-vim
         packadd! vim-tmux-navigator
+        packadd! stepmania.vim
     else
         " Use Pathogen for plug-in loading.
         source $HOME/.vim/pack/bundle/opt/vim-pathogen/autoload/pathogen.vim
