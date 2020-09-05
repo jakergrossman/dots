@@ -14,3 +14,5 @@ nnoremap tr :TabooRename<Space>
 " gitgutter mappings
 nmap [c <Plug>(GitGutterPrevHunk) " move to last hunk
 nmap ]c <Plug>(GitGutterNextHunk) " move to next hunk
+
+nnoremap q: <Nop>
