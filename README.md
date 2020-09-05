@@ -15,14 +15,11 @@ git clone https://github.com/jakergrossman/jakergrossman.git
 cd jakergrossman
 ```
 
-then, install selected modules with the `install.sh` script:
+i use [GNU Stow](https://www.gnu.org/software/stow/) to manage my dotfiles
 
+then, to install packages
 ```
-Usage: ./install.sh [-h|-m] [-vdn] module1 module2 ...
-    -h        Show this help dialog.
-    -v        Show verbose output.
-    -d        Remove modules instead of installing them.
-    -n        Print the actions that would be executed,
-              but do not execute them.
-    -m        Print a list of modules.
+stow vim
+stow zsh
+...
 ```
