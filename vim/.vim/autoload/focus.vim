@@ -1,6 +1,8 @@
 function! focus#focus() abort
-    " full statusline
-    exec 'setlocal statusline=' . statusline#get_statusline(0)
+    if exists('+statusline')
+        " full statusline
+        exec 'setlocal statusline=' . statusline#get_statusline(0)
+    endif
 
     if exists('+colorcolumn')
         " indicate focused buffer with colorcolumn
@@ -9,8 +11,10 @@ function! focus#focus() abort
 endfunction
 
 function! focus#defocus() abort
-    " condensed statusline
-    exec 'setlocal statusline=' . statusline#get_statusline(1)
+    if exists('+statusline')
+        " condensed statusline
+        exec 'setlocal statusline=' . statusline#get_statusline(1)
+    endif
 
     if exists('+colorcolumn')
         " clear colorcolumn
