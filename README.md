@@ -9,13 +9,13 @@ kitty       > kitty terminal emulator settings
 ```
 
 # usage
+i use [GNU Stow](https://www.gnu.org/software/stow/) to manage my dotfiles
+
 cloning:
 ```
-git clone https://github.com/jakergrossman/jakergrossman.git
-cd jakergrossman
+git clone https://github.com/jakergrossman/jakergrossman.git ~/jakergrossman
+cd ~/jakergrossman
 ```
-
-i use [GNU Stow](https://www.gnu.org/software/stow/) to manage my dotfiles
 
 then, to install packages
 ```
