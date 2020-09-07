@@ -13,9 +13,6 @@
 [submodule "zsh-vim-mode"]
 	path = zsh/.oh-my-zsh/custom/plugins/zsh-vim-mode
 	url = https://github.com/softmoth/zsh-vim-mode
-[submodule "vim-tmux-navigator"]
-	path = vim/.vim/pack/bundle/opt/vim-tmux-navigator
-	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule "apprentice"]
 	path = vim/.vim/pack/bundle/opt/Apprentice
 	url = https://github.com/romainl/Apprentice
