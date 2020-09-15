@@ -23,5 +23,6 @@ then, to install packages
 * zsh
 
 to install git submodules
+
     git submodule init
     git submodule update
