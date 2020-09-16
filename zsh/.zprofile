@@ -1,17 +1,7 @@
-# set editor to vim
-set EDITOR=vim
-# if stack is installed
-if [ -x "$(which stack)" ]; then
-    alias ghci="stack ghci"
-fi
-
 # create new note
 note() {
     vim "+Note $*"
 }
-
-# change default fzf command to show hidden files
-export FZF_DEFAULT_COMMAND='find -L .'
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
@@ -37,4 +27,5 @@ fi
 # python3 shorthand
 alias py="python3"
 
-export PATH="$HOME/.cargo/bin:$PATH"
+# clean vim alias
+alias vi="vi --clean"

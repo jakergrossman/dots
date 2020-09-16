@@ -11,7 +11,6 @@ plugins=(
     zsh-vim-mode
 )
 source $ZSH/oh-my-zsh.sh
-export EDITOR="vim"
 
 # mode-sensitive cursor styling
 MODE_CURSOR_VIINS="blinking bar"
