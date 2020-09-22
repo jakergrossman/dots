@@ -1,4 +1,5 @@
 # dotfiles
+
     fonts       > custom fonts
     git         > git config and aliases
     vim         > vim editor config
@@ -10,10 +11,12 @@
 i use [GNU Stow](https://www.gnu.org/software/stow/) to manage my dotfiles
 
 cloning:
+
     git clone https://github.com/jakergrossman/jakergrossman.git ~/jakergrossman
     cd ~/jakergrossman
 
 then, to install packages
+
     stow vim
     stow zsh
     ...
