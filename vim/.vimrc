@@ -12,7 +12,6 @@ if &loadplugins
         packadd! vim-commentary
         packadd! vim-gitgutter
         packadd! emmet-vim
-        packadd! vim-tmux-navigator
         packadd! stepmania.vim
     else
         " Use Pathogen for plug-in loading.

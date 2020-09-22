@@ -22,3 +22,6 @@
 [submodule "stepmania.vim"]
 	path = vim/.vim/pack/bundle/opt/stepmania.vim
 	url = git@github.com:jakergrossman/stepmania.vim.git
+[submodule "fzf"]
+	path = vim/.vim/pack/bundle/opt/fzf
+	url = https://github.com/junegunn/fzf
