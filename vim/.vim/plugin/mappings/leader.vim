@@ -50,3 +50,6 @@ nnoremap <expr> <Leader>s &ft == 'netrw' ? ':split %<CR>' : ':split %:h<CR>'
 
 " in new vertical split
 nnoremap <expr> <Leader>S &ft == 'netrw' ? ':vsplit %<CR>' : ':vsplit %:h<CR>'
+
+" fzf for file
+nnoremap <Leader>f :FZF<CR>

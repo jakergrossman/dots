@@ -12,6 +12,7 @@ if &loadplugins
         packadd! vim-commentary
         packadd! vim-gitgutter
         packadd! emmet-vim
+        packadd! fzf
         packadd! stepmania.vim
     else
         " Use Pathogen for plug-in loading.
