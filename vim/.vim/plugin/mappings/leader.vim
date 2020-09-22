@@ -38,3 +38,15 @@ vmap <Leader>e $<Plug>(emmet-expand-abbr)
 " copy to clipboard
 nmap <Leader>c "*yy
 vmap <Leader>c "*y
+
+" open directory of current file in netrw
+" if already in netrw, open same directory not parent
+
+" in same split
+nnoremap <Leader>d :e %:h<CR>
+
+" in new horizontal split
+nnoremap <expr> <Leader>s &ft == 'netrw' ? ':split %<CR>' : ':split %:h<CR>'
+
+" in new vertical split
+nnoremap <expr> <Leader>S &ft == 'netrw' ? ':vsplit %<CR>' : ':vsplit %:h<CR>'
