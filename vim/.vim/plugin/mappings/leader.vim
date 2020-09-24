@@ -39,6 +39,9 @@ vmap <Leader>e $<Plug>(emmet-expand-abbr)
 nmap <Leader>c "*yy
 vmap <Leader>c "*y
 
+" paste clipboard
+nnoremap <Leader>v "*p
+
 " open directory of current file in netrw
 " if already in netrw, open same directory not parent
 
