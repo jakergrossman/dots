@@ -8,5 +8,8 @@ if has('autocmd')
         " indicate focused buffers
         autocmd BufEnter,BufWinEnter,FocusGained,VimEnter,WinEnter * call focus#focus()
         autocmd FocusLost,WinLeave * call focus#defocus()
+
+        " turn on spell checking for gitcommit buffers
+        autocmd Syntax gitcommit setlocal spell
     augroup end
 endif
