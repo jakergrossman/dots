@@ -10,6 +10,6 @@ if has('autocmd')
         autocmd FocusLost,WinLeave * call focus#defocus()
 
         " turn on spell checking for gitcommit buffers
-        autocmd Syntax gitcommit setlocal spell
+        autocmd FileType gitcommit setlocal spell
     augroup end
 endif
