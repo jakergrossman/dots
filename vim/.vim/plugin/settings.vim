@@ -38,8 +38,6 @@ set backspace=indent,eol,start
 set undofile " persistent undo
 set undodir=~/.vim/undodir " set persistent undo dir
 
-set term=xterm-256color
-
 colorscheme apprentice
 
 " plugin config -----------------------
