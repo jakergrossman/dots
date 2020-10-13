@@ -1,5 +1,9 @@
 [alias]
     # shorter commands
+    a  = add
+
+    # fuzzy add: use fzf to fuzzy find a file to add
+    fa = "!FILE=$(fzf); git add $FILE"
     co = checkout
     ci = commit
     st = status
