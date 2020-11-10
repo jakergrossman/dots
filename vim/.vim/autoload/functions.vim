@@ -25,6 +25,8 @@ function! functions#edit(...)
     endif
 endfunc
 
+" Escape text for use in a URL
+" TODO: Is this all required symbols?
 function! functions#url_escape(text) abort
     " it is important that % is first
     " otherwise, previously escaped characters
@@ -60,22 +62,22 @@ function! functions#url_escape(text) abort
                 \ ['~', '%7E'],
             \ ]
 
-    let escaped_url = a:text
+    let escaped_text = a:text
 
     " escape any special characters
     for c in conversion_table
-        let escaped_url = substitute(escaped_url, '\v\' . c[0], c[1], 'g')
+        let escaped_text = substitute(escaped_text, '\v\' . c[0], c[1], 'g')
     endfor
 
-    return escaped_url
+    return escaped_text
 endfunction
 
+" find the URL for a specified tag on Vimhelp.org
 function! functions#vimhelp_url(tag) abort
     " open help for tag
     try
         exec 'silent help ' . a:tag
     catch /^Vim\%((\a\+)\)\=:/
-        echo "foo"
         " 'Error' message on single line
         echohl ErrorMsg
         unsilent echomsg substitute(v:exception, '^\CVim\%((\a\+)\)\=:', '', '')
@@ -95,11 +97,16 @@ function! functions#vimhelp_url(tag) abort
     " close help window
     close
 
-    " construct URL
-    let url = 'https://vimhelp.org/' . doc_file . '.html#' . tag_text
+    " construct and return URL
+    return 'https://vimhelp.org/' . doc_file . '.html#' . tag_text
+endfunction
 
-    " echom for confirmation
-    unsilent echom ':help ' . a:tag . ' -> ' . url
+" Corresponding function for :TagURL command
+function! functions#tag_url_c(tag) abort
+    let URL = functions#vimhelp_url(a:tag)
 
-    return url
+    " only update clipboard for a successful search
+    if URL != ''
+        let @+ = URL
+    endif
 endfunction
