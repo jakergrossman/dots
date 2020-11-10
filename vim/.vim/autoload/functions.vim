@@ -72,7 +72,16 @@ endfunction
 
 function! functions#vimhelp_url(tag) abort
     " open help for tag
-    exec 'silent help ' . a:tag
+    try
+        exec 'silent help ' . a:tag
+    catch /^Vim\%((\a\+)\)\=:/
+        echo "foo"
+        " 'Error' message on single line
+        echohl ErrorMsg
+        unsilent echomsg substitute(v:exception, '^\CVim\%((\a\+)\)\=:', '', '')
+        echohl None
+        return
+    endtry
 
     " get name of doc file
     let doc_file=expand('%:t')
