@@ -64,7 +64,7 @@ function! functions#url_escape(text) abort
 
     " escape any special characters
     for c in conversion_table
-        let escaped_url = substitute(escaped_url, '\v\' . c[0], c[1], '')
+        let escaped_url = substitute(escaped_url, '\v\' . c[0], c[1], 'g')
     endfor
 
     return escaped_url
