@@ -56,3 +56,6 @@ nnoremap <expr> <Leader>S &ft == 'netrw' ? ':vsplit %<CR>' : ':vsplit %:h<CR>'
 
 " fzf for file
 nnoremap <Leader>f :FZF<CR>
+
+" prompt for tag to get vimhelp url
+nnoremap <Leader>u :TagURL<Space>
