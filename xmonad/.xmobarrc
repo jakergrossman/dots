@@ -31,7 +31,7 @@ Config { font = "xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true"
                                "--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
-                    , Run Uptime ["-t", "Uptime: <days>:<hours>:<seconds>"] 10
+                    , Run Uptime ["-t", "Uptime: <days>:<hours>:<minutes>:<seconds>"] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     ]
