@@ -32,7 +32,7 @@ options = {
   install_json: "install.json"
 }
 OptionParser.new do |opts|
-  opts.banner = "Usage: install.rb [-h] [-B INSTALL_JSON]"
+  opts.banner = "Usage: install.rb [-h] [-n] [-B INSTALL_JSON] [-C INSTALL_JSON]"
 
   # help
   opts.on("-h", "--help", "Show this text.") do |h|
@@ -45,8 +45,25 @@ OptionParser.new do |opts|
     options[:always_make] = true
     options[:install_json] = b
   end
+
+  # choose configuration file to use when installing packages
+  # not compatible with -B
+  opts.on("-C", "--config INSTALL_JSON", "Select another configuration JSON other than #{options[:install_json]}") do |c|
+    options[:config] = true
+    options[:install_json] = c
+  end
+
+  # print output, but don't actually install
+  opts.on("-n", "Print output, but don't actually install") do |n|
+    options[:intent] = true
+  end
 end.parse!
 
+# check that -B and -C not set together
+if options[:always_make] && options[:config]
+  STDERR.puts "ERROR: Both -B/--always-make and -C/--config specified, aborting..."
+  exit
+end
 
 # hash of filenames to file locations
 symlink_map = {}
@@ -109,10 +126,15 @@ symlink_map.each do |pkg, files|
   Dir.chdir(pkg) do
     # symlink "to" to "from"
     files.each do |from, to|
-      # make parent folders if they don't exist
-      system("#{File.dirname(File.expand_path(to))}")
-
       puts "\t#{from} -> #{File.expand_path(to)}"
+
+      # don't do symlink if -n set
+      if (options[:intent])
+        next
+      end
+
+      # make parent folders if they don't exist
+      system("mkdir -p #{File.dirname(File.expand_path(to))}")
 
       # setup link
       if (File.symlink?(File.expand_path(to)))
