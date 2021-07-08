@@ -1,9 +1,9 @@
 # dotfiles
-	bash		> shell
+    bash        > shell
     git         > git config and aliases
     vim         > vim editor
-	xfiles		> x programs (xterm, etc.)
-	xmonad		> xmonad window manager
+    xfiles      > x programs (xterm, etc.)
+    xmonad      > xmonad window manager
 
 ## dependencies
 - [Ruby](https://www.ruby-lang.org/en/) to run the installation script
