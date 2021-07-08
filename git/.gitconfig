@@ -1,25 +1,12 @@
 [alias]
     # shorter commands
     a  = add
-
-    # fuzzy add: use fzf to fuzzy find a file to add
-    fa = "!FILE=$(fzf); git add $FILE"
     co = checkout
     ci = commit
     st = status
     br = branch
     hist = log --oneline --all --decorate --graph
 
-    # re-index project tags
-    ctags = !.git/hooks/ctags
-
 [user]
     email = jake.r.grossman@gmail.com
     name = jakergrossman
-
-[init]
-	templatedir = ~/.git_template
-
-[filter "tabspace"]
-    smudge = gexpand --tabs=4 --initial
-    clean = gunexpand --tabs=4 --first-only

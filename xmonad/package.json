@@ -1,0 +1,8 @@
+{
+	"name": "xmonad",
+	"description": "Configuration for the Xmonad WM",
+	"file_locations": {
+		"xmonad.hs": "~/.xmonad/xmonad.hs",
+		".xmobarrc": "~/.xmobarrc"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"name": "xfiles",
+	"description": "Configuration for X based programs (xterm, etc.)",
+	"file_locations": {
+		".Xresources":	"~/.Xresources",
+		".xinitrc":		"~/.xinitrc"	
+	}
+}

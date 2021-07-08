@@ -2,24 +2,14 @@ if v:progname == 'vi'
     set noloadplugins
 endif
 
-let mapleader="\<Space>"
-let maplocalleader="\\"
+set tabstop=4 softtabstop=4 shiftwidth=4
+set number
+set ruler
 
-if &loadplugins
-    if has('packages')
-        packadd! Apprentice
-        packadd! vim-polyglot
-        packadd! vim-commentary
-        packadd! vim-gitgutter
-        packadd! emmet-vim
-        packadd! fzf
-        packadd! stepmania.vim
-    else
-        " Use Pathogen for plug-in loading.
-        source $HOME/.vim/pack/bundle/opt/vim-pathogen/autoload/pathogen.vim
-        call pathogen#infect('pack/bundle/start/{}')
-    endif
-endif
+set hlsearch
+set incsearch
+
+set backspace=indent,eol,start
 
 " Automatic, language-dependent indentation, syntax coloring and other
 " functionality.
