@@ -27,10 +27,10 @@ if !deps_satisfied
   exit
 end
 
-install_json = "install.json"
-
 # parse options
-options = {}
+options = {
+  install_json: "install.json"
+}
 OptionParser.new do |opts|
   opts.banner = "Usage: install.rb [-h] [-B INSTALL_JSON]"
 
@@ -40,10 +40,10 @@ OptionParser.new do |opts|
     exit
   end
 
-  # force remake of #{install_json} from each package.json
-  opts.on("-B", "--always-make INSTALL_JSON", "Always remake install json, save as INSTALL_JSON") do |b|
+  # force remake of #{options[:install_json]} from each package.json
+  opts.on("-B", "--always-make INSTALL_JSON", "Always remake install JSON, save as INSTALL_JSON") do |b|
     options[:always_make] = true
-    install_json = b
+    options[:install_json] = b
   end
 end.parse!
 
@@ -77,8 +77,8 @@ if (options[:always_make] || !File.exist?("install.json"))
   # build symlink_map
   enabled_pkg_dirs.each do |pkg|
     # check that package has package.json
-    if (File.exist?(pkg + "/package.json"))
-      pkg_json = File.read(pkg + "/package.json")
+    if (File.exist?("#{pkg}/package.json"))
+      pkg_json = File.read("#{pkg}/package.json")
       obj = JSON.parse(pkg_json)
 
       # add package to symlink_map
@@ -89,18 +89,18 @@ if (options[:always_make] || !File.exist?("install.json"))
         symlink_map[pkg][file[0]] = file[1]
       end
     else
-      STDERR.puts "WARNING: Package " + pkg + " missing package.json"
+      STDERR.puts "WARNING: Package #{pkg} missing package.json"
     end
   end
 
   # write to install.json
-  File.open(install_json, "w") do |f|
+  File.open(options[:install_json], "w") do |f|
     f.write(symlink_map.to_json)
   end
 end
 
-# load install_json
-symlink_map = JSON.parse(File.read(install_json))
+# load options[:install_json]
+symlink_map = JSON.parse(File.read(options[:install_json]))
 
 # set symlinks
 symlink_map.each do |pkg, files|
