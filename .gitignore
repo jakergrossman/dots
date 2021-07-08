@@ -1,5 +1,4 @@
 # don't keep .netrwhist to keep repo pure
-vim/.vim/.netrwhist
-vim/.vim/undodir
+install.json
 .uuid
 .DS_Store
