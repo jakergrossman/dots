@@ -14,6 +14,7 @@ import qualified Data.Map        as M
 -- certain contrib modules.
 --
 myTerminal      = "alacritty"
+myBrowser       = "qutebrowser"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -47,7 +48,7 @@ myWorkspaces    = ["web","irc","code","4","5","6","7","8","9"]
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#c4e88d"
+myFocusedBorderColor = "#f07178"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -56,6 +57,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+
+    -- launch a (b)rowser
+    , ((modm,               xK_b     ), spawn myBrowser)
 
     -- VOLUME --
 
