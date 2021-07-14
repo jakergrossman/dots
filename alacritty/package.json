@@ -1,0 +1,7 @@
+{
+	"name": "alacritty",
+	"description": "Configuration for Alacritty Terminal Emulator",
+	"file_locations": {
+		"alacritty.yml": "~/.config/alacritty/alacritty.yml"	
+	}
+}
