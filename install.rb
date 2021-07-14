@@ -32,7 +32,7 @@ options = {
   install_json: "install.json"
 }
 OptionParser.new do |opts|
-  opts.banner = "Usage: install.rb [-h] [-n] [-B INSTALL_JSON] [-C INSTALL_JSON]"
+  opts.banner = "Usage: install.rb [-h] [-f] [-n] [-B INSTALL_JSON] [-C INSTALL_JSON]"
 
   # help
   opts.on("-h", "--help", "Show this text.") do |h|
@@ -44,6 +44,11 @@ OptionParser.new do |opts|
   opts.on("-B", "--always-make INSTALL_JSON", "Always remake install JSON, save as INSTALL_JSON") do |b|
     options[:always_make] = true
     options[:install_json] = b
+  end
+
+  # like -B, but use install.json
+  opts.on("-f", "--force", "Like -B, but use install.json") do |f|
+    options[:always_make] = true
   end
 
   # choose configuration file to use when installing packages
