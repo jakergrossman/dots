@@ -1,4 +1,5 @@
 # dotfiles
+    alacritty   > alacritty terminal emulator
     bash        > shell
     git         > git config and aliases
     vim         > vim editor
