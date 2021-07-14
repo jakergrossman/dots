@@ -1,5 +1,6 @@
 -- imports
 import XMonad
+import XMonad.Actions.Volume
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
@@ -55,6 +56,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+
+    -- VOLUME --
+
+    -- coarse volume up
+    , ((modm .|. shiftMask, xK_Up    ), raiseVolume 10 >> return ())
+
+    -- fine volume up
+    , ((modm,               xK_Up    ), raiseVolume 5 >> return ())
+
+    -- coarse volume down
+    , ((modm .|. shiftMask, xK_Down  ), lowerVolume 10 >> return ())
+
+    -- fine volume down
+    , ((modm,               xK_Down  ), lowerVolume 5 >> return ())
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
