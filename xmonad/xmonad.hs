@@ -74,12 +74,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- fine volume down
     , ((modm,               xK_Down  ), lowerVolume 5 >> return ())
-
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
 
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+    -- launch passmenu
+    , ((modm .|. shiftMask, xK_p     ), spawn "passmenu")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
