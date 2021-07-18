@@ -20,13 +20,13 @@ Config { font = "xft:Mononoki:pixelsize=14:antialias=true:hinting=true"
        , commands = [ Run Cpu ["-t", "<fc=#c792ea>cpu</fc> <total>%"] 10
                     , Run Memory ["-t","<fc=#c792ea>mem</fc> <usedratio>%"] 10
                     , Run Uptime ["-t", "<fc=#c792ea>up</fc> <days>:<hours>:<minutes>:<seconds>"] 10
-                    , Run Com "sh" ["-c", "~/.xmonad/get-volume.sh"] "volume" 50
-                    , Run Com "whoami" [] "" 36000
-                    , Run Com "cat" ["/proc/sys/kernel/hostname"] "hostname" 150
+                    , Run Com "whoami" [] "" 150
+                    , Run Com "cat" ["/proc/sys/kernel/hostname"] "hostname" 36000
                     , Run Date "<fc=#c792ea>%a %m</fc>/<fc=#c792ea>%_d %I</fc>:<fc=#c792ea>%M %p</fc>" "date" 10
+                    , Run Volume "default" "Master" ["-t", "<fc=#c792ea>vol</fc> <volume>" ] 10
                     ]
        , sepChar = "%"
        , alignSep = "}{" -- seperator between left-right alignment
-       , template = "}{%cpu% | %memory% | <fc=#c792ea>vol</fc> %volume% \
+       , template = "}{%cpu% | %memory% | %default:Master% \
                      \| %uptime% | <fc=#c792ea>%hostname%/%whoami%</fc> | %date%"
        }
