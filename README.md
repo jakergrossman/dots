@@ -1,9 +1,12 @@
 # dotfiles
+collection of system configuration files for my Arch machine
+
+## packages
     alacritty   > alacritty terminal emulator
-    bash        > shell
-    git         > git config and aliases
+    bash        > shell (.bashrc, .bash_profile, etc.)
+    git         > .gitconfig and aliases
     vim         > vim editor
-    xfiles      > x programs (xterm, etc.)
+    xfiles      > X11 settings (.xinitrc, etc.)
     xmonad      > xmonad window manager
 
 ## dependencies
