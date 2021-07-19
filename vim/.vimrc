@@ -7,6 +7,9 @@ set expandtab
 set number
 set ruler
 
+set splitright
+set splitbelow
+
 set hlsearch
 set incsearch
 
