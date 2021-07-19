@@ -1,6 +1,8 @@
 -- imports
 import XMonad
 import XMonad.Actions.Volume
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.Spacing
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
@@ -26,6 +28,7 @@ myClickJustFocuses = False
 -- Width of the window border in pixels.
 --
 myBorderWidth   = 2
+myWindowGap     = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -47,7 +50,7 @@ myWorkspaces    = ["web","irc","code","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
+myNormalBorderColor  = "#292d3e"
 myFocusedBorderColor = "#f07178"
 
 ------------------------------------------------------------------------
@@ -193,7 +196,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = spacing myWindowGap $ avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -266,7 +269,7 @@ myStartupHook = do
 --
 main = do
     xmproc <- spawnPipe "xmobar /home/jake/.xmobarrc"
-    xmonad $ docks defaults
+    xmonad $ docks defaults fullscreenSupport
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
