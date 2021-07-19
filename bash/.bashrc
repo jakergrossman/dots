@@ -15,6 +15,10 @@ fi
 # set ENV variables
 export EDITOR=vim
 
+# hidden files, please
+export FZF_DEFAULT_COMMAND="find . -printf \"%P\\\n\""
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
