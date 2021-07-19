@@ -6,6 +6,7 @@ collection of system configuration files for my Arch machine
     bash        > shell (.bashrc, .bash_profile, etc.)
     git         > .gitconfig and aliases
     vim         > vim editor
+    tmux        > tmux multiplexer
     xfiles      > X11 settings (.xinitrc, etc.)
     xmonad      > xmonad window manager
 

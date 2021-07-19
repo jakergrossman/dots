@@ -1,0 +1,7 @@
+{
+    "name": "tmux",
+    "description": "(t)erminal (mu)ltiple(x)er config",
+    "file_locations": {
+        ".tmux.conf": "~/.tmux.conf"
+    }
+}
