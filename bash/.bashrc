@@ -30,4 +30,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# machine-local bashrc, if exists
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
 ufetch
