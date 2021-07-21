@@ -18,6 +18,20 @@ set backspace=indent,eol,start
 " show longest match like bash completion, list candidates
 set wildmode=full:longest:list
 
+" override highlighting
+augroup myhighlight
+    autocmd!
+
+    " Replace Visual highlight with uniform, simple colors
+    " Replace Folded highlight with comment highlight
+    autocmd ColorScheme * hi! Visual ctermfg=0 ctermbg=4 guifg=Black guibg=Blue
+                      \ | hi! link Folded Comment
+
+augroup END
+
+colorscheme default
+set bg=dark
+
 " Automatic, language-dependent indentation, syntax coloring and other
 " functionality.
 filetype indent plugin on
