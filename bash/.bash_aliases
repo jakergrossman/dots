@@ -1,5 +1,10 @@
 alias l="ls -lah"
 
+# even short commands
+alias gd="git diff"
+alias gs="git status"
+alias gh="git log --oneline --all --decorate --graph"
+
 # alternate vim uses
 alias view="vim -u \"NONE\" -M" # viewer
 alias vi="vim --clean -u \"NONE\"" # clean mode
