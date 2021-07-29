@@ -19,13 +19,6 @@ if [ -f ~/.bash_aliases.local ]; then
     . ~/.bash_aliases.local
 fi
 
-# set ENV variables
-export EDITOR=vim
-
-# hidden files, please
-export FZF_DEFAULT_COMMAND="find . -printf \"%P\\\n\""
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-
 # machine-local bashrc, if exists
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
