@@ -1,4 +1,9 @@
+# shorties
 alias l="ls -lah"
+alias v="vim"
+alias p="sudo pacman"
+alias g="git"
+
 
 # even short commands
 alias gd="git diff"
