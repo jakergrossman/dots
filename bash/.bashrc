@@ -5,7 +5,7 @@ case $- in
 esac
 
 # set prompt
-PS1='\[\e[1;32m\]\w > \[\e[m\]'
+PS1='[\[\e[1;31m\]\h@\u \w \[\e[m\]]$ '
 
 # alias definitions
 if [ -f ~/.bash_aliases ]; then
