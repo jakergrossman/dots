@@ -12,6 +12,8 @@ if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
 fi
 
+shopt -s autocd # cd with just dir name
+
 # local aliases
 if [ -f ~/.bash_aliases.local ]; then
     . ~/.bash_aliases.local
