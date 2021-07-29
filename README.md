@@ -1,5 +1,5 @@
 # dotfiles
-collection of system configuration files for my Arch machine
+collection of system configuration files
 
 ## packages
     alacritty   > alacritty terminal emulator
