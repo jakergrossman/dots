@@ -1,7 +1,9 @@
 -- imports
 import XMonad
 import XMonad.Actions.Volume
+import XMonad.Actions.MouseResize
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.WindowArranger
 import XMonad.Layout.Spacing
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
@@ -63,6 +65,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a (b)rowser
     , ((modm,               xK_b     ), spawn myBrowser)
+
+    , ((modm,               button1  ), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
 
     -- VOLUME --
 
@@ -196,7 +200,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = spacing myWindowGap $ avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = mouseResize $ windowArrange $ spacing myWindowGap $ avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
