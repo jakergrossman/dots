@@ -2,35 +2,14 @@
 require 'optparse'
 require 'json'
 require 'pp'
-
-# check for dependencies
-deps_satisfied = true
-deps = [
-  "vipe",
-]
-
-# check output of `which #{pkg}`
-# assumed empty     -> not installed
-#         non-empty -> installed
-deps.each do |d|
-  which_output = `which #{d}`
-
-  # check for empty output
-  if which_output == ""
-    deps_satisfied = false
-    STDERR.puts "ERROR: Missing dependency \"#{d}\""
-  end
-end
-
-# exit if missing any deps
-if !deps_satisfied
-  exit
-end
+require 'tempfile'
+require 'timeout'
 
 # parse options
 options = {
   install_json: "install.json"
 }
+
 OptionParser.new do |opts|
   opts.banner = "Usage: install.rb [-h] [-f] [-n] [-B INSTALL_JSON] [-C INSTALL_JSON]"
 
@@ -86,9 +65,22 @@ if (options[:always_make] || !File.exist?("install.json"))
   pkg_dirs = `find -maxdepth 1 -type d \\( ! -iname ".*" \\) -printf '%P\n'`
 
   # open "git commit" style editor to select packages
-  enabled_pkg_dirs = `echo -n \"#{editor_blurb}#{pkg_dirs}\" | vipe`
+  tmp = Tempfile.new("dotfile-install") # open temp file
+
+  # populate temp file
+  tmp.write(editor_blurb)
+  tmp.write(pkg_dirs)
+  tmp.rewind
+
+  # open editor with stdio connected
+  puts `${EDITOR} #{tmp.path} < /dev/tty > /dev/tty || $?`
+  enabled_pkg_dirs = tmp.read                 # read buffer after edit
                      .split("\n")             # split at newlines
                      .select{ |i| i[/^[^#]/]} # filter out lines starting with '#'
+
+  # clean up tmp file
+  tmp.close
+  tmp.unlink
 
   # check that there are any enabled packages
   if enabled_pkg_dirs.length() == 0
