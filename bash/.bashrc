@@ -24,17 +24,6 @@ export EDITOR=vim
 export FZF_DEFAULT_COMMAND="find . -printf \"%P\\\n\""
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 # machine-local bashrc, if exists
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
