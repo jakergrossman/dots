@@ -6,12 +6,15 @@ set tabstop=4 softtabstop=4 shiftwidth=4
 set expandtab
 set number
 set ruler
-
 set splitright
 set splitbelow
 
 set hlsearch
 set incsearch
+
+" persistent undo
+set undofile
+set undodir=~/.cache/vim/undo
 
 set backspace=indent,eol,start
 
