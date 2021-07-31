@@ -20,6 +20,9 @@ set backspace=indent,eol,start
 
 set laststatus=2
 
+set exrc
+set secure
+
 " show longest match like bash completion, list candidates
 set wildmode=full:longest:list
 
