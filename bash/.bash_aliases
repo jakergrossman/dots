@@ -3,6 +3,7 @@ alias l="ls -lah"
 alias v="vim"
 alias p="sudo pacman"
 alias g="git"
+alias gr="grep"
 
 
 # even short commands
