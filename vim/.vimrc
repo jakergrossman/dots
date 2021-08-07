@@ -35,7 +35,7 @@ augroup myhighlight
     " Replace Folded highlight with comment highlight
     autocmd ColorScheme * hi! Visual ctermfg=0 ctermbg=4 guifg=Black guibg=Blue
                       \ | hi! link Folded Comment
-
+                      \ | hi! link SignColumn LineNr
 augroup END
 
 colorscheme default
