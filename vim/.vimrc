@@ -2,6 +2,8 @@ if v:progname == 'vi'
     set noloadplugins
 endif
 
+let mapleader="\<Space>"
+
 set tabstop=4 softtabstop=4 shiftwidth=4
 set expandtab
 set number
