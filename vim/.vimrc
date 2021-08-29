@@ -48,14 +48,16 @@ set bg=dark
 filetype indent plugin on
 syntax on
 
-" install vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin()
-Plug 'airblade/vim-gitgutter'
-call plug#end()
+try
+	call plug#begin()
+	Plug 'airblade/vim-gitgutter'
+	call plug#end()
+catch /\(E117\|E492\)/
+    " Let the user know vim-plug is not installed after startup
+    augroup onstartup
+        au!
+        au VimEnter * echom 'No plugins, missing plug.vim...'
+    augroup END
+endtry
 
 let g:gitgutter_set_sign_backgrounds=1

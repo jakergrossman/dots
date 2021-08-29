@@ -1,5 +1,8 @@
-# don't keep .netrwhist to keep repo pure
 install.json
 .uuid
 .DS_Store
 .netrwhist
+
+# don't save vim-plug or it's plugins
+vim/.vim/autoload/plug.vim
+vim/.vim/plugged/
