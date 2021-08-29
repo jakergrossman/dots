@@ -6,3 +6,5 @@ install.json
 # don't save vim-plug or it's plugins
 vim/.vim/autoload/plug.vim
 vim/.vim/plugged/
+
+vim/.vim/undodir
