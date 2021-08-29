@@ -49,12 +49,12 @@ filetype indent plugin on
 syntax on
 
 try
-	call plug#begin()
-	Plug 'airblade/vim-gitgutter'
-	Plug 'tpope/vim-commentary'
+    call plug#begin()
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
-	Plug 'jakergrossman/tagurl.vim'
-	call plug#end()
+    Plug 'jakergrossman/tagurl.vim'
+    call plug#end()
 catch /\(E117\|E492\)/
     " Let the user know vim-plug is not installed after startup
     augroup onstartup
