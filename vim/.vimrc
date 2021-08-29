@@ -11,7 +11,7 @@ set ruler
 set splitright
 set splitbelow
 
-set hlsearch
+set nohlsearch
 set incsearch
 
 " persistent undo
