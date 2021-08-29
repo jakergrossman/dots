@@ -51,6 +51,9 @@ syntax on
 try
 	call plug#begin()
 	Plug 'airblade/vim-gitgutter'
+	Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+	Plug 'jakergrossman/tagurl.vim'
 	call plug#end()
 catch /\(E117\|E492\)/
     " Let the user know vim-plug is not installed after startup
@@ -61,3 +64,4 @@ catch /\(E117\|E492\)/
 endtry
 
 let g:gitgutter_set_sign_backgrounds=1
+let g:tagurl_verbose=v:false
