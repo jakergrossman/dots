@@ -50,6 +50,8 @@ set bg=dark
 filetype indent plugin on
 syntax on
 
+let g:gitgutter_set_sign_backgrounds=1
+let g:tagurl_verbose=v:false
 let g:polyglot_disabled=['sensible', 'autoindent']
 
 try
@@ -67,6 +69,3 @@ catch /\(E117\|E492\)/
         au VimEnter * echom 'No plugins, missing plug.vim...'
     augroup END
 endtry
-
-let g:gitgutter_set_sign_backgrounds=1
-let g:tagurl_verbose=v:false
