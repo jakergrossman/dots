@@ -15,6 +15,9 @@ alias gh="git log --oneline --all --decorate --graph"
 alias view="vim -u \"NONE\" -M" # viewer
 alias vi="vim --clean -u \"NONE\"" # clean mode
 
+# systemctl
+alias sc="sudo systemctl"
+
 # output color grep and ls to terminal
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
