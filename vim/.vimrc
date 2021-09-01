@@ -48,12 +48,15 @@ set bg=dark
 filetype indent plugin on
 syntax on
 
+let g:polyglot_disabled=['sensible', 'autoindent']
+
 try
     call plug#begin()
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'jakergrossman/tagurl.vim'
+    Plug 'sheerun/vim-polyglot'
     call plug#end()
 catch /\(E117\|E492\)/
     " Let the user know vim-plug is not installed after startup
