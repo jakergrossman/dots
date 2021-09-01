@@ -28,6 +28,8 @@ set secure
 " show longest match like bash completion, list candidates
 set wildmode=full:longest:list
 
+set updatetime=100
+
 " override highlighting
 " great gist by romainl: https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f#file-colorscheme-override-md
 augroup myhighlight
