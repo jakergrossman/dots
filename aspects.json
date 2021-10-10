@@ -1,0 +1,20 @@
+{
+    "platforms": {
+        "darwin": {
+            "aspects": [
+                "dotfiles",
+                "nvim",
+                "xmonad"
+            ],
+            "variables": {}
+        },
+        "linux": {
+            "aspects": [
+                "dotfiles",
+                "xfiles",
+                "xmonad"
+            ],
+            "variables": {}
+        }
+    }
+}

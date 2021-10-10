@@ -19,6 +19,8 @@ if [ -f ~/.bash_aliases.local ]; then
     . ~/.bash_aliases.local
 fi
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # machine-local bashrc, if exists
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local

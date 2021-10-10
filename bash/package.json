@@ -1,9 +1,0 @@
-{
-	"name": "bash",
-	"description": "Configuration for bash shell",
-	"file_locations": {
-		".bashrc": "~/.bashrc",
-		".bash_profile": "~/.bash_profile",
-		".bash_aliases": "~/.bash_aliases"
-	}
-}

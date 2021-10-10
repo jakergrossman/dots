@@ -1,23 +1,23 @@
 # dotfiles
 collection of system configuration files
 
-## packages
-    alacritty   > alacritty terminal emulator
-    bash        > shell (.bashrc, .bash_profile, etc.)
-    git         > .gitconfig and aliases
-    vim         > vim editor
-    tmux        > tmux multiplexer
-    xfiles      > X11 settings (.xinitrc, etc.)
-    xmonad      > xmonad window manager
+loosely based on [greg Hurrell's dotfile structure](https://github.com/wincent/wincent)
 
 ## dependencies
-- [Ruby](https://www.ruby-lang.org/en/) to run the installation script
+- [ruby](https://www.ruby-lang.org/en/) to run the installation script
 
-## installation
-executing `install.rb` will run a `git commit`-style pager. every line
-corresponds to a package to install, write the file once you've made your
-selection. then, it creates a symbolic link for each file in a package. the
-destination of the symlink is defined in each packages `package.json`. if
-the destination is already a symlink, it will unlink and relink with the new
-file. If the destination is a file or hard link, then it will backup the
-existing file before linking with the new file.
+## usage
+install by running `bootstrap.rb`:
+
+    ruby
+
+`aspects.json` contains a list of aspects for each supported platform. for
+every aspect on a platform, the corresponding `aspect.rb` for that aspect is run.
+for example, for the `dotfiles` aspect, `bootstrab.rb` will execute the script
+`aspects/dotfiles/aspect.rb`. each aspect is run in isolation, so local variables
+and definitions do not leak into the global namespace.
+
+to assist with common tasks, a meta-aspect named `meta` is always included. It defines
+common functions for creating aspects. the most important is `task(desc, callback)`, which
+takes a description for the task logger and a callback to run for that task (backing up, creating
+directories, etc).

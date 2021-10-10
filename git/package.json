@@ -1,6 +1,0 @@
-{
-	"name": "git",
-	"file_locations": {
-		".gitconfig": "~/.gitconfig"
-	}
-}

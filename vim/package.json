@@ -1,7 +1,0 @@
-{
-	"name":		"vim", 
-	"file_locations": {
-		".vimrc":	"~/.vimrc",
-		".vim":		"~/.vim"
-	}
-}
