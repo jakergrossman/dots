@@ -22,9 +22,6 @@ context(-> {
             '-fLo',
             File.join(HOME, '.config', 'nvim', 'autoload', 'plug.vim'),
             '--create-dirs',
-            'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim',
-            '>',
-            '/dev/null',
-            '2>&1')
+            'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
   })
 }, __FILE__);

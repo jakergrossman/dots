@@ -66,7 +66,7 @@ end
 
 # run a system command. argv is the whitespace separated
 # components of the command to run.
-def command (*argv, context: nil)
+def command (*argv, context: nil, quiet: true)
   if context == nil
     # don't change context
     context = FileUtils.pwd()
@@ -74,6 +74,10 @@ def command (*argv, context: nil)
 
   context(-> {
     fullCommand = argv.join(' ')
+    if quiet
+      # swallow output
+      fullCommand += ' > /dev/null 2>&1'
+    end
     system(fullCommand)
   }, context);
 end
