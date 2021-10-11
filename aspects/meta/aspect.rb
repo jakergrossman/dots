@@ -1,5 +1,7 @@
 require 'fileutils'
 
+# TODO: should this be an aspect or a top level `bin`-style script? who knows
+
 # run callback in the directory of 'contextPath'
 def context (callback, contextPath)
   # save current directory 
@@ -60,4 +62,18 @@ def backup (path)
     # no file to backup, create directory
     FileUtils.mkdir_p(File.dirname(oldFile))
   end
+end
+
+# run a system command. argv is the whitespace separated
+# components of the command to run.
+def command (*argv, context: nil)
+  if context == nil
+    # don't change context
+    context = FileUtils.pwd()
+  end
+
+  context(-> {
+    fullCommand = argv.join(' ')
+    system(fullCommand)
+  }, context);
 end

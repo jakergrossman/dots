@@ -18,6 +18,13 @@ context(-> {
 
   task('install plug.vim', -> {
     # run curl quietly
-    system("curl -fLo #{File.join(HOME, '.config', 'nvim', 'autoload', 'plug.vim')} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1")
+    command('curl',
+            '-fLo',
+            File.join(HOME, '.config', 'nvim', 'autoload', 'plug.vim'),
+            '--create-dirs',
+            'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim',
+            '>',
+            '/dev/null',
+            '2>&1')
   })
 }, __FILE__);
