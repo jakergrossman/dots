@@ -1,7 +1,7 @@
 # dotfiles
 collection of system configuration files
 
-loosely based on [greg Hurrell's dotfile structure](https://github.com/wincent/wincent)
+loosely based on [Greg Hurrell's dotfile structure](https://github.com/wincent/wincent)
 
 ## dependencies
 - [ruby](https://www.ruby-lang.org/en/) to run the installation script
@@ -9,7 +9,7 @@ loosely based on [greg Hurrell's dotfile structure](https://github.com/wincent/w
 ## usage
 install by running `bootstrap.rb`:
 
-    ruby
+    ruby bootstrap.rb
 
 `aspects.json` contains a list of aspects for each supported platform. for
 every aspect on a platform, the corresponding `aspect.rb` for that aspect is run.

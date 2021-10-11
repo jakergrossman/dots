@@ -3,15 +3,14 @@
         "darwin": {
             "aspects": [
                 "dotfiles",
-                "nvim",
-                "xmonad"
+                "nvim"
             ],
             "variables": {}
         },
         "linux": {
             "aspects": [
                 "dotfiles",
-                "xfiles",
+                "nvim",
                 "xmonad"
             ],
             "variables": {}

@@ -26,4 +26,6 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
-ufetch
+if [ -x "/usr/bin/ufetch" ]; then
+	/usr/bin/ufetch
+fi

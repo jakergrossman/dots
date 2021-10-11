@@ -11,10 +11,6 @@ alias gd="git diff"
 alias gs="git status"
 alias gh="git log --oneline --all --decorate --graph"
 
-# alternate vim uses
-alias view="vim -u \"NONE\" -M" # viewer
-alias vi="vim --clean -u \"NONE\"" # clean mode
-
 # systemctl
 alias sc="sudo systemctl"
 
@@ -30,4 +26,4 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias ncpamixer="bash -c ncpamixer"
+alias vim="nvim"
