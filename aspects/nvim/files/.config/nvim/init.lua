@@ -48,7 +48,7 @@ vim.o.relativenumber = true
 
 -- persistent undo
 vim.o.undofile = true
-vim.o.undodir = "/Users/jgrossman/.cache/vim/undo"
+vim.o.undodir = vim.fn.expand("~/.cache/vim/undo")
 
 -- }}}
 
