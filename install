@@ -11,13 +11,13 @@ source "bin/common"
 
 # TODO: logging system that's better than echoing
 echo "Installing TypeScript"
-npm ci > /dev/null 2>&1
+npm ci > /dev/null
 
 echo "Cleaning"
 git clean -fdxq -- lib
 
 echo "Compiling TypeScript source to JavaScript"
-npx --no-install --quiet tsc
+tsc
 
 # hacks so that built JS can import from 'meta'
 ln -fns ../lib/meta node_modules/meta
