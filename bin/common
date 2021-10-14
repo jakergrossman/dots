@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# https://stackoverflow.com/a/2684300
+if [[ "${BASH_SOURCE[0]}" = "${0}" ]]; then
+  echo "[error] script \"$0\" is intended to be sourced, not executed directly"
+  exit 1
+fi
+
+REPO_ROOT="$(cd ${BASH_SOURCE%/*}/.. && pwd)"
+
+BIN_DIR="$REPO_ROOT/bin"
+
+NODE_VERSION=16.11.0
+
+export PATH="$BIN_DIR":$PATH

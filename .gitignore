@@ -1,10 +1,10 @@
-install.json
 .uuid
 .DS_Store
 .netrwhist
 
 # don't save vim-plug or it's plugins
-vim/.vim/autoload/plug.vim
-vim/.vim/plugged/
+plug.vim
+plugged/*
 
-vim/.vim/undodir
+node_modules
+vendor/node

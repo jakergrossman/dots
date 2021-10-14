@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+REPO_ROOT="${BASH_SOURCE%/*}/.."
+
+source "$REPO_ROOT/bin/common"
+
+VENDOR_ROOT="$REPO_ROOT/vendor"
+N_EXE="$VENDOR_ROOT/n/bin/n"
+N_PREFIX="$VENDOR_ROOT/node"
+NPM_EXE="$VENDOR_ROOT/node/bin/npm"
+
+export N_PREFIX
+
+if [[ ! -x "$N_EXE" ]]; then
+    echo "No executable at $N_EXE; did you forget to \`git submodule update\`?"
+    exit 1
+fi
+
+if ! "$N_EXE" which "$NODE_VERSION" &> /dev/null; then
+    echo "Install Node $NODE_VERSION"
+    "$N_EXE" $NODE_VERSION
+else
+    echo "Using Node $NODE_VERSION installation"
+fi
+
+
+# install node/npm/npx
+"$N_EXE" $NODE_VERSION
+
+"$NPM_EXE" "$@"
