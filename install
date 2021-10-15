@@ -9,16 +9,16 @@ cd $REPO_ROOT
 
 source "bin/common"
 
-# TODO: logging system that's better than echoing
-echo "Installing TypeScript"
+log_run "Installing TypeScript"
 npm ci > /dev/null
 
-echo "Cleaning"
+log_run "Cleaning"
 git clean -fdxq -- lib
 
-echo "Compiling TypeScript source to JavaScript"
+log_run "Compiling TypeScript source to JavaScript"
 tsc
 
+log_run "Bootstrapping meta package"
 # hacks so that built JS can import from 'meta'
 ln -fns ../lib/meta node_modules/meta
 cat > lib/meta/package.json << EOF
@@ -32,5 +32,5 @@ cat > lib/meta/package.json << EOF
 }
 EOF
 
-echo "Running main"
+log_run "Running main"
 node lib/meta/main.js

@@ -13,15 +13,15 @@ N_PREFIX="$VENDOR_ROOT/node"
 export N_PREFIX
 
 if [[ ! -x "$N_EXE" ]]; then
-    echo "No executable at $N_EXE; did you forget to \`git submodule update\`?"
+    log_error "No executable at $N_EXE; did you forget to \`git submodule update\`?"
     exit 1
 fi
 
 if ! "$N_EXE" which "$NODE_VERSION" &> /dev/null; then
-    echo "Install Node $NODE_VERSION"
+    log_run "Install Node $NODE_VERSION"
     "$N_EXE" $NODE_VERSION
 else
-    echo "Using Node $NODE_VERSION installation"
+    log_info "Using Node $NODE_VERSION installation"
 fi
 
 "$N_EXE" "$@"

@@ -1,6 +1,8 @@
 import {open} from 'fs/promises';
 
 import Context from './context.js';
+import Log from './log.js';
+
 import assert from './assert.js';
 
 /**
@@ -27,22 +29,24 @@ async function main(): Promise<void> {
   }
 
   // run tasks
-  try {
+    Log.run(`Running tasks for platform "${Context.attributes.platform}"`);
     for (const aspect of aspects) {
       // Update context
       Context.currentAspect = aspect;
 
       // Print and run an aspects tasks, if there are any
       if (Context.tasks.get(Context.currentAspect).length > 0) {
-        console.log(Context.currentAspect);
+        Log.info(Context.currentAspect);
         for (const [callback, description] of Context.tasks.get(aspect)) {
-          console.log('  ' + description);
+          Log.run('\\ ' + description);
+
+        try {
           await callback();
+        } catch (err) {
+          Log.error('TASK FAILED');
         }
       }
     }
-  } catch (err) {
-    console.error(err);
   }
 }
 
@@ -56,7 +60,7 @@ async function loadAspect(aspect: string): Promise<void> {
   try {
     await import('../aspects/' + aspect + '/index.js');
   } catch (err) {
-    console.log(err);
+    Log.error('Could not import aspect "' + aspect + '"');
   }
 }
 
