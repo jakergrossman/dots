@@ -71,3 +71,8 @@ task('nvim', 'install vim-plug', async() => {
     ]
   );
 });
+
+// TODO: build nvim from source?
+task('nvim', 'install plugins', async() => {
+  await command('nvim', ['-c', 'PlugInstall --sync', '-c', 'qa']);
+});
