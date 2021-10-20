@@ -10,7 +10,7 @@ cd $REPO_ROOT
 source "bin/common"
 
 log_run "Installing TypeScript"
-npm ci > /dev/null
+npm install > /dev/null
 
 log_run "Cleaning"
 git clean -fdxq -- lib

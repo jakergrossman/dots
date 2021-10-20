@@ -16,6 +16,11 @@ type Result = {
   stderr: string,
 }
 
+type Options = {
+  cwd?: string,
+  env?: NodeJS.ProcessEnv,
+}
+
 /**
  * Runs an external command.
  *
@@ -26,7 +31,7 @@ type Result = {
 export default async function command(
   executable: string,
   args: string[] = [],
-  cwd?: string
+  options: Options = {}
 ): Promise<Result> {
   return new Promise(resolve => {
     // initialize result
@@ -38,12 +43,7 @@ export default async function command(
       stderr: '',
     }
 
-    let child;
-    if (cwd) {
-      child = spawn(executable, args, {cwd: cwd});
-    } else {
-      child = spawn(executable, args);
-    }
+    let child = spawn(executable, args, options);
 
     // log stdout
     child.stdout.on('data', (data) => {

@@ -14,7 +14,8 @@
             "aspects": [
                 "dotfiles",
                 "nvim",
-                "fzf"
+                "fzf",
+                "node"
             ],
             "variables": {}
         },
@@ -22,7 +23,8 @@
             "aspects": [
                 "dotfiles",
                 "nvim",
-                "xmonad"
+                "xmonad",
+                "node"
             ],
             "variables": {}
         }
