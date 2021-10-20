@@ -20,8 +20,14 @@ async function main(): Promise<void> {
   assert(obj.platforms);
   let platforms = obj.platforms;
 
-  // get aspects for current platform
-  let aspects = platforms[Context.attributes.platform]['aspects'];
+  let aspects: string[];
+  if (process.argv.length > 2) {
+    // use passed aspects args
+    aspects = process.argv.slice(2);
+  } else {
+    // get aspects for current platform
+    aspects = platforms[Context.attributes.platform]['aspects'];
+  }
 
   // register tasks
   for (const aspect of aspects) {
@@ -29,16 +35,23 @@ async function main(): Promise<void> {
   }
 
   // run tasks
+  if (process.argv.length > 2) {
+    // specified aspects
+    Log.run('Running user-specified tasks');
+  } else {
+    // platform defined aspects
     Log.run(`Running tasks for platform "${Context.attributes.platform}"`);
-    for (const aspect of aspects) {
-      // Update context
-      Context.currentAspect = aspect;
+  }
 
-      // Print and run an aspects tasks, if there are any
-      if (Context.tasks.get(Context.currentAspect).length > 0) {
-        Log.info(Context.currentAspect);
-        for (const [callback, description] of Context.tasks.get(aspect)) {
-          Log.run('\\ ' + description);
+  for (const aspect of aspects) {
+    // Update context
+    Context.currentAspect = aspect;
+
+    // Print and run an aspects tasks, if there are any
+    if (Context.tasks.get(Context.currentAspect).length > 0) {
+      Log.info(Context.currentAspect);
+      for (const [callback, description] of Context.tasks.get(aspect)) {
+        Log.run('\\ ' + description);
 
         try {
           await callback();

@@ -33,4 +33,4 @@ cat > lib/meta/package.json << EOF
 EOF
 
 log_run "Running main"
-node lib/meta/main.js
+node lib/meta/main.js "$@"
