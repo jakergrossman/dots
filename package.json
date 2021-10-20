@@ -23,7 +23,6 @@
             "aspects": [
                 "dotfiles",
                 "nvim",
-                "xmonad",
                 "node"
             ],
             "variables": {}
