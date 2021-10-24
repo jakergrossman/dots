@@ -50,6 +50,10 @@ vim.o.relativenumber = true
 vim.o.undofile = true
 vim.o.undodir = vim.fn.expand("~/.cache/vim/undo")
 
+vim.o.wrap = false
+
+vim.o.colorcolumn = "80"
+
 -- }}}
 
 -- PLUGIN CONFIG {{{
@@ -74,7 +78,7 @@ vim.fn['plug#']('marko-cerovac/material.nvim')
 vim.fn['plug#end']()
 
 -- marko-cerovac/material.nvim
-vim.g.material_style = 'palenight'
+vim.g.material_style = 'darker'
 vim.api.nvim_exec('colo material', false)
 
 -- }}}
@@ -109,6 +113,9 @@ local map_on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 end
 
+nvim_lsp.clangd.setup {
+  on_attach = map_on_attach
+}
 nvim_lsp.tsserver.setup {
     on_attach = function(client, bufnr)
         local ts_utils = require("nvim-lsp-ts-utils")
@@ -158,5 +165,4 @@ nvim_lsp.tsserver.setup {
 -- }}}
 
 -- MAPPING {{{
-vim.api.nvim_exec("nnoremap q: <nop>", false)
 -- }}}
