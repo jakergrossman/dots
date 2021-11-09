@@ -35,10 +35,6 @@ vim.o.incsearch = true
 -- bash-like completion
 vim.o.wildmode = 'full:longest:list'
 
--- directory specific vimrc
-vim.o.exrc = true
-vim.o.secure = true
-
 -- gotto go fast
 vim.o.updatetime = 100
 
@@ -52,7 +48,10 @@ vim.o.undodir = vim.fn.expand("~/.cache/vim/undo")
 
 vim.o.wrap = false
 
-vim.o.colorcolumn = "80"
+vim.o.textwidth = 120
+vim.o.colorcolumn = vim.o.textwidth .. ''
+
+vim.g.c_syntax_for_h = 1
 
 -- }}}
 
@@ -114,8 +113,9 @@ local map_on_attach = function(client, bufnr)
 end
 
 nvim_lsp.clangd.setup {
-  on_attach = map_on_attach
+  on_attach = map_on_attach,
 }
+
 nvim_lsp.tsserver.setup {
     on_attach = function(client, bufnr)
         local ts_utils = require("nvim-lsp-ts-utils")
@@ -166,3 +166,7 @@ nvim_lsp.tsserver.setup {
 
 -- MAPPING {{{
 -- }}}
+
+-- directory specific vimrc
+vim.o.exrc = true
+vim.o.secure = true

@@ -6,9 +6,14 @@
     st = status
     br = branch
     hist = log --oneline --all --decorate --graph
+    other = ls-files --others --exclude-from=.gitignore
 
 [user]
     email = jake.r.grossman@gmail.com
     name = jakergrossman
+
 [init]
 	defaultBranch = master
+
+[core]
+	editor = vim
