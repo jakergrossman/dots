@@ -4,7 +4,14 @@ case $- in
 	  *) return;;
 esac
 
-PS1='\e[37m[\A]\e[0m \e[31m$(basename "$(pwd)")\e[0m \e[33m|\e[0m '
+git_branch () {
+	GIT_BRANCH="$(git branch 2>/dev/null | grep '^*')"
+	if [ "$GIT_BRANCH" != "* master" ] && [ "$GIT_BRANCH" != "* main" ]; then
+		echo "$GIT_BRANCH"
+	fi
+}
+
+PS1='\e[37m[\A]\e[0m \e[31m$(basename "$(pwd)")\e[0m $(git_branch)\e[33m|\e[0m '
 
 # alias definitions
 if [ -f ~/.bash_aliases ]; then
