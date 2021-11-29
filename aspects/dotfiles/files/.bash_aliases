@@ -1,6 +1,5 @@
 # shorties
 alias l="ls -lah"
-alias v="vim"
 alias p="sudo pacman"
 alias g="git"
 alias gr="grep"
@@ -26,4 +25,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias vim="nvim"
+if [ ! -z $(which nvim 2>/dev/null) ]; then
+	alias v='nvim'
+fi

@@ -4,8 +4,7 @@ case $- in
 	  *) return;;
 esac
 
-# set prompt
-PS1='[\[\e[1;31m\]\h@\u \w \[\e[m\]]$ '
+PS1='\e[37m[\A]\e[0m \e[31m$(basename "$(pwd)")\e[0m \e[33m|\e[0m '
 
 # alias definitions
 if [ -f ~/.bash_aliases ]; then
