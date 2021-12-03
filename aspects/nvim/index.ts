@@ -45,6 +45,32 @@ task('nvim', 'create symlinks', async () => {
   return Promise.resolve();
 });
 
+task('nvim', 'fetch neovim git', async () => {
+  await command('git',
+               ['clone',
+                '--depth',
+                '1',
+                'https://github.com/neovim/neovim.git',
+               ],
+               {
+                 cwd: 'vendor'
+               }
+  );
+});
+
+task('nvim', 'build neovim', async () => {
+  await command('make',
+               ['CMAKE_BUILD_TYPE=Release'],
+               {
+                 cwd: 'vendor/neovim'
+               }
+  );
+});
+
+task('nvim', 'install neovim', async () => {
+  await command('make', ['install'], { cwd: 'vendor/neovim' });
+});
+
 task('nvim', 'install vim-plug', async() => {
   const autoload = join(
     Context.attributes.home,

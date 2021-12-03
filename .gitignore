@@ -8,3 +8,4 @@ plugged/*
 
 node_modules
 vendor/node
+vendor/neovim
