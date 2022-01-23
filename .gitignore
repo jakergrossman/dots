@@ -1,11 +1,4 @@
 .uuid
 .DS_Store
 .netrwhist
-
-# don't save vim-plug or it's plugins
-plug.vim
-plugged/*
-
-node_modules
-vendor/node
-vendor/neovim
+*~

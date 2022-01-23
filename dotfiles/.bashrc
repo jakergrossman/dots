@@ -12,7 +12,8 @@ git_branch () {
 	fi
 }
 
-PS1='\e[37m[\A]\e[0m \e[31m$(basename "$(pwd)")\e[0m$(git_branch) \e[33m|\e[0m '
+#PS1='\e[37m[\A]\e[0m \e[31m$(basename "$(pwd)")\e[0m$(git_branch) \e[33m|\e[0m '
+PS1='[\A] $(basename "$(pwd)")$(git_branch) | '
 
 # alias definitions
 if [ -f ~/.bash_aliases ]; then
@@ -45,3 +46,6 @@ export PATH="$N_PREFIX/bin":"$PATH"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+. "$HOME/.cargo/env"
+export PATH="$HOME/.local/bin:$PATH"

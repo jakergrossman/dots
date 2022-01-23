@@ -1,5 +1,5 @@
 # set ENV variables
-export EDITOR=vim
+export EDITOR=nvim
 export TERMINAL=alacritty
 
 # system specific exports
@@ -22,3 +22,4 @@ fi
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
+. "$HOME/.cargo/env"
