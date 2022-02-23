@@ -2,6 +2,9 @@
 export EDITOR=nvim
 export TERMINAL=alacritty
 
+# disable monitoring for background processes
+set +m
+
 # system specific exports
 if   [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # linux

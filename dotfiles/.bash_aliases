@@ -28,3 +28,12 @@ fi
 if [ ! -z $(which nvim 2>/dev/null) ]; then
 	alias v='nvim'
 fi
+
+# system specific aliases
+case "$OSTYPE" in
+    darwin*)
+        alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+        alias matlab="/Applications/MATLAB_R2021b.app/bin/matlab"
+        ;;
+esac
+

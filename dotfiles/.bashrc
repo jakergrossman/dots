@@ -12,7 +12,6 @@ git_branch () {
 	fi
 }
 
-#PS1='\e[37m[\A]\e[0m \e[31m$(basename "$(pwd)")\e[0m$(git_branch) \e[33m|\e[0m '
 PS1='[\A] $(basename "$(pwd)")$(git_branch) | '
 
 # alias definitions
