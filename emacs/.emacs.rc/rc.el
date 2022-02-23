@@ -23,3 +23,7 @@
   (let ((theme-package (intern (concat (symbol-name theme) "-theme"))))
     (rc/require theme-package)
     (load-theme theme t)))
+
+(defun rc/load-if-present (pathname)
+  (when (file-exists-p pathname)
+    (load pathname)))

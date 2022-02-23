@@ -30,7 +30,11 @@
 (set-face-attribute 'mode-line nil :box nil)
 
 (rc/require 'hl-todo)
-(hl-todo-mode)
+(global-hl-todo-mode)
+
+;; don't spam customize-* in version-controlled file >:(
+(setq custom-file "~/.emacs.d/custom.el")
+(rc/load-if-present custom-file)
 
 ;;;; PACKAGES
 
@@ -38,12 +42,12 @@
 (require 'dired-x)
 
 ;; ls flags for dired output
-(setq dired-listing-switches "-aDghlo --group-directories-first")
+(when (not (string= system-type "darwin"))
+  (setq dired-use-ls-dired t))
 
 ;; slime
 (rc/require 'slime)
            
-
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 ;; magit
