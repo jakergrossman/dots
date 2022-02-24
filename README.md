@@ -1,3 +1,4 @@
+
 # dotfiles
 collection of system configuration files
 
@@ -10,7 +11,11 @@ collection of system configuration files
 - [git](https://git-scm.com/) to clone the repository
 - optionaly: [GNU Stow](https://www.gnu.org/software/stow/) for automatic installation
 
-## installation using GNU Stow
+## installation using GNU Stow (*nix/MacOS)
 ```console
 $ stow package1 package2 ...
 ```
+
+## installation using PowerShell (Windows 7+)
+Right click `deploy.ps1`, "Run With Powershell". The script will automatically try to elevate
+it's privileges and deploy MANIFEST.
