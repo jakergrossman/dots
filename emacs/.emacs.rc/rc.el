@@ -24,6 +24,10 @@
     (rc/require theme-package)
     (load-theme theme t)))
 
-(defun rc/load-if-present (pathname)
-  (when (file-exists-p pathname)
-    (load pathname)))
+(defun rc/load (path &optional ignore)
+  (cond
+   ((file-exists-p path) (load path))
+   ((not ignore)
+      (let ((response (read-from-minibuffer (format "%s could not be loaded. Continue? [Y/n]: " path))))
+        (when (not (string-prefix-p "y" (downcase response)))
+          (error "Could not load %s" path))))))

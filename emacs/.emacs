@@ -34,7 +34,7 @@
 
 ;; don't spam customize-* in version-controlled file >:(
 (setq custom-file "~/.emacs.d/custom.el")
-(rc/load-if-present custom-file)
+(rc/load custom-file t)
 
 ;;;; PACKAGES
 
@@ -47,11 +47,13 @@
 
 ;; slime
 (rc/require 'slime)
-           
+
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 ;; magit
 (rc/require 'magit)
+
+(add-to-list 'evil-emacs-state-modes 'dired-mode)
 
 ;;;; MAPPINGS
 

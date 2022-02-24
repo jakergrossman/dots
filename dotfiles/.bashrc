@@ -41,6 +41,9 @@ fi
 export N_PREFIX="$HOME/n"
 export PATH="$N_PREFIX/bin":"$PATH"
 
+# maven
+export PATH="/usr/local/bin/apache-maven/bin":"$PATH"
+
 # load fzf stuff, if available
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 
