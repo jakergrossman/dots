@@ -1,9 +1,9 @@
 ;;;; https://github.com/rexim/dotfiles/blob/9ca2e60a2f52a00eb24592cb47f2329a7c8d6aa1/.emacs.rc/rc.el
 
+(package-initialize)
+
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-
-(package-initialize)
 
 (defvar rc/package-contents-refreshed nil)
 (defun rc/package-refresh-contents-once ()
