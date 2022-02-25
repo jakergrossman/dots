@@ -1,9 +1,14 @@
-;;;; https://github.com/rexim/dotfiles/blob/9ca2e60a2f52a00eb24592cb47f2329a7c8d6aa1/.emacs.rc/rc.el
-
 (package-initialize)
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
+
+(defun rc/error (fmt &rest args)
+  "Issue a warning with type (RC) and level :ERROR"
+  (apply #'lwarn `((rc) :error ,fmt ,@args)))
+
+;; Package handling inspired by Tsoding:
+;; https://github.com/rexim/dotfiles/blob/9ca2e60a2f52a00eb24592cb47f2329a7c8d6aa1/.emacs.rc/rc.el
 
 (defvar rc/package-contents-refreshed nil)
 (defun rc/package-refresh-contents-once ()
@@ -38,15 +43,11 @@
     (let ((continue (yes-or-no-p (format "%s could not be loaded. Continue? " path))))
       (when (not continue) (error "Could not load %s" path))))))
 
-(defun rc/set-keys (keys func)
-  "Shorthand for keybindings"
-  (global-set-key (kbd keys) func))
-
-;; cl-lib is not installed by default on Windows,
-;; but is required for cl-loop
-(rc/require 'cl-lib)
 (defun rc/set-keys (&rest mappings)
-  "Given an alist MAPPINGS => (KEYS ACTION), map each KEYS to ACTION"
+  "Given a property list MAPPINGS => (KEYS ACTION)*, map each KEYS to ACTION"
+  (when (eq (mod (length mappings) 2) 1)
+    (rc/error "Odd number of arguments to RC/SET-KEYS (%s)" (length mappings))
+    (return-from rc/set-keys))
   (cl-loop for (keys action) on mappings by #'cddr
            do (global-set-key (kbd keys) action)))
 
@@ -66,8 +67,10 @@ preceded by either '+' or '-' (enabled or disabled, respectively):
                                          (string-match spec-format spec)))
 
             when is-malformed
-            do (warn "Org Babel specifier is malformed, ignoring (%s)" spec)
+            do (rc/error "Org Babel specifier is malformed, ignoring (%s)" spec)
 
             unless is-malformed
             collect (cons (intern (cl-subseq spec 1))
-                          (char-equal (aref spec 0) ?+)))))
+                          (cl-ecase (aref spec 0)
+                            (?+ t)
+                            (?- nil))))))
