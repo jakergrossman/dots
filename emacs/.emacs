@@ -97,3 +97,7 @@
    (t (message "The minibuffer is not active!!!"))))
 
 (rc/set-keys "C-M-m" 'rc/switch-to-minibuffer)
+
+;; select languages allowed for inline ORG blocks
+(rc/register-org-babel-languages "+lisp" "+shell" "+C")
+(setf org-confirm-babel-evaluate nil)

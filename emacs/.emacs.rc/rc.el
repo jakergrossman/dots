@@ -49,3 +49,25 @@
   "Given an alist MAPPINGS => (KEYS ACTION), map each KEYS to ACTION"
   (cl-loop for (keys action) on mappings by #'cddr
            do (global-set-key (kbd keys) action)))
+
+(defun rc/register-org-babel-languages (&rest lang-specs)
+  "Register languages with org-babel.
+
+Each item in LANG-SPECS is a string specifier for a language
+preceded by either '+' or '-' (enabled or disabled, respectively):
+
+  '+lisp'   ; enable lisp
+  '-C'      ; disable C"
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   (cl-loop with spec-format = "^[+-][a-zA-Z_-]+$"
+            for spec in lang-specs
+            for is-malformed = (not (and (stringp spec)
+                                         (string-match spec-format spec)))
+
+            when is-malformed
+            do (warn "Org Babel specifier is malformed, ignoring (%s)" spec)
+
+            unless is-malformed
+            collect (cons (intern (cl-subseq spec 1))
+                          (char-equal (aref spec 0) ?+)))))
