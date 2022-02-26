@@ -1,5 +1,5 @@
 ;; configuration utilities
-(load "~/.emacs.rc/rc.el")
+(load "~/.emacs.d/rc.el")
 
 ;; expand tabs to spaces
 (setq-default indent-tabs-mode nil)
