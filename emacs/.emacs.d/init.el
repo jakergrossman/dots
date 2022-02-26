@@ -101,3 +101,8 @@
 ;; select languages allowed for inline ORG blocks
 (rc/register-org-babel-languages "+lisp" "+shell" "+C")
 (setf org-confirm-babel-evaluate nil)
+
+;; custom modes
+(add-to-list 'load-path "~/.emacs.d/modes/")
+(require 'jflex-mode)
+(require 'cup-mode)
