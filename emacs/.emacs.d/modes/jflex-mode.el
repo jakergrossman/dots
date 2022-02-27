@@ -19,19 +19,18 @@
 (defun jflex-mode (&optional arg)
   "Minor mode for JFLEX syntax highlighting"
   (interactive (list (or current-prefix-arg 'toggle)))
-  (let ((enable
-         (if (eq arg 'toggle)
-             (not jflex-mode)
-           (> (prefix-numeric-value arg) 0))))
-    (if enable
-        (progn
-          (setq jflex-mode t)
-          ;; Register highlighting
-          (font-lock-add-keywords nil jflex-font-lock-keywords)
-
-          (add-to-list 'minor-mode-alist '(jflex-mode " JFLEX")))
-      (progn
-        (setq jflex-mode nil)
-        (font-lock-remove-keywords nil jflex-font-lock-keywords)))))
+  (let ((enable (if (eq arg 'toggle)
+                    (not jflex-mode)
+                  (> (prefix-numeric-value arg) 0))))
+    (setq jflex-mode enable)
+    (cond
+      (enable
+       ;; Register highlighting
+       (font-lock-add-keywords nil jflex-font-lock-keywords)
+       (add-to-list 'minor-mode-alist '(jflex-mode " JFLEX"))
+       (font-lock-fontify-buffer))
+      (t
+       (font-lock-remove-keywords nil jflex-font-lock-keywords)
+       (font-lock-fontify-buffer)))))
 
 (provide 'jflex-mode)
