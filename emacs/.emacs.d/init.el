@@ -106,3 +106,6 @@
 (add-to-list 'load-path "~/.emacs.d/modes/")
 (require 'jflex-mode)
 (require 'cup-mode)
+
+;; racket- and racket repl-modes
+(rc/require 'racket-mode 'geiser-racket 'quack)
