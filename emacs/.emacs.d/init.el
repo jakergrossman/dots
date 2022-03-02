@@ -13,7 +13,11 @@
 (scroll-bar-mode 0)
 (column-number-mode 1)
 (setq-default display-line-numbers 'relative)
-(show-paren-mode)
+(show-paren-mode 1)
+
+;; smooth scrolling
+(when (>= emacs-major-version 29)
+  (pixel-scroll-precision-mode 1))
 
 ;; don't show startup screen
 (setq inhibit-startup-screen t)
