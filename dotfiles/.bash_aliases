@@ -11,11 +11,11 @@ alias gh="git log --oneline --all --decorate --graph"
 
 # systemctl
 alias sc="sudo systemctl"
-if [ ! -z $(which nvim 2>/dev/null) ]; then
-	alias v='nvim'
-fi
 
-# system specific aliases
+# alias vim -> nvim, if it exists on the path
+[ ! -z "$(command -v nvim)" ] && alias vim="nvim"
+
+# platform specific aliases
 case "$OSTYPE" in
     darwin*)
         alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
