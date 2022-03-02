@@ -51,6 +51,24 @@
   (cl-loop for (keys action) on mappings by #'cddr
            do (global-set-key (kbd keys) action)))
 
+(defun rc/set-user-keys (&rest mappings)
+  "Like RC/SET-KEYS, but asserts that the only mappings present
+are those reserved for users: C-c followed by a letter and <f5>-<f9>.
+
+If any mapping is not a reserved mapping, no keys are mapped and an error is emitted."
+  (cl-loop for (keys action) on mappings by #'cddr
+           for errorp = (not (string-match-p "\\(C-c\s+[a-zA-Z]\\|<f[5-9]>\\)" keys))
+
+           when errorp
+           collect keys into errors
+
+           unless errorp
+           append (list keys action) into validated
+
+           finally (if errors
+                       (rc/error "The following keymaps were not reserved user mappings: %S" errors)
+                       (apply #'rc/set-keys validated))))
+
 (defun rc/register-org-babel-languages (&rest lang-specs)
   "Register languages with org-babel.
 
