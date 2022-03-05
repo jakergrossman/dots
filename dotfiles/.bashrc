@@ -52,7 +52,7 @@ case "$OSTYPE" in
 "/libexec/gnubin"
 
         # racket
-        add_to_path "/Applications/Racket"
+        add_to_path "/Applications/Racket/bin"
         ;;
 esac
 
