@@ -1,3 +1,5 @@
+; -*- lexical-binding: t -*-
+
 ;; configuration utilities
 (load "~/.emacs.d/rc.el")
 
@@ -114,3 +116,25 @@
 
 ;; racket- and racket repl-modes
 (rc/require 'racket-mode 'geiser-racket 'quack)
+
+(defconst rc/roman-greek-alist
+  '((?a . #x03B1)   ; GREEK SMALL LETTER ALPHA
+    (?b . #x03B2)   ; GREEK SMALL LETTER BETA
+    (?g . #x03B3)   ; GREEK SMALL LETTER GAMMA
+    (?d . #x0394)   ; GREEK CAPITAL LETTER DELTA
+    (?e . #x03B5)   ; GREEK SMALL LETTER EPSILON
+    (?t . #x03B8)   ; GREEK SMALL LETTER THETA
+    (?l . #x03BB)   ; GREEK SMALL LETTER LAMBDA
+    (?m . #x03BC)   ; GREEK SMALL LETTER MU
+    (?r . #x03C1)   ; GREEK SMALL LETTER RHO
+    (?s . #x03C3)   ; GREEK SMALL LETTER SIGMA
+    (?p . #x03C6)   ; GREEK SMALL LETTER PHI
+    (?w . #x03C9))  ; GREEK SMALL LETTER OMEGA
+  "Association list from Latin letters to Greek counterparts.
+Only letters frequently used as variables are available.")
+
+;; map `C-c C-g LETTER` to the Greek counterpart to
+;; LETTER in rc/roman-greek-alist
+(dolist (key rc/roman-greek-alist)
+  (rc/set-keys (concat "C-c C-g " (string (car key)))
+               (lambda () (interactive) (insert-char (cdr key)))))
