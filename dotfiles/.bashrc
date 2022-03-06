@@ -23,7 +23,7 @@ git_branch () {
     fi
 }
 
-PS1='[\A] $(basename "$(pwd)")$(git_branch) | '
+PS1='\[\e[0;90m\][\A]\[\e[0m\] \[\e[0;95m\]$(basename "$(pwd)")\[\e[0m\]\[\e[0;33m\]$(git_branch)\[\e[0m\] \[\e[0;91m\]|\[\e[0m\] '
 
 # alias definitions
 if [ -f ~/.bash_aliases ]; then
