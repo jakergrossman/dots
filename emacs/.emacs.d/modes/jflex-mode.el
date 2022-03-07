@@ -2,8 +2,8 @@
 ;;;;
 ;;;; Minor mode for syntax highlighting in JFLEX files
 
-(defvar-local jflex-mode-hook nil)
-(defvar-local jflex-mode nil)
+(defvar jflex-mode-hook nil)
+(defvar jflex-mode nil)
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.jflex\\'" . jflex-mode))
@@ -16,21 +16,17 @@
    '("\\(:\\(?:\\(?:digit\\|letter\\):\\)\\)" . font-lock-builtin-face)
    '("\"\\(\\\\[\\\\\"]\\|[^\\\\\"]\\)*\"" . font-lock-string-face)))
 
-(defun jflex-mode (&optional arg)
-  "Minor mode for JFLEX syntax highlighting"
-  (interactive (list (or current-prefix-arg 'toggle)))
-  (let ((enable (if (eq arg 'toggle)
-                    (not jflex-mode)
-                  (> (prefix-numeric-value arg) 0))))
-    (setq jflex-mode enable)
-    (cond
-      (enable
-       ;; Register highlighting
-       (font-lock-add-keywords nil jflex-font-lock-keywords)
-       (add-to-list 'minor-mode-alist '(jflex-mode " JFLEX"))
-       (font-lock-fontify-buffer))
-      (t
-       (font-lock-remove-keywords nil jflex-font-lock-keywords)
-       (font-lock-fontify-buffer)))))
+(define-minor-mode jflex-mode
+  "Toggles jflex-mode for simple syntax highlighting in JFlex files."
+  nil
+  :lighter " jflex"
+  (cond
+   (jflex-mode
+    ;; Register highlighting
+    (font-lock-add-keywords nil jflex-font-lock-keywords)
+    (font-lock-fontify-buffer))
+   (t
+    (font-lock-remove-keywords nil jflex-font-lock-keywords)
+    (font-lock-fontify-buffer))))
 
 (provide 'jflex-mode)
