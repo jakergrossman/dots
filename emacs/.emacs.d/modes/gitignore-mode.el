@@ -15,15 +15,17 @@
    ;; comments
    '("^#.*" . font-lock-comment-face)
 
-   ;; kleene * and ?
-   '("\\(^\\|[^\\\\]\\)\\(\\*+\\|\\?\\)" . (2 font-lock-keyword-face))
+   ;; escaped characters
+   '("\\\\." . font-lock-warning-face)
 
-   ;; directory
-   '("[^!].*/$" . font-lock-constant-face) ; TODO: doesn't support '/'
+   ;; kleene * and ?
+   '("[*?]" . font-lock-keyword-face)
+
+   ;; directory separator
+   '("[/]" . font-lock-builtin-face)
 
    ;; pattern negation
    '("^!" . font-lock-warning-face)))
-
 
 (defun gitignore-mode (&optional arg)
   "Minor mode for GITIGNORE syntax highlighting"
