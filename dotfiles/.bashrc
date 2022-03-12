@@ -4,10 +4,12 @@ case $- in
     *) return;;
 esac
 
-# add each directory argument to PATH only if it is not already present
+# add directory arguments to PATH if:
+#   1. The directory exists
+#   2. The directory is not already present in PATH
 add_to_path () {
     for dir in $@; do
-        if [[ ! ":$PATH:" == *":$dir:"* ]]; then
+        if [ -d "$dir" ] && [[ ! ":$PATH:" == *":$dir:"* ]]; then
             export PATH="$dir:$PATH"
         fi
     done
@@ -38,26 +40,20 @@ if [ -x "/usr/bin/ufetch" ]; then
     /usr/bin/ufetch
 fi
 
-# local aliases
-if [ -f ~/.bash_aliases.local ]; then
-    . ~/.bash_aliases.local
-fi
-
 # platform specific settings
 case "$OSTYPE" in
     darwin*)
         # put gnu-utils first to avoid g prefix
-        add_to_path "/usr/local/opt/"\
-{coreutils,findutils,gnu-tar,gnu-sed,gawk,gnutls,gnu-indent,gnu-getopt,grep}\
-"/libexec/gnubin"
+        add_to_path "/usr/local/opt/gnu-utils"
 
         # racket
         add_to_path "/Applications/Racket/bin"
+
+        # MATLAB
+        add_to_path "/Applications/Matlab/bin"
         ;;
 esac
 
-# maven
-add_to_path "/usr/local/bin/apache-maven/bin"
 
 # load fzf stuff, if available
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash

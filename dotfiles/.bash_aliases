@@ -18,8 +18,13 @@ alias sc="sudo systemctl"
 # platform specific aliases
 case "$OSTYPE" in
     darwin*)
+        # TODO: find the utterance that brings me to the SO page
+        #       that mentions emacs can't be symlinked
         alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
-        alias matlab="/Applications/MATLAB_R2021b.app/bin/matlab"
         ;;
 esac
 
+# machine local aliases
+if [ -f ~/.bash_aliases.local ]; then
+    . ~/.bash_aliases.local
+fi
