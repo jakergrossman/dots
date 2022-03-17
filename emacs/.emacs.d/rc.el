@@ -28,11 +28,10 @@
   (dolist (package packages)
     (rc/require-one-package package)))
 
-(defun rc/require-theme (theme &optional theme-package)
+(cl-defun rc/require-theme (theme &optional (theme-package (intern (concat (symbol-name theme) "-theme"))))
   "Require a theme. If THEME-PACKAGE is nil, the name of the theme's package is assumed to be THEME-theme"
-  (let ((theme-package (or theme-package (intern (concat (symbol-name theme) "-theme")))))
-    (rc/require theme-package)
-    (load-theme theme t)))
+  (rc/require theme-package)
+  (load-theme theme t))
 
 (defun rc/load (path &optional ignore)
   "Load a file from PATH. Ignores non-existent file if IGNORE is non-nil"
@@ -92,3 +91,11 @@ preceded by either '+' or '-' (enabled or disabled, respectively):
                           (cl-ecase (aref spec 0)
                             (?+ t)
                             (?- nil))))))
+
+(cl-defmacro λ (&body body)
+  "Anonymous closure shorthand with no arguments."
+  `(lambda () (interactive) ,@body))
+
+(cl-defmacro φ ((&rest args) &body body)
+  "Anonymous closure shorthand with arguments."
+  `(lambda (,@args) (interactive) ,@body))

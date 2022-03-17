@@ -82,8 +82,10 @@
 (ido-ubiquitous-mode 1)
 
 ;; evil mode
-;; (evil-mode t)
-;; (evil-set-initial-state 'dired-mode 'emacs)
+(setq evil-want-C-u-scroll t) ; why this isn't the default is beyond me
+(rc/require 'evil)
+(evil-mode t)
+(evil-set-initial-state 'dired-mode 'emacs)
 
 ;; multi-cursor support
 (rc/require 'multiple-cursors)
@@ -118,23 +120,35 @@
 (rc/require 'racket-mode 'geiser-racket 'quack)
 
 (defconst rc/roman-greek-alist
-  '((?a . #x03B1)   ; GREEK SMALL LETTER ALPHA
-    (?b . #x03B2)   ; GREEK SMALL LETTER BETA
-    (?g . #x03B3)   ; GREEK SMALL LETTER GAMMA
-    (?d . #x0394)   ; GREEK CAPITAL LETTER DELTA
-    (?e . #x03B5)   ; GREEK SMALL LETTER EPSILON
-    (?t . #x03B8)   ; GREEK SMALL LETTER THETA
-    (?l . #x03BB)   ; GREEK SMALL LETTER LAMBDA
-    (?m . #x03BC)   ; GREEK SMALL LETTER MU
-    (?r . #x03C1)   ; GREEK SMALL LETTER RHO
-    (?s . #x03C3)   ; GREEK SMALL LETTER SIGMA
-    (?p . #x03C6)   ; GREEK SMALL LETTER PHI
-    (?w . #x03C9))  ; GREEK SMALL LETTER OMEGA
+  '((?a . #x03B1)   ; α GREEK SMALL   LETTER ALPHA
+    (?b . #x03B2)   ; β GREEK SMALL   LETTER BETA
+    (?g . #x03B3)   ; γ GREEK SMALL   LETTER GAMMA
+    (?d . #x0394)   ; Δ GREEK CAPITAL LETTER DELTA
+    (?e . #x03B5)   ; ε GREEK SMALL   LETTER EPSILON
+    (?t . #x03B8)   ; θ GREEK SMALL   LETTER THETA
+    (?l . #x03BB)   ; λ GREEK SMALL   LETTER LAMBDA
+    (?m . #x03BC)   ; μ GREEK SMALL   LETTER MU
+    (?r . #x03C1)   ; ρ GREEK SMALL   LETTER RHO
+    (?s . #x03C3)   ; σ GREEK SMALL   LETTER SIGMA
+    (?p . #x03C6)   ; φ GREEK SMALL   LETTER PHI
+    (?w . #x03C9))  ; ω GREEK SMALL   LETTER OMEGA
   "Association list from Latin letters to Greek counterparts.
-Only letters frequently used as variables are available.")
+Only letters frequently used as variables (by me) are available.")
 
 ;; map `C-c C-g LETTER` to the Greek counterpart to
 ;; LETTER in rc/roman-greek-alist
 (dolist (key rc/roman-greek-alist)
   (rc/set-keys (concat "C-c C-g " (string (car key)))
-               (lambda () (interactive) (insert-char (cdr key)))))
+               (λ (insert-char (cdr key)))))
+
+;; company-mode
+(rc/require 'company 'slime-company)
+
+;; company mode everywhere
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; kinda slow completion...
+(setq company-idle-delay 2)
+
+;; ...but can manually prompt completion anyways
+(rc/set-user-keys "C-c p" 'company-complete)
