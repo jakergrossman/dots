@@ -1,0 +1,549 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Jake Grossman
+#+EMAIL: jake.r.grossman@gmail.com
+#+OPTIONS: num:nil
+
+* Lexical Binding
+Enable lexical binding for closures.
+
+#+begin_src emacs-lisp
+; -*- lexical-binding: t -*-
+#+end_src
+
+* RC Utilities
+Utility functions used for configuring Emacs.
+
+** Errors
+Error function for Emacs configuration; issues a warning with type =RC= and level =:ERROR=.
+
+#+begin_src emacs-lisp
+(defun rc/error (fmt &rest args)
+  "Issue a warning with type (RC) and level :ERROR"
+  (apply #'lwarn `((rc) :error ,fmt ,@args)))
+#+end_src
+
+** Anonymous Closure Macros
+
+Define =λ= and =φ= macros as shorthands for non-paremetrized and parametrized
+anonymous closures. 
+
+#+begin_src emacs-lisp
+(cl-defmacro λ (&body body)
+  "Anonymous closure shorthand with no arguments."
+  `(lambda () (interactive) ,@body))
+
+(cl-defmacro φ ((&rest args) &body body)
+  "Anonymous closure shorthand with arguments."
+  `(lambda (,@args) (interactive) ,@body))
+#+end_src
+
+** Symbol & String Concatenation
+Take 0 or more strings and symbols and concatenates them, returning that value as a symbol.
+Used to avoid =(intern (concat (symbol-name 'symbol) "-string"))= pattern.
+
+#+begin_src emacs-lisp
+(defun rc/symbol-cat (&rest symbols-or-strings)
+  (intern (apply #'concat (mapcar (φ (x) (cond
+                                          ((symbolp x) (symbol-name x))
+                                          ((stringp x) x)))
+                                  symbols-or-strings))))
+#+end_src
+
+** Package Management
+
+Functions for requiring and installing packages. The main function is
+=rc/require=, accepting any number of symbols designating packages. Packages
+are installed using =package-install= if not already present on the system.
+
+#+begin_src emacs-lisp
+(defvar rc/package-contents-refreshed nil)
+(defun rc/package-refresh-contents-once ()
+  "Refresh package contents the first time this functions is called"
+  (when (not rc/package-contents-refreshed)
+    (setq rc/package-contents-refreshed t)
+    (package-refresh-contents)))
+
+(defun rc/require-one-package (package)
+  "Require a single package, refreshing the contents if required"
+  (when (not (package-installed-p package))
+    (rc/package-refresh-contents-once)
+    (package-install package)))
+
+(defun rc/require (&rest packages)
+  "Require one or more PACKAGES"
+  (dolist (package packages)
+    (rc/require-one-package package)))
+#+end_src
+
+Require a theme package. If =theme-package= is nil, the theme package's name is inferred to
+be =THEME-theme=.
+
+=cl-defun= /is *required* in order to have an evaluated optional argument./
+
+#+begin_src emacs-lisp
+(cl-defun rc/require-theme (theme &optional (theme-package (intern (concat (symbol-name theme) "-theme"))))
+  "Require a theme. If THEME-PACKAGE is nil, the name of the theme's package is inferred to be THEME-theme"
+  (rc/require theme-package)
+  (load-theme theme t))
+#+end_src
+
+Load a file an Emacs lisp file given a path. Ignores non-existent file
+if =ignore= is non-nil, and prompts the user to continue otherwise. If the user
+declines to continue, an error is thrown to stop execution.
+
+#+begin_src emacs-lisp
+(defun rc/load (path &optional ignore)
+  "Load a file from PATH. Ignores non-existent file if IGNORE is non-nil"
+  (interactive "FFile path: ")
+  (cond
+   ((file-exists-p path) (load path))
+   ((not ignore)
+    (let ((continue (yes-or-no-p (format "%s could not be loaded. Continue? " path))))
+      (when (not continue) (error "Could not load %s" path))))))
+#+end_src
+
+** Key Bindings
+Defines two functions, =rc/set-keys= and =rc/set-user-keys=, which accepts a property list
+where each key is a string suitable for passing to =kbd= and each value the command to perform.
+
+=rc/set-user-keys= is like =rc/set-keys=, except it ensures that every mapping is a user reserved mapping.
+When invalid mappings are present, no keys are mapped and an error is emitted.
+
+#+begin_src emacs-lisp
+(defun rc/set-keys (&rest mappings)
+  "Given a property list MAPPINGS => (KEYS ACTION)*, map each KEYS to ACTION"
+  (when (eq (mod (length mappings) 2) 1)
+    (rc/error "Odd number of arguments to RC/SET-KEYS (%s)" (length mappings))
+    (return-from rc/set-keys))
+  (cl-loop for (keys action) on mappings by #'cddr
+           do (global-set-key (kbd keys) action)))
+
+(defun rc/set-user-keys (&rest mappings)
+  "Like RC/SET-KEYS, but asserts that the only mappings present
+are those reserved for users: C-c followed by a letter and <f5>-<f9>.
+
+If any mapping is not a reserved mapping, no keys are mapped and an error is emitted."
+  (cl-loop with valid-format = "^\\(C-c\s+[a-zA-Z]\\|<f[5-9]>\\)"
+           for (keys action) on mappings by #'cddr
+           for errorp = (not (string-match-p valid-format keys))
+
+           when errorp
+           collect keys into errors
+
+           unless errorp
+           append (list keys action) into validated
+
+           finally (if errors
+                       (rc/error "The following keymaps were not reserved user mappings: %S" errors)
+                       (apply #'rc/set-keys validated))))
+#+end_src
+
+** Org Babel Languages
+Register languages with =org-babel=. Each item in =lang-specs= is a string
+specifier for a language preceded by '+' or '-' (enabled or disabled, respectively).
+
+#+begin_src emacs-lisp
+(defun rc/register-org-babel-languages (&rest lang-specs)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   (cl-loop with spec-format = "^[+-][a-zA-Z_-]+$"
+            for spec in lang-specs
+            for is-malformed = (not (and (stringp spec)
+                                         (string-match spec-format spec)))
+
+            when is-malformed
+            do (rc/error "Org Babel specifier is malformed, ignoring (%s)" spec)
+
+            unless is-malformed
+            collect (cons (intern (cl-subseq spec 1))
+                          (cl-ecase (aref spec 0)
+                            (?+ t)
+                            (?- nil))))))
+#+end_src
+
+* Main Configuration
+** Expand hard tabs to spaces
+
+#+begin_src emacs-lisp
+(setq-default indent-tabs-mode nil)
+#+end_src
+
+** Appearance
+Set theme.
+
+#+begin_src emacs-lisp
+(rc/require-theme 'modus-operandi)
+#+end_src
+
+Disable tool bar, menu bar, scroll bar.
+
+#+begin_src emacs-lisp
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
+#+end_src
+
+Disable modeline outline.
+
+#+begin_src emacs-lisp
+(set-face-attribute 'mode-line nil :box nil)
+#+end_src
+
+Show column number in modeline and relative line numbers.
+
+#+begin_src emacs-lisp
+(column-number-mode 1)
+(setq-default display-line-numbers 'relative)
+#+end_src
+
+Show matching parentheses.
+
+#+begin_src emacs-lisp
+(show-paren-mode 1)
+#+end_src
+
+Enable smooth pixel scrolling on supported Emacs.
+
+#+begin_src emacs-lisp
+(when (>= emacs-major-version 29)
+  (pixel-scroll-precision-mode 1))
+#+end_src
+
+Don't show startup screen, go straight to scratch buffer if no file is specified.
+
+#+begin_src emacs-lisp
+(setq inhibit-startup-screen t)
+#+end_src
+
+Flash frame to represent bell.
+
+#+begin_src emacs-lisp
+(setq visible-bell 1)
+#+end_src
+
+Indent the =THEN= and =ELSE= clauses of Emacs lisp =if= forms equally, like Common Lisp.
+While Emacs lisp supports multiple =ELSE= forms, I never use them and would use either a
+=cond=/=prog= form in it's place.
+
+** Whitespace handling
+Whitespace handler function. Enables whitespace visualization and deletes trailing whitespace on save.
+
+#+begin_src emacs-lisp
+(defun rc/setup-whitespace-handling ()
+  (interactive)
+  (whitespace-mode 1)
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+  (setq whitespace-style '(face spaces space-mark))
+  (set-face-attribute 'whitespace-space nil :background nil :foreground "gray30"))
+#+end_src
+
+Always enable whitespace handling for certain modes by default.
+
+#+begin_src emacs-lisp
+(setq rc/whitespace-modes '(lisp-mode
+                            c-mode
+                            emacs-lisp-mode
+                            python-mode
+                            matlab-mode))
+
+(dolist (mode rc/whitespace-modes)
+  (add-hook (rc/symbol-cat mode "-hook") 'rc/setup-whitespace-handling))
+#+end_src
+
+Highlight =TODO= and similar keywords in comments and strings.
+
+#+begin_src emacs-lisp
+(rc/require 'hl-todo)
+(global-hl-todo-mode)
+#+end_src
+
+** Avoid Customize Spam
+Move automatic customize elisp code to a separate file not under version control.
+
+#+begin_src emacs-lisp
+(setq custom-file "~/.emacs.d/custom.el")
+(rc/load custom-file t)
+#+end_src
+
+** Always ask for yes/no in full
+
+#+begin_src emacs-lisp
+(defalias 'y-or-n-p 'yes-or-no-p)
+#+end_src
+
+** Dired
+Enable extended directory editing.
+
+#+begin_src emacs-lisp
+(require 'dired-x)
+#+end_src
+
+The default =find= utility on MacOS doesn't support many common flags used by dired, so disable them.
+
+#+begin_src emacs-lisp
+(when (not (string= system-type "darwin"))
+  (setq dired-use-ls-dired t))
+#+end_src
+
+Jump to Dired buffer corresponding to the current buffer.
+
+#+begin_src emacs-lisp
+(rc/set-keys "C-x C-j" 'dired-jump)
+#+end_src
+
+** Slime
+
+#+begin_src emacs-lisp
+(rc/require 'slime)
+
+(setq inferior-lisp-program "sbcl")
+#+end_src
+
+** Magit
+
+#+begin_src emacs-lisp
+(rc/require 'magit)
+#+end_src
+
+** Completion
+Use =ido-completing-read+= everywhere.
+
+#+begin_src emacs-lisp
+(rc/require 'ido-completing-read+)
+
+(ido-mode 1)
+(ido-everywhere 1)
+(ido-ubiquitous-mode 1)
+#+end_src
+
+Use =company-mode= and friends everywhere.
+
+#+begin_src emacs-lisp
+(rc/require 'company 'slime-company)
+
+(add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+Make automatic completion popup on the slow side, I prefer to manually invoke completion.
+
+#+begin_src emacs-lisp
+(setq company-idle-delay 2)
+#+end_src
+
+Set keybinding for manual company completion.
+
+#+begin_src emacs-lisp
+(rc/set-user-keys "C-c p" 'company-complete)
+#+end_src
+
+** Evil Mode
+Use Vim-style modal editing.
+
+#+begin_src emacs-lisp
+(rc/require 'evil)
+(evil-mode t)
+#+end_src
+
+Make =C-u= scroll (I don't use =C-u= prefix very often).
+
+#+begin_src emacs-lisp
+(setq evil-want-C-u-scroll t)
+#+end_src
+
+Extended mappings for Org mode
+
+#+begin_src emacs-lisp
+(rc/require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+#+end_src
+
+** Multi-Cursor Support
+Enable multiple cursor and related keybindings.
+
+#+begin_src emacs-lisp
+(rc/require 'multiple-cursors)
+
+(rc/set-keys "C-S-c C-S-c" 'mc/edit-lines
+             "C->"         'mc/mark-next-like-this
+             "C-<"         'mc/mark-previous-like-this
+             "C-c C-<"     'mc/mark-all-like-this)
+#+end_src
+
+** Switch to Minibuffer
+Add mechanism for moving directly to the minibuffer.
+
+#+begin_src emacs-lisp
+(defun rc/switch-to-minibuffer ()
+  "Switch to the minibuffer window, if it is active"
+  (interactive)
+  (cond
+   ((active-minibuffer-window)
+    (select-frame-set-input-focus (window-frame (active-minibuffer-window)))
+    (select-window (active-minibuffer-window)))
+   (t (message "The minibuffer is not active!!!"))))
+
+(rc/set-user-keys "C-c M" 'rc/switch-to-minibuffer)
+#+end_src
+
+** Org Mode
+Don't add extra indent in Org source blocks.
+
+#+begin_src emacs-lisp
+(setq org-edit-src-content-indentation 0)
+#+end_src
+
+Select languages allowed for evaluation as inline Org blocks.
+
+#+begin_src emacs-lisp
+(rc/register-org-babel-languages "+lisp" "+shell" "+C")
+#+end_src
+
+Don't confirm before interactively evaluating code in Org blocks.
+
+#+begin_src emacs-lisp
+(setf org-confirm-babel-evaluate nil)
+#+end_src
+
+** Greek Letters
+
+Provide a mechanism to input Greek letters with the prefix =C-c g=
+
+#+begin_src emacs-lisp
+(defconst rc/roman-greek-alist
+  '((?a . #x03B1)   ; α GREEK SMALL   LETTER ALPHA
+    (?b . #x03B2)   ; β GREEK SMALL   LETTER BETA
+    (?g . #x03B3)   ; γ GREEK SMALL   LETTER GAMMA
+    (?d . #x0394)   ; Δ GREEK CAPITAL LETTER DELTA
+    (?e . #x03B5)   ; ε GREEK SMALL   LETTER EPSILON
+    (?t . #x03B8)   ; θ GREEK SMALL   LETTER THETA
+    (?l . #x03BB)   ; λ GREEK SMALL   LETTER LAMBDA
+    (?m . #x03BC)   ; μ GREEK SMALL   LETTER MU
+    (?r . #x03C1)   ; ρ GREEK SMALL   LETTER RHO
+    (?s . #x03C3)   ; σ GREEK SMALL   LETTER SIGMA
+    (?p . #x03C6)   ; φ GREEK SMALL   LETTER PHI
+    (?w . #x03C9))  ; ω GREEK SMALL   LETTER OMEGA
+  "Association list from Latin letters to Greek counterparts.
+Only letters frequently used as variables (by me) are available.")
+
+(dolist (key rc/roman-greek-alist)
+  (rc/set-keys (concat "C-c g " (string (car key)))
+               (λ (insert-char (cdr key)))))
+#+end_src
+
+* Modes
+Custom modes
+
+** Syntax Modes
+Minor modes used just for syntax highlighting.
+
+*** CUP
+Syntax highlighting for Java CUP files.
+
+#+begin_src emacs-lisp
+(defvar cup-mode-hook nil)
+(defvar cup-mode nil)
+
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.cup\\'" . cup-mode))
+
+(defconst cup-font-lock-keywords
+  (list
+   '("//.*" . font-lock-comment-face)
+   '("/\\*.*\\*/" . font-lock-comment-face)
+   '("\\(import\\|package\\|start with\\)" . font-lock-warning-face)
+   '("\\(\\(?:non \\)?terminal\\)" . font-lock-keyword-face)
+   '("\\<[A-Z]+\\>" . font-lock-builtin-face)
+   '("\\<\\([A-Z][a-z]*\\)+\\>" . font-lock-type-face)))
+
+(define-minor-mode cup-mode
+  "Toggles cup-mode for simple syntax highlighting in Java CUP files."
+  nil
+  :lighter " cup"
+  (cond
+   (cup-mode
+    ;; Register highlighting
+    (font-lock-add-keywords nil cup-font-lock-keywords)
+    (font-lock-fontify-buffer))
+   (t
+    (font-lock-remove-keywords nil cup-font-lock-keywords)
+    (font-lock-fontify-buffer))))
+
+(provide 'cup-mode)
+#+end_src
+
+*** .gitignore
+Syntax highlighting for .gitignore files.
+
+#+begin_src emacs-lisp
+(defvar gitignore-mode-hook nil)
+(defvar gitignore-mode nil)
+
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.gitignore\\'" . gitignore-mode))
+
+(defconst gitignore-font-lock-keywords
+  (list
+   ;; comments
+   '("^#.*" . font-lock-comment-face)
+
+   ;; escaped characters
+   '("\\\\." . font-lock-warning-face)
+
+   ;; kleene * and ?
+   '("[*?]" . font-lock-keyword-face)
+
+   ;; directory separator
+   '("[/]" . font-lock-builtin-face)
+
+   ;; pattern negation
+   '("^!" . font-lock-warning-face)))
+
+(define-minor-mode gitignore-mode
+  "Toggles gitignore-mode for simple syntax highlighting in .gitignore files."
+  nil
+  :lighter " gitignore"
+  (cond
+   (gitignore-mode
+    ;; Register highlighting
+    (font-lock-add-keywords nil gitignore-font-lock-keywords)
+    (font-lock-fontify-buffer))
+   (t
+    (font-lock-remove-keywords nil gitignore-font-lock-keywords)
+    (font-lock-fontify-buffer))))
+
+(provide 'gitignore-mode)
+#+end_src
+
+*** JFLEX
+Syntax highlighting for jflex files.
+
+#+begin_src emacs-lisp
+(defvar jflex-mode-hook nil)
+(defvar jflex-mode nil)
+
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.jflex\\'" . jflex-mode))
+
+(defconst jflex-font-lock-keywords
+  (list
+   '("^\\(%[a-zA-Z0-9_-]+\\|\\(%[{}]\\)\\)" . font-lock-keyword-face)
+   '("^%%" . font-lock-warning-face)
+   '("{[a-zA-Z]+}" . font-lock-type-face)
+   '("\\(:\\(?:\\(?:digit\\|letter\\):\\)\\)" . font-lock-builtin-face)
+   '("\"\\(\\\\[\\\\\"]\\|[^\\\\\"]\\)*\"" . font-lock-string-face)))
+
+(define-minor-mode jflex-mode
+  "Toggles jflex-mode for simple syntax highlighting in JFlex files."
+  nil
+  :lighter " jflex"
+  (cond
+   (jflex-mode
+    ;; Register highlighting
+    (font-lock-add-keywords nil jflex-font-lock-keywords)
+    (font-lock-fontify-buffer))
+   (t
+    (font-lock-remove-keywords nil jflex-font-lock-keywords)
+    (font-lock-fontify-buffer))))
+
+(provide 'jflex-mode)
+#+end_src

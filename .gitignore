@@ -6,10 +6,7 @@
 # emacs recovery files
 \#*#
 
-# FIXME: GNU stow causes uglies when .emacs.d doesn't exist prior to STOWing
-emacs/.emacs.d/custom.el
-emacs/.emacs.d/eln-cache/
-emacs/.emacs.d/elpa/
-emacs/.emacs.d/ido.last
-emacs/.emacs.d/transient/
-emacs/.emacs.d/srecode-map.el
+# ignore everything in emacs EXCEPT init.el and configuration Org file
+emacs/.emacs.d/*
+!emacs/.emacs.d/init.el
+!emacs/.emacs.d/config.org
