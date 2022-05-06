@@ -25,6 +25,23 @@ git_branch () {
     fi
 }
 
+# recursively create directories,
+# then cd to the last one
+mkcd () {
+    if [ "$#" -eq 0 ]; then
+        >&2 echo "mkcd: expected at least one directory"
+        >&2 echo "usage: mkcd DIRECTORY ..."
+        return 1
+    fi
+
+    for n in "$@"; do
+        mkdir -p "$n"
+    done
+
+    # `n' is implicitly saved from for loop
+    cd "$n"
+}
+
 PS1='\[\e[0;90m\][\A]\[\e[0m\] \[\e[0;95m\]$(basename "$(pwd)")\[\e[0m\]\[\e[0;33m\]$(git_branch)\[\e[0m\] \[\e[0;91m\]|\[\e[0m\] '
 
 # alias definitions
