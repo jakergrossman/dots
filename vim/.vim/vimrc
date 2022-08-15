@@ -1,0 +1,23 @@
+set number relativenumber
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set laststatus=2
+
+set splitright splitbelow
+
+set undofile
+set undodir="~/.cache/vim/undo"
+
+set nowrap
+
+set textwidth=120
+set colorcolumn=+0
+
+set autoindent smartindent
+
+set visualbell
+set termguicolors
+
+silent! colorscheme base16-default-dark
+
+filetype plugin indent on
+syntax on
