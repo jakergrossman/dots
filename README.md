@@ -4,7 +4,7 @@ collection of system configuration files
 
 ## packages
 - dotfiles: creates symlinks in $HOME to the files in this aspect
-- nvim: Configures [neovim](https://github.com/neovim/neovim)
+- vim: Configures [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim).
 - emacs: Configures [emacs](https://www.gnu.org/software/emacs/)
 
 ## dependencies

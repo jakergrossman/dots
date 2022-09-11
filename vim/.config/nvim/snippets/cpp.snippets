@@ -1,0 +1,28 @@
+# Print to standard out, with newline
+snippet coutn
+	std::cout << $0 << std::endl;
+
+# Print to standard out, without newline
+snippet cout
+	std::cout << $0;
+
+# Print to standard error
+snippet cerr
+	std::cerr << $0 << std::endl;
+
+# <> include
+snippet inc
+	#include <$0>
+
+# "" include
+snippet qinc
+	#include "$0"
+
+# include guard
+snippet guard
+	#ifndef ${1:guard}
+	#define $1
+
+	$0
+
+	#endif

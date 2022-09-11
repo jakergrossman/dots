@@ -1,9 +1,27 @@
--- AUTOCMDS {{{
+-- TODO: provide fallback functions
+if vim.api.nvim_create_autocmd == nil then
+  error('This version of NeoVim does not support autocmd api')
+end
 
--- foldmethod=marker on init.{vim,lua} 
-vim.api.nvim_exec('autocmd BufRead init.vim,init.lua set foldmethod=marker', false)
+vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+    desc = 'Make inactive statusline more visible.',
+    pattern = { 'material' },
+    command = 'hi! link StatusLineNC Visual',
+});
 
--- Make inactive statusline more visible.
-vim.api.nvim_exec('autocmd ColorScheme material hi! link StatusLineNC Visual', false)
+vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
+    desc = 'Highlight yanked text',
+    pattern = { '*' },
+    callback = function ()
+        vim.highlight.on_yank({
+            higroup = 'CursorIM',
+            timeout = 300,
+        })
+    end
+});
 
--- }}}
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    desc = 'Highlight yanked text',
+    pattern = { '*.snippets' },
+    command = 'setfiletype snippets',
+});

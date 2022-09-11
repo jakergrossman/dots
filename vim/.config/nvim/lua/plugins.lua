@@ -9,7 +9,20 @@ return require('packer').startup(function(use)
 
   use 'wbthomason/packer.nvim'
 
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    lock = true,
+    requires = {
+      {
+        'hrsh7th/nvim-cmp',
+        requires = { 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip' },
+        config = function()
+          require('lsp').setup_completion()
+        end,
+        lock = true,
+      }
+    }
+  }
  
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'jose-elias-alvarez/null-ls.nvim'
@@ -40,17 +53,12 @@ return require('packer').startup(function(use)
   use 'tikhomirov/vim-glsl'
 
   use {
-    'norcalli/snippets.nvim',
+    'L3MON4D3/LuaSnip',
     config = function()
-      -- keybindings
-      vim.api.nvim_set_keymap("i", "<C-k>", "<cmd>lua return require('snippets').expand_or_advance(1)<CR>", { noremap=true })
-      vim.api.nvim_set_keymap("i", "<C-j>", "<cmd>lua return require('snippets').advance_snippet(-1)<CR>", { noremap=true })
-
-      -- snippet definitions
-      time = function() return os.date("%H:%M:%S") end
-      snippets = require('snip')
-      require('snippets').snippets = require('snip')
-    end
+      require('luasnip.loaders.from_snipmate').load()
+      vim.api.nvim_set_keymap('i', '<C-k>', '<Plug>luasnip-expand-or-jump', { noremap = true})
+      vim.api.nvim_set_keymap('i', '<C-j>', '<Plug>luasnip-jump-prev', { noremap = true})
+    end,
   }
 
   use {
@@ -60,8 +68,14 @@ return require('packer').startup(function(use)
       local size = 512;
       local top = 75;
       local right = 25;
+
+      local exe_path = 'glslViewer'
+      if (vim.fn.has('windows')) then
+        exe_path = exe_path .. '.exe'
+      end
+
       require('glslView').setup({
-          exe_path = '/mnt/c/Users/jake/Documents/code/glslViewer/MinSizeRel/glslViewer.exe',
+          exe_path = exe_path,
           args = {
             '-l',
             '--fps', 0 ,

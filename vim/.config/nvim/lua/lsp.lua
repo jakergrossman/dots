@@ -1,4 +1,3 @@
--- LSP CONFIG {{{
 local nvim_lsp = require("lspconfig")
 
 -- Use an on_attach function to only map the following keys
@@ -8,7 +7,7 @@ local map_on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -82,4 +81,47 @@ nvim_lsp.tsserver.setup {
     end
 }
 
--- }}}
+local M = {}
+
+M.setup_completion = function()
+  local cmp = require('cmp')
+
+  vim.o.completeopt = 'menu,menuone'
+
+  cmp.setup({
+    -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#no-snippet-plugin
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    }),
+
+    sources = cmp.config.sources({
+      { name = "buffer" },
+      { name = "nvim_lsp" },
+      { name = "path" },
+      { name = "luasnip" },
+    }),
+  })
+
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local lspcfg = require('lspconfig')
+
+  local lsp_list = { 'jedi_language_server', 'clangd', 'tsserver' }
+  for _,v in pairs(lsp_list) do
+    lspcfg[v].setup {
+      capabilities = capabilities
+    }
+  end
+end
+
+return M
