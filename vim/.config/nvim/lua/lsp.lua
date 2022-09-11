@@ -86,10 +86,9 @@ local M = {}
 M.setup_completion = function()
   local cmp = require('cmp')
 
-  vim.o.completeopt = 'menu,menuone'
+  vim.o.completeopt = 'menu,menuone,noinsert,noselect'
 
   cmp.setup({
-    -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#no-snippet-plugin
     snippet = {
       expand = function(args)
         require('luasnip').lsp_expand(args.body)

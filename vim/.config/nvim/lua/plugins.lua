@@ -88,4 +88,20 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- fuzzy finding
+  use {
+    'junegunn/fzf.vim',
+    requires = {
+      {
+        'junegunn/fzf',
+        run = ':call fzf#install()',
+      }
+    }
+  }
+
+  -- change directory to the project root while editing files
+  use 'airblade/vim-rooter'
+
+  use 'dag/vim-fish'
+
 end)

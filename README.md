@@ -3,19 +3,20 @@
 collection of system configuration files
 
 ## packages
-- dotfiles: creates symlinks in $HOME to the files in this aspect
-- vim: Configures [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim).
-- emacs: Configures [emacs](https://www.gnu.org/software/emacs/)
+- dotfiles: creates symlinks in $home to the files in this aspect
+- shell: configures shell environment
+  - [fish](https://fishshell.com) configuration
+  - minimal `bash` configuration
+  - tmux
+  - git
+- vim: configures [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim).
+- emacs: configures [emacs](https://www.gnu.org/software/emacs/)
 
 ## dependencies
 - [git](https://git-scm.com/) to clone the repository
-- optionaly: [GNU Stow](https://www.gnu.org/software/stow/) for automatic installation
+- optionaly: [gnu stow](https://www.gnu.org/software/stow/) for automatic installation
 
-## installation using GNU Stow (*nix/MacOS)
+## installation using gnu stow
 ```console
 $ stow package1 package2 ...
 ```
-
-## installation using PowerShell (Windows 7+)
-Right click `deploy.ps1`, "Run With Powershell". The script will automatically try to elevate
-it's privileges and deploy MANIFEST.
