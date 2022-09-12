@@ -62,7 +62,7 @@ return require('packer').startup(function(use)
   }
 
   use {
-    '/home/jgrossman/code/glslView-nvim',
+    'jakergrossman/glslView-nvim',
     ft = 'glsl',
     config = function()
       local size = 512;
@@ -96,12 +96,43 @@ return require('packer').startup(function(use)
         'junegunn/fzf',
         run = ':call fzf#install()',
       }
-    }
+    },
+    config = function ()
+      -- fzf files
+      vim.api.nvim_set_keymap('', '<C-p>', ':Files<CR>', {})
+
+      -- fzf buffers
+      vim.api.nvim_set_keymap('n', '<leader>;', ':Buffers<CR>', {})
+
+      -- fzf file contents
+      vim.api.nvim_set_keymap('', '<leader>s', ':Rg<CR>', {})
+      -- TODO: use nvim api to define commands
+      vim.cmd([[
+        command! -bang -nargs=* Rg
+          \ call fzf#vim#grep(
+          \   'rg --hidden --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+          \   <bang>0 ? fzf#vim#with_preview('up:60%')
+          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \   <bang>0)
+      ]])
+    end
   }
 
   -- change directory to the project root while editing files
   use 'airblade/vim-rooter'
 
-  use 'dag/vim-fish'
+  use {
+    'dag/vim-fish',
+    config = function()
+      vim.api.nvim_create_autocmd({ 'FileType' }, {
+          pattern = { 'fish' },
+          callback = function()
+            vim.api.nvim_command('compiler fish')
+            vim.opt_local.foldmethod = 'expr'
+          end
+      })
+    end
+
+  }
 
 end)

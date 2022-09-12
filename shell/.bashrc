@@ -4,7 +4,7 @@
 # be nice to sysadmins
 if [ -f /etc/bashrc ]; then
     source /etc/bashrc
-elif [-f /etc/bash.bashrc ]; then
+elif [ -f /etc/bash.bashrc ]; then
     source /etc/bash.bashrc
 fi
 

@@ -1,3 +1,4 @@
+# fallback to vim if nvim is not found
 set vi vim
 test -x (command -v nvim); and set vi nvim
 
@@ -15,6 +16,15 @@ set __fish_git_prompt_showupstream 'none'
 set -g fish_prompt_pwd_dir_length 3
 
 set -x EDITOR $vi
+
+# determine what to use for find
+set -l FIND "find . -type f -not -path '*/\.git/*' -printf '%P\n'"
+if type -q rg
+    set -l FIND 'rg --hidden --files .'
+end
+
+set -x FZF_DEFAULT_COMMAND $FIND
+set -x FZF_CTRL_T_COMMAND $FIND
 set -x FZF_DEFAULT_OPTS '--height 20%'
 
 # colored man output
@@ -42,7 +52,7 @@ function fish_prompt
 end
 
 function fish_greeting
-    if test -x /usr/bin/ufetch
+    if type -q ufetch
         ufetch
     end
 end

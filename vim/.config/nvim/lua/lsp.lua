@@ -108,7 +108,6 @@ M.setup_completion = function()
       { name = "buffer" },
       { name = "nvim_lsp" },
       { name = "path" },
-      { name = "luasnip" },
     }),
   })
 
