@@ -98,14 +98,6 @@ return require('packer').startup(function(use)
       }
     },
     config = function ()
-      -- fzf files
-      vim.api.nvim_set_keymap('', '<C-p>', ':Files<CR>', {})
-
-      -- fzf buffers
-      vim.api.nvim_set_keymap('n', '<leader>;', ':Buffers<CR>', {})
-
-      -- fzf file contents
-      vim.api.nvim_set_keymap('', '<leader>s', ':Rg<CR>', {})
       -- TODO: use nvim api to define commands
       vim.cmd([[
         command! -bang -nargs=* Rg
@@ -115,6 +107,24 @@ return require('packer').startup(function(use)
           \           : fzf#vim#with_preview('right:50%:hidden', '?'),
           \   <bang>0)
       ]])
+
+      -- 3 FZF bindings:
+      --   p -> :Files
+      --   ; -> :Buffers
+      --   s -> :Rg
+      -- 'v' or 'h' can be prepended before the specifier open the file in a vertically or horizontally split
+      -- window, respectively.
+      local fzf_actions = {
+        { 'p', 'Files' },
+        { ';', 'Buffers' },
+        { 's', 'Rg' },
+      }
+
+      for _,v in ipairs(fzf_actions) do
+        vim.api.nvim_set_keymap('n', '<leader>' .. v[1], ':' .. v[2] .. '<CR>', { noremap = true });
+        vim.api.nvim_set_keymap('n', '<leader>v' .. v[1], ':vsplit: | ' .. v[2] .. '<CR>', { noremap = true });
+        vim.api.nvim_set_keymap('n', '<leader>h' .. v[1], ':split: | ' .. v[2] .. '<CR>', { noremap = true });
+      end
     end
   }
 
@@ -132,7 +142,6 @@ return require('packer').startup(function(use)
           end
       })
     end
-
   }
 
 end)

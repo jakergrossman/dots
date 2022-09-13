@@ -86,7 +86,7 @@ local M = {}
 M.setup_completion = function()
   local cmp = require('cmp')
 
-  vim.o.completeopt = 'menu,menuone,noinsert,noselect'
+  vim.o.completeopt = 'menu,menuone,longest'
 
   cmp.setup({
     snippet = {
@@ -117,7 +117,8 @@ M.setup_completion = function()
   local lsp_list = { 'jedi_language_server', 'clangd', 'tsserver' }
   for _,v in pairs(lsp_list) do
     lspcfg[v].setup {
-      capabilities = capabilities
+      capabilities = capabilities,
+      on_attach = map_on_attach
     }
   end
 end
