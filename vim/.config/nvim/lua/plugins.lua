@@ -7,7 +7,10 @@ return require('packer').startup(function(use)
   ]])
 
 
-  use 'wbthomason/packer.nvim'
+  use {
+    'wbthomason/packer.nvim',
+    lock = true
+  }
 
   use {
     'neovim/nvim-lspconfig',
