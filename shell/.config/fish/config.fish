@@ -7,7 +7,7 @@ abbr -a e $vi
 abbr -a g git
 abbr -a gs git status
 abbr -a gr gitroot
-abbr -a rm rmtrash
+abbr -a r rmtrash
 
 # fish git prompt
 set __fish_git_prompt_showuntrackedfiles 'yes'
