@@ -131,9 +131,6 @@ return require('packer').startup(function(use)
     end
   }
 
-  -- change directory to the project root while editing files
-  use 'airblade/vim-rooter'
-
   use {
     'dag/vim-fish',
     config = function()
