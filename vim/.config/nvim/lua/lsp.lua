@@ -111,7 +111,7 @@ M.setup_completion = function()
     }),
   })
 
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   local lspcfg = require('lspconfig')
 
   local lsp_list = { 'jedi_language_server', 'clangd', 'tsserver' }
