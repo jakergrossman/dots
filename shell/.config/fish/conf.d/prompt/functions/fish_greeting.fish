@@ -1,4 +1,7 @@
 function fish_greeting
+    status is-login
+    or return
+
     set_color $material_gray
     echo -n 'OS:     '
     set_color normal
