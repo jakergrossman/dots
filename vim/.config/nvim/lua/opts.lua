@@ -2,7 +2,6 @@
 
 -- leader key
 vim.g.mapleader = " "
---vim.api.nvim_set_var('indent_blankline_filetype_exclude', ['notes'])
 
 -- 4 wide soft tab
 vim.o.tabstop = 4
@@ -39,13 +38,12 @@ vim.o.undodir = vim.fn.expand("~/.cache/vim/undo")
 vim.o.wrap = false
 
 vim.o.textwidth = 120
-vim.o.colorcolumn = vim.o.textwidth .. ''
-
-vim.g.c_syntax_for_h = 1
-
+vim.o.colorcolumn = tostring(vim.o.textwidth)
 
 -- directory specific vimrc
 vim.o.exrc = true
 vim.o.secure = true
+
+vim.o.cursorline = true
 
 -- }}}
