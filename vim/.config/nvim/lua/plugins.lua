@@ -53,7 +53,6 @@ return require('packer').startup(function(use)
     end
   }
 
-  use 'tikhomirov/vim-glsl'
 
   use {
     'L3MON4D3/LuaSnip',
@@ -64,8 +63,9 @@ return require('packer').startup(function(use)
     end,
   }
 
+  use 'tikhomirov/vim-glsl' -- syntax highlighting
   use {
-    'jakergrossman/glslView-nvim',
+    'timtro/glslView-nvim',
     ft = 'glsl',
     config = function()
       local size = 512;
