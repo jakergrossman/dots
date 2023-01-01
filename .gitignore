@@ -5,8 +5,3 @@
 
 # emacs recovery files
 \#*#
-
-# ignore everything in emacs EXCEPT init.el and configuration Org file
-emacs/.emacs.d/*
-!emacs/.emacs.d/init.el
-!emacs/.emacs.d/config.org

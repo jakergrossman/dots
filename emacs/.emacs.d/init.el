@@ -1,14 +1,23 @@
-; -*- lexical-binding: t -*-
-
-;; Configure package.el to include MELPA
+;;; init.el
+;;;
+;;; Bootstrap use-package and load configuration packages
 (require 'package)
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+
 (package-initialize)
+(package-install 'use-package)
+(require 'use-package)
+(setq use-package-always-ensure t)
 
-;; always follow symlinks
-(setq vc-follow-symlinks t)
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file t))
 
-;; Load configuration
-(org-babel-load-file "~/.emacs.d/config.org")
+;; configuration modules
+(add-to-list 'load-path "/home/goby/.emacs.d/elisp")
+(use-package rc :ensure nil)
+(use-package appearance :ensure nil)
+(use-package core :ensure nil)
+(use-package editor :ensure nil)
