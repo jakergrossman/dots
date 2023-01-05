@@ -2,8 +2,6 @@
 ;;;
 ;;; settings for text editing
 
-(provide 'editor)
-
 (setq c-default-style "linux")
 (setq-default indent-tabs-mode nil)
 
@@ -39,4 +37,26 @@
 
 (rc/set-user-keys "C-c M" 'ed/switch-to-minibuffer)
 
-(use-package completion :ensure nil)
+;;;; completion
+(use-package ido-completing-read+
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1))
+
+(use-package company
+  :hook (after-init . global-company-mode)
+  :config (setq company-idle-delay 0)
+  :bind (("C-c p" . 'company-complete)))
+
+(use-package rg
+  :bind (("C-c t" . rg-project)))
+
+(rc/set-user-keys "C-c K" 'kill-this-buffer
+                  "C-c r" 'replace-string
+                  "C-c R" 'replace-regexp)
+
+(use-package undo-tree
+  :hook (after-init . global-undo-tree-mode))
+
+(provide 'editor)

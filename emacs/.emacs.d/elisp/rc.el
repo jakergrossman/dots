@@ -1,8 +1,8 @@
-;;;; -*- lexical-binding: t -*-
+;;; rc.el
+;;;
+;;; Emacs configuration configuration
 
-(provide 'rc)
-
-(require 'cl)
+(require 'cl-lib)
 
 (cl-defmacro λ (&body body)
   "Anonymous closure shorthand with no arguments."
@@ -18,9 +18,9 @@
 
 (defun rc/symbol-cat (&rest components)
   (intern (apply #'concat (mapcar (φ (x) (cond
-					  ((symbolp x) (symbol-name x))
-					  ((stringp x) x)))
-				  components))))
+                                          ((symbolp x) (symbol-name x))
+                                          ((stringp x) x)))
+                                  components))))
 
 (defun rc/set-keys (&rest mappings)
   "Given a property list MAPPINGS => (KEYS ACTION)*, map each KEYS to ACTION"
@@ -66,18 +66,26 @@ If any mapping is not a reserved mapping, no keys are mapped and an error is emi
     (?s . #x03C3)   ; σ GREEK SMALL   LETTER SIGMA
     (?p . #x03C6)   ; φ GREEK SMALL   LETTER PHI
     (?w . #x03C9))  ; ω GREEK SMALL   LETTER OMEGA
-  "Association list from Latin letters to Greek counterparts.
-Only letters frequently used as variables (by me) are available.")
+  "Association list from Latin letters to unicode Greek counterparts.")
+
 
 (dolist (key rc/roman-greek-alist)
   (rc/set-keys (concat "C-c g " (string (car key)))
                (λ (insert-char (cdr key)))))
 
 (defun rc/load (path &optional ignorep)
-  "Load a file from PATH. Ignore non-existent file if IGNORE is non-nil"
+  "Load a file from PATH.
+If ignore is nil, emit an error when a file can not be loaded"
   (interactive "FFile Path: ")
   (cond
    ((file-exists-p path) (load path))
    ((not ignorep)
     (let ((continue (yes-or-no-p (format "%s could not be loaded. Continue? " path))))
       (when (not continue) (error "Could not load %s" path))))))
+
+(cl-defun rc/edit-conf (&optional (relpath user-emacs-directory))
+  "Wrapper around `find-file' starting in `user-emacs-directory'"
+  (interactive "fFile Path: ")
+  (find-file relpath))
+
+(provide 'rc)

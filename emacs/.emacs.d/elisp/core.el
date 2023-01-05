@@ -2,8 +2,6 @@
 ;;;
 ;;; core Emacs configuration
 
-(provide 'core)
-
 ;; always ask yes and no in full
 (fset 'y-or-n-p 'yes-or-no-p)
 
@@ -14,3 +12,8 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)
+
+;; undo-tree files in their own directory
+(setq undo-tree-history-directory-alist '(("." . "~/.cache/emacs/undo-tree")))
+
+(provide 'core)

@@ -16,8 +16,11 @@
   (load custom-file t))
 
 ;; configuration modules
-(add-to-list 'load-path "/home/goby/.emacs.d/elisp")
+(add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 (use-package rc :ensure nil)
 (use-package appearance :ensure nil)
 (use-package core :ensure nil)
 (use-package editor :ensure nil)
+(use-package vcs :ensure nil)
+(use-package tree-sitter :ensure nil)
+(use-package lsp :ensure nil)

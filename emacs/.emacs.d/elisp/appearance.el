@@ -2,15 +2,12 @@
 ;;;
 ;;; Visual settings of the Emacs editor (not files)
 
-(provide 'appearance)
+(load-theme 'tsdh-light)
 
 ;; disable tool bar, menu bar, scroll bar
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
-
-;; no modeline outline, column number
-(set-face-attribute 'mode-line nil :box nil)
 (column-number-mode 1)
 
 ;; show matching parentheses
@@ -22,6 +19,16 @@
 ;; flash frame to represent bell
 (setq visible-bell 1)
 
-(use-package gruber-darker-theme
-  :ensure t
-  :config (load-theme 'gruber-darker))
+(add-to-list 'after-init-hook 'global-hl-line-mode)
+
+(when (>= emacs-major-version 29)
+  (pixel-scroll-precision-mode 1))
+
+(set-face-attribute 'default nil :height 150)
+
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (ansi-color-apply-on-region compilation-filter-start (point)))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(provide 'appearance)
