@@ -1,4 +1,4 @@
-;;; rc.el
+;;; rc.el -*- lexical-binding: t -*-
 ;;;
 ;;; Emacs configuration configuration
 
@@ -13,10 +13,14 @@
   `(lambda (,@args) (interactive) ,@body))
 
 (defun rc/error (fmt &rest args)
-  "Issue a warning with type (RC) and level :ERROR"
+  "Issue a warning with type (RC) and level :ERROR."
   (apply #'lwarn `((rc) :error ,fmt ,@args)))
 
 (defun rc/symbol-cat (&rest components)
+  "Concatenate a list of symbols  or strings, `intern'ing the result.
+
+Symbols are converted to string via `symbol-name', and arguments that
+are not strings or symbols are silently ignored."
   (intern (apply #'concat (mapcar (φ (x) (cond
                                           ((symbolp x) (symbol-name x))
                                           ((stringp x) x)))
@@ -31,7 +35,7 @@
            do (global-set-key (kbd keys) action)))
 
 (defun rc/set-user-keys (&rest mappings)
-  "Like RC/SET-KEYS, but asserts that the only mappings present
+  "Like `rc/set-keys', but asserts that the only mappings present
 are those reserved for users: C-c followed by a letter and <f5>-<f9>.
 
 If any mapping is not a reserved mapping, no keys are mapped and an error is emitted."

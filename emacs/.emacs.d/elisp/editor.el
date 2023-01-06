@@ -10,22 +10,7 @@
   :config (rc/unset-keys "C-x C-j")
   :bind (("C-c C-j" . 'dired-jump)))
 
-(defun ed/setup-whitespace ()
-  (interactive)
-  (whitespace-mode 1)
-  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-  (setq whitespace-style '(face spaces space-mark))
-  (set-face-attribute 'whitespace-space nil :background nil :foreground "gray30"))
-
-(setq ed/whitespace-modes '(lisp-mode
-                            c-mode
-                            emacs-lisp-mode
-                            python-mode))
-
-(dolist (mode ed/whitespace-modes)
-  (add-hook (rc/symbol-cat mode "-hook") 'ed/setup-whitespace))
-
-(defun ed/switch-to-minibuffer ()
+(defun rc/switch-to-minibuffer ()
   "Switch to the minibuffer window, if it is active"
   (interactive)
   (cond
@@ -35,7 +20,7 @@
 
    (t (message "The minibuffer is not active!"))))
 
-(rc/set-user-keys "C-c M" 'ed/switch-to-minibuffer)
+(rc/set-user-keys "C-c M" 'rc/switch-to-minibuffer)
 
 ;;;; completion
 (use-package ido-completing-read+
@@ -58,5 +43,14 @@
 
 (use-package undo-tree
   :hook (after-init . global-undo-tree-mode))
+
+(use-package slime
+  :custom
+  (inferior-lisp-program "sbcl"))
+
+;; (use-package paredit
+;;   :hook ((lisp-mode . paredit-mode)
+;;          (emacs-lisp-mode . paredit-mode)
+;;          (scheme-mode . paredit-mode)))
 
 (provide 'editor)

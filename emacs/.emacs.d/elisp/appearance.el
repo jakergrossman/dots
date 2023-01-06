@@ -2,7 +2,7 @@
 ;;;
 ;;; Visual settings of the Emacs editor (not files)
 
-(load-theme 'tsdh-light)
+(load-theme 'adwaita)
 
 ;; disable tool bar, menu bar, scroll bar
 (tool-bar-mode 0)
@@ -30,5 +30,20 @@
 (defun colorize-compilation-buffer ()
   (ansi-color-apply-on-region compilation-filter-start (point)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(defun rc/setup-whitespace ()
+  (interactive)
+  (whitespace-mode 1)
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+  (setq whitespace-style '(face spaces space-mark))
+  (set-face-attribute 'whitespace-space nil :background nil :foreground "gray20"))
+
+(setq ed/whitespace-modes '(lisp-mode
+                            c-mode
+                            emacs-lisp-mode
+                            python-mode))
+
+(dolist (mode ed/whitespace-modes)
+  (add-hook (rc/symbol-cat mode "-hook") 'rc/setup-whitespace))
 
 (provide 'appearance)

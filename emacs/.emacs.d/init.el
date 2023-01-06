@@ -15,12 +15,17 @@
 (when (file-exists-p custom-file)
   (load custom-file t))
 
+;; set up load path
+;; everything under .emacs.d/elisp can be found
+(let ((default-directory (expand-file-name "elisp" user-emacs-directory)))
+  (add-to-list 'load-path default-directory)
+  (normal-top-level-add-subdirs-to-load-path))
+
 ;; configuration modules
-(add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
-(use-package rc :ensure nil)
-(use-package appearance :ensure nil)
-(use-package core :ensure nil)
-(use-package editor :ensure nil)
-(use-package vcs :ensure nil)
-(use-package tree-sitter :ensure nil)
-(use-package lsp :ensure nil)
+(require 'rc)
+(require 'appearance)
+(require 'core)
+(require 'editor)
+(require 'vcs)
+(require 'lsp)
+(require 'tree-sitter)
