@@ -66,6 +66,14 @@
   (interactive (list (read-file-name "Find File: " user-emacs-directory)))
   (find-file filename wildcard))
 
+(defcustom rc/trim-whitespace-on-save t
+  "Trim whitespace when saving"
+  :group 'rc
+  :type '(boolean))
+
+(when rc/trim-whitespace-on-save
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace))
+
 ;; loose global keybindings not associated with a package
 (bind-keys
  :map global-map

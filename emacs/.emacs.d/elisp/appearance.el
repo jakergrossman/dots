@@ -36,22 +36,14 @@
   (ansi-color-apply-on-region compilation-filter-start (point)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-(defun rc/setup-whitespace ()
-  (interactive)
-  (whitespace-mode 1)
-  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+(defun rc/setup-whitespace-mode ()
+  (global-whitespace-mode 1)
   (setq whitespace-style '(face spaces space-mark))
-  (set-face-attribute 'whitespace-space nil :background nil :foreground "gray75"))
+  (set-face-attribute 'whitespace-space nil :background 'unspecified :foreground "gray75"))
 
-(setq ed/whitespace-modes '(lisp-mode
-                            c-mode
-                            emacs-lisp-mode
-                            python-mode))
 (defvar after-load-theme-hook nil
   "Hook that is run after a color theme is loaded using `load-theme'.")
 
-(dolist (mode ed/whitespace-modes)
-  (add-hook (rc/symbol-cat mode "-hook") 'rc/setup-whitespace))
 (defadvice load-theme (after run-after-load-theme-hook activate)
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
