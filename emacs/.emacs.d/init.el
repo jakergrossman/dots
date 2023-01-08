@@ -7,8 +7,11 @@
                          ("melpa" . "https://melpa.org/packages/")))
 
 (package-initialize)
-(package-install 'use-package)
+(package-install 'use-package)          ; at the moment, use-package requires
+(package-install 'bind-key)             ; bind-key anyways, but this wont break l8r
 (require 'use-package)
+(require 'bind-key)
+
 (setq use-package-always-ensure t)
 
 (setq custom-file "~/.emacs.d/custom.el")

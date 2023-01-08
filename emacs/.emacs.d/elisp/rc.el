@@ -26,38 +26,7 @@ are not strings or symbols are silently ignored."
                                           ((stringp x) x)))
                                   components))))
 
-(defun rc/set-keys (&rest mappings)
-  "Given a property list MAPPINGS => (KEYS ACTION)*, map each KEYS to ACTION"
-  (when (eq (mod (length mappings) 2) 1)
-    (rc/error "Odd number of arguments to RC/SET-KEYS (%s)" (length mappings))
-    (return-from rc/set-keys))
-  (cl-loop for (keys action) on mappings by #'cddr
-           do (global-set-key (kbd keys) action)))
-
-(defun rc/set-user-keys (&rest mappings)
-  "Like `rc/set-keys', but asserts that the only mappings present
-are those reserved for users: C-c followed by a letter and <f5>-<f9>.
-
-If any mapping is not a reserved mapping, no keys are mapped and an error is emitted."
-  (cl-loop with valid-format = "^\\(C-c\s+[a-zA-Z]\\|<f[5-9]>\\)"
-           for (keys action) on mappings by #'cddr
-           for errorp = (not (string-match-p valid-format keys))
-
-           when errorp
-           collect keys into errors
-
-           unless errorp
-           append (list keys action) into validated
-
-           finally (if errors
-                       (rc/error "The following keymaps were not reserved user mappings: %S" errors)
-                     (apply #'rc/set-keys validated))))
-
-(defun rc/unset-keys (&rest mappings)
-  (dolist (map mappings)
-    (global-unset-key (kbd map))))
-
-(defconst rc/roman-greek-alist
+(defconst rc/latin-greek-alist
   '((?a . #x03B1)   ; α GREEK SMALL   LETTER ALPHA
     (?b . #x03B2)   ; β GREEK SMALL   LETTER BETA
     (?g . #x03B3)   ; γ GREEK SMALL   LETTER GAMMA
@@ -72,9 +41,8 @@ If any mapping is not a reserved mapping, no keys are mapped and an error is emi
     (?w . #x03C9))  ; ω GREEK SMALL   LETTER OMEGA
   "Association list from Latin letters to unicode Greek counterparts.")
 
-(dolist (key rc/roman-greek-alist)
-  (rc/set-keys (concat "C-c g " (string (car key)))
-               (λ (insert-char (cdr key)))))
+(cl-loop for (key . code) in rc/latin-greek-alist
+         do (define-key 'iso-transl-ctl-x-8-map (string key) (string code)))
 
 (defun rc/load (path &optional ignorep)
   "Load a file from PATH.

@@ -20,8 +20,6 @@
 
    (t (message "The minibuffer is not active!"))))
 
-(rc/set-user-keys "C-c M" 'rc/switch-to-minibuffer)
-
 ;;;; completion
 (use-package ido-completing-read+
   :config
@@ -31,15 +29,17 @@
 
 (use-package company
   :hook (after-init . global-company-mode)
-  :config (setq company-idle-delay 0)
-  :bind (("C-c p" . 'company-complete)))
+  :custom
+  (company-idle-delay 0)
+  :bind (:map company-mode-map
+         ("C-c p" . company-complete)))
+
+(use-package company-fuzzy
+  :hook (company-mode . global-company-fuzzy-mode))
 
 (use-package rg
-  :bind (("C-c t" . rg-project)))
-
-(rc/set-user-keys "C-c K" 'kill-this-buffer
-                  "C-c r" 'replace-string
-                  "C-c R" 'replace-regexp)
+  :bind (:map prog-mode-map
+         ("C-c t" . rg-project)))
 
 (use-package undo-tree
   :hook (after-init . global-undo-tree-mode))
@@ -65,5 +65,13 @@
   "Wrapper around `find-file' starting in `user-emacs-directory'."
   (interactive (list (read-file-name "Find File: " user-emacs-directory)))
   (find-file filename wildcard))
+
+;; loose global keybindings not associated with a package
+(bind-keys
+ :map global-map
+ ("C-c M" . rc/switch-to-minibuffer)
+ ("C-c K" . kill-this-buffer)
+ ("C-c r" . replace-string)
+ ("C-c R" . replace-regexp))
 
 (provide 'editor)
