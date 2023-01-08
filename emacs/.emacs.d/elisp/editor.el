@@ -5,10 +5,7 @@
 (setq c-default-style "linux")
 (setq-default indent-tabs-mode nil)
 
-(use-package dired-x
-  :ensure nil
-  :config (rc/unset-keys "C-x C-j")
-  :bind (("C-c C-j" . 'dired-jump)))
+(use-package dired-x :ensure nil)
 
 (defun rc/switch-to-minibuffer ()
   "Switch to the minibuffer window, if it is active"
@@ -23,7 +20,10 @@
 ;;;; completion
 (use-package ido-completing-read+
   :config
+  (setq-default ido-enable-flex-matching t)
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
   (ido-mode 1)
+  (ido-vertical-mode 1)
   (ido-everywhere 1)
   (ido-ubiquitous-mode 1))
 

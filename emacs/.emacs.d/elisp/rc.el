@@ -63,7 +63,7 @@ KEY to each element in ITEMS.
 
 KEY is a single-argument function applied to each element to retrieve the
 value to evaluate with PREDICATE."
-  (let ((tmp (gensym)))
+  (cl-with-gensyms (tmp)
     `(cl-loop for ,tmp in ,items
               for ,item-name = (funcall ',key ,tmp)
               always (progn ,@predicate))))
@@ -80,7 +80,7 @@ KEY to each element in ITEMS.
 
 KEY is a single-argument function applied to each element to retrieve the
 value to evaluate with PREDICATE."
-  (let ((tmp (gensym)))
+  (cl-with-gensyms (tmp)
     `(cl-loop for ,tmp in ,items
               for ,item-name = (funcall ',key ,tmp)
               thereis (progn ,@predicate))))
@@ -97,7 +97,7 @@ KEY to each element in ITEMS.
 .
 KEY is a single-argument function applied to each element to retrieve the
 value to evaluate with PREDICATE."
-  (let ((tmp (gensym)))
+  (cl-with-gensyms (tmp)
     `(cl-loop for ,tmp in ,items
               for ,item-name = (funcall ',key ,tmp)
               never (progn ,@predicate))))
