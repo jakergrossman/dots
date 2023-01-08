@@ -53,4 +53,17 @@
 ;;          (emacs-lisp-mode . paredit-mode)
 ;;          (scheme-mode . paredit-mode)))
 
+(defun rc/load-this-file ()
+  (interactive)
+  (cond
+   ((buffer-file-name)
+    (load-file buffer-file-name))
+   ((yes-or-no-p "Current buffer is not a file. Evaluate buffer? ")
+    (eval-buffer))))
+
+(cl-defun rc/find-conf-file (filename &optional wildcard)
+  "Wrapper around `find-file' starting in `user-emacs-directory'."
+  (interactive (list (read-file-name "Find File: " user-emacs-directory)))
+  (find-file filename wildcard))
+
 (provide 'editor)

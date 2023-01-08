@@ -1,4 +1,4 @@
-;;; init.el
+;;; init.el --- -*- lexical-binding: t -*-
 ;;;
 ;;; Bootstrap use-package and load configuration packages
 (require 'package)

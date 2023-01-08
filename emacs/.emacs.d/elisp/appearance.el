@@ -2,6 +2,11 @@
 ;;;
 ;;; Visual settings of the Emacs editor (not files)
 
+;; set up theme path
+(dolist (dir (rc/dirs (rc/conf-concat "elisp" "themes")))
+  (when dir
+    (add-to-list 'custom-theme-load-path dir)))
+
 (load-theme 'adwaita)
 
 ;; disable tool bar, menu bar, scroll bar
@@ -36,7 +41,7 @@
   (whitespace-mode 1)
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
   (setq whitespace-style '(face spaces space-mark))
-  (set-face-attribute 'whitespace-space nil :background nil :foreground "gray20"))
+  (set-face-attribute 'whitespace-space nil :background nil :foreground "gray75"))
 
 (setq ed/whitespace-modes '(lisp-mode
                             c-mode
