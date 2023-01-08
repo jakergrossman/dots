@@ -90,8 +90,8 @@ If ignore is nil, emit an error when a file can not be loaded"
 (cl-defmacro rc/all ((item-name items &key (key #'identity)) &body predicate)
   "Return whether PREDICATE evaluates true for every elements of ITEMS.
 
-While evaluating PREDICATE, each element of ITEMS is bound to the result of
-applying KEY to ITEM-NAME.
+While evaluating PREDICATE, ITEM-NAME is bound to the result of applying
+KEY to each element in ITEMS.
 
 KEY is a single-argument function applied to each element to retrieve the
 value to evaluate with PREDICATE."
@@ -107,8 +107,8 @@ value to evaluate with PREDICATE."
 (cl-defmacro rc/any ((item-name items &key (key #'identity)) &body predicate)
   "Return whether PREDICATE evaluates true for any elements of ITEMS.
 
-While evaluating PREDICATE, each element of ITEMS is bound to the result of
-applying KEY to ITEM-NAME.
+While evaluating PREDICATE, ITEM-NAME is bound to the result of applying
+KEY to each element in ITEMS.
 
 KEY is a single-argument function applied to each element to retrieve the
 value to evaluate with PREDICATE."
@@ -124,9 +124,9 @@ value to evaluate with PREDICATE."
 (cl-defmacro rc/none ((item-name items &key (key #'identity)) &body predicate)
   "Return whether PREDICATE evaluates true for no elements of ITEMS.
 
-While evaluating PREDICATE, each element of ITEMS is bound to the result of
-applying KEY to ITEM-NAME.
-
+While evaluating PREDICATE, ITEM-NAME is bound to the result of applying
+KEY to each element in ITEMS.
+.
 KEY is a single-argument function applied to each element to retrieve the
 value to evaluate with PREDICATE."
   (let ((tmp (gensym)))
