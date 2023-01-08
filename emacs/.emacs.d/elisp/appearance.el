@@ -47,8 +47,15 @@
                             c-mode
                             emacs-lisp-mode
                             python-mode))
+(defvar after-load-theme-hook nil
+  "Hook that is run after a color theme is loaded using `load-theme'.")
 
 (dolist (mode ed/whitespace-modes)
   (add-hook (rc/symbol-cat mode "-hook") 'rc/setup-whitespace))
+(defadvice load-theme (after run-after-load-theme-hook activate)
+  "Run `after-load-theme-hook'."
+  (run-hooks 'after-load-theme-hook))
+
+(add-hook 'after-load-theme-hook #'rc/setup-whitespace-mode)
 
 (provide 'appearance)
