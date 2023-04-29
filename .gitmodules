@@ -1,6 +1,3 @@
 [submodule "vim/.local/share/nvim/site/packer.nvim"]
 	path = vim/.local/share/nvim/site/pack/packer/start/packer.nvim
 	url = https://github.com/wbthomason/packer.nvim
-[submodule "emacs/.emacs.d/elisp/modes/kernel-mode"]
-	path = emacs/.emacs.d/elisp/modes/kernel-mode
-	url = git@github.com:jakergrossman/kernel-mode.git

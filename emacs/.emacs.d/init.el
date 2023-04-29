@@ -1,22 +1,27 @@
-;;; init.el --- -*- lexical-binding: t -*-
-;;;
-;;; Bootstrap use-package and load configuration packages
-(require 'package)
+;; Identifying Information
+(setq user-full-name "Jake Grossman"
+      user-mail-address "jakergrossman@gmail.com")
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+;; Garbage Collection/Large File Threshold
+(setq gc-cons-threshold             50000000  ; 50 MB
+      large-file-warning-threshold 100000000) ; 100 MB
 
-(package-initialize)
-(package-install 'use-package)          ; at the moment, use-package requires
-(package-install 'bind-key)             ; bind-key anyways, but this wont break l8r
-(require 'use-package)
-(require 'bind-key)
+;; Startup Metrics
+(defun rc/uptime (&optional after-init)
+  (interactive)
+  (let* ((startup-time (time-subtract after-init-time before-init-time))
+         (ftime (float-time startup-time))
+         (strtime (if after-init (emacs-uptime) (format "%.2f seconds" ftime))))
+    (message "%s with %d GC passes" strtime gcs-done)))
+(add-hook 'emacs-startup-hook #'rc/uptime)
+
+(package-install 'use-package)
 
 (setq use-package-always-ensure t)
+(use-package diminish :ensure t)
 
-(setq custom-file "~/.emacs.d/custom.el")
-(when (file-exists-p custom-file)
-  (load custom-file t))
+;; Clean whitespace on buffer save
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; set up load path
 ;; everything under .emacs.d/elisp can be found
@@ -24,11 +29,8 @@
   (add-to-list 'load-path default-directory)
   (normal-top-level-add-subdirs-to-load-path))
 
-;; configuration modules
-(require 'rc)
-(require 'appearance)
-(require 'core)
-(require 'editor)
-(require 'vcs)
-(require 'lsp)
-(require 'tree-sitter)
+(require 'init-nav)
+(require 'init-appearance)
+(require 'init-completion)
+(require 'init-misc)
+(require 'init-verilog)

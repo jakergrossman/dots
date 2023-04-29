@@ -4,3 +4,5 @@
 .emacs.d/auto-save-list/
 .emacs.d/tramp
 .emacs.d/.lsp-session*
+.emacs.d/eln-cache
+.emacs.d/transient
