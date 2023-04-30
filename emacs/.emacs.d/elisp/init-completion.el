@@ -6,16 +6,16 @@
               ("<tab>" . company-complete-selection))
 
   :custom
-  (company-idle-delay 0)
+  (company-idle-delay 0.2)
   (company-minimum-prefix-length 2)
   (company-tooltip-align-annotations t)
   (company-tooltip-limit 7))
 
-
-(use-package company-fuzzy :ensure t :hook company-mode)
+(use-package company-fuzzy
+  :hook company-mode
+  :diminish company-fuzzy-mode)
 
 (use-package ido-completing-read+
-  :defer 3
   :config
   (ido-everywhere 1)
   (ido-ubiquitous-mode 1)

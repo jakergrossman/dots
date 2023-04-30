@@ -21,3 +21,4 @@
 (require 'init-completion)
 (require 'init-misc)
 (require 'init-verilog)
+(require 'init-common-lisp)

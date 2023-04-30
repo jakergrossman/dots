@@ -5,6 +5,20 @@
   :config
   (setq avy-background t))
 
+(use-package multiple-cursors
+  :config
+  (bind-keys
+   :map prog-mode-map
+   :prefix "C-c m"
+   :prefix-map multiple-cursors-map
+   ("n" . mc/mark-next-like-this)
+   ("p" . mc/mark-pref-like-this)
+   ("<" . mc/mark-all-like-this)
+   ("a" . mc/edit-beginnings-of-lines)
+   ("e" . mc/edit-ends-of-lines)
+   ("\"" . mc/skip-to-next-like-this)
+   (":" . mc/skip-to-prev-like-this)))
+
 (defun newline-and-indent-same-level ()
   "Insert a newline, then indent to the same column as the current line."
   (interactive)
@@ -33,5 +47,14 @@ Otherwise call `kill-word'"
         (backward-char)
         (kill-region pos (point)))
     (kill-word)))
+
+(defun dired-parent ()
+  "Visit Dired for the directory containing the current buffer"
+  (interactive)
+  (if (null buffer-file-name)
+      (message "Current buffer has no parents!")
+    (dired (file-name-directory buffer-file-name))))
+
+(bind-key "C-x D" #'dired-parent)
 
 (provide 'init-nav)
