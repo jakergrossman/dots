@@ -6,10 +6,10 @@
       kept-old-versions 2
       version-control t)
 
-;; Don't blow up VC files with custom
-(setq custom-file "~/.emacs.d/custom.el")
-(when (file-exists-p custom-file)
-  (load custom-file t))
+;; Clean whitespace on buffer save
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+(setq visible-bell 1)
 
 (bind-keys
  :map global-map

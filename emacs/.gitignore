@@ -6,3 +6,5 @@
 .emacs.d/.lsp-session*
 .emacs.d/eln-cache
 .emacs.d/transient
+.emacs.d/.package-timestamp
+.emacs.d/session.*

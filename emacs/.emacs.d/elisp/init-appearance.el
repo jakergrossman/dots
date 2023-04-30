@@ -1,8 +1,9 @@
+(use-package diminish :ensure t)
+
 ;; theme
 (use-package hc-zenburn-theme
   :config
   (load-theme 'hc-zenburn t))
-
 
 ;; font
 (cl-flet ((font-p (font) (find-font (font-spec :name font))))

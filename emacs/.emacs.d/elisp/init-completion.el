@@ -1,19 +1,18 @@
 ;; Completion
 (use-package company
   :diminish company-mode
-  :hook (prog-mode . company-mode)
+  :hook prog-mode
   :bind (:map company-active-map
               ("<tab>" . company-complete-selection))
 
   :custom
-  (company-idle-delay 0.2)
-  (company-minimum-prefix-length 5)
+  (company-idle-delay 0)
+  (company-minimum-prefix-length 2)
   (company-tooltip-align-annotations t)
   (company-tooltip-limit 7))
 
 
-(use-package company-fuzzy
-  :hook (company-mode . company-fuzzy-mode))
+(use-package company-fuzzy :ensure t :hook company-mode)
 
 (use-package ido-completing-read+
   :defer 3
