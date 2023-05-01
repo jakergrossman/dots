@@ -12,6 +12,7 @@
 (setq gc-cons-threshold             50000000  ; 50 MB
       large-file-warning-threshold 100000000) ; 100 MB
 
+
 ;; Refresh package contents every 24 hours
 (defvar emacs-timestamp-file (expand-file-name ".package-timestamp" user-emacs-directory))
 (defvar emacs-package-refresh-interval 24)
@@ -32,8 +33,11 @@
       (> delta (* emacs-package-refresh-interval 60 60))))))
 
 (when (rc/need-refresh-p)
-    (package-refresh-contents)
-    (set-file-times emacs-timestamp-file (current-time)))
+  (package-refresh-contents)
+  (set-file-times emacs-timestamp-file (current-time)))
+
+(defconst my-lisp-dir (expand-file-name "elisp" user-emacs-directory)
+  "Directory of personal configuration")
 
 ;; Provide consistency with older emacs versions that DONT call
 ;; package initialize between early-init.el and init.el

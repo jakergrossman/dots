@@ -10,8 +10,8 @@
 
 ;; set up load path
 ;; everything under .emacs.d/elisp can be found
-(let ((elisp-dir (expand-file-name "elisp" user-emacs-directory)))
-  (add-to-list 'load-path elisp-dir)
+(let ((default-directory my-lisp-dir))
+  (add-to-list 'load-path my-lisp-dir)
   (normal-top-level-add-subdirs-to-load-path))
 
 ;;; Main configuration entry point:
