@@ -12,12 +12,12 @@
    :prefix "C-c m"
    :prefix-map multiple-cursors-map
    ("n" . mc/mark-next-like-this)
-   ("p" . mc/mark-pref-like-this)
+   ("p" . mc/mark-previous-like-this)
    ("<" . mc/mark-all-like-this)
    ("a" . mc/edit-beginnings-of-lines)
    ("e" . mc/edit-ends-of-lines)
    ("\"" . mc/skip-to-next-like-this)
-   (":" . mc/skip-to-prev-like-this)))
+   (":" . mc/skip-to-previous-like-this)))
 
 (defun newline-and-indent-same-level ()
   "Insert a newline, then indent to the same column as the current line."
