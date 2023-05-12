@@ -11,9 +11,8 @@
 
 ;; set up load path
 ;; everything under .emacs.d/elisp can be found
-(let ((default-directory my-lisp-dir))
-  (add-to-list 'load-path my-lisp-dir)
-  (normal-top-level-add-subdirs-to-load-path))
+(add-subdirs-to-load-path my-lisp-dir)
+(add-subdirs-to-load-path my-site-lisp-dir)
 
 ;;; Main configuration entry point:
 

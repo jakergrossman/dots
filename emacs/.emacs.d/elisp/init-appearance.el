@@ -1,14 +1,16 @@
-(use-package diminish)
+(use-package delight)
 
-;; theme
 (use-package hc-zenburn-theme
   :config
   (load-theme 'hc-zenburn t))
 
+(defvar font-priority-list '("JetBrains Mono" "Hack" "Source Code Pro" "Fira Code")
+  "In-order list of fonts to pick if available")
+
+
 ;; font
 (cl-flet ((font-p (font) (find-font (font-spec :name font))))
-  (let* ((fonts '("Hack" "Source Code Pro" "Fira Code"))
-         (font-name (or (cl-find-if #'font-p fonts) "monospace")))
+  (let ((font-name (or (cl-find-if #'font-p font-priority-list) "monospace")))
     (set-frame-font (concat font-name "-12") nil t)))
 
 ;; Tabs are 4 spaces
@@ -17,15 +19,14 @@
 
 ;; indent markers
 (use-package highlight-indent-guides
+  :delight
   :hook prog-mode
-  :diminish highlight-indent-guides-mode
 
   :init
   (defalias 'hig-mode 'highlight-indent-guides-mode)
 
   :custom
-  (highlight-indent-guides-method 'character)
-  (highlight-indent-guides-auto-character-face-perc 75))
+  (highlight-indent-guides-method 'column))
 
 (setq inhibit-startup-screen t)
 
@@ -43,5 +44,8 @@
 (column-number-mode 1)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(when (version<= "29.1" emacs-version)
+  (pixel-scroll-precision-mode))
 
 (provide 'init-appearance)
