@@ -18,3 +18,8 @@ or run `git submodule init && git submodule update` in the root of the repositor
 ```console
 $ stow package1 package2 ...
 ```
+
+## license
+This work is dual-licensed under the following licenses:
+- [The Unlicense](https://opensource.org/license/unlicense/)
+- [ISC](https://opensource.org/license/isc-license-txt/)
