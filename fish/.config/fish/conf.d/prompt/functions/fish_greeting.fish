@@ -1,12 +1,4 @@
 function fish_greeting
-    status is-login
-    or return
-
-    set_color $material_gray
-    echo -n 'OS:     '
-    set_color normal
-    lsb_release -ds | rainbow
-
     set_color $material_gray
     echo -n 'UPTIME: '
     set_color normal

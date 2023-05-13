@@ -16,6 +16,17 @@ function fish_prompt
 
     set prompt_status (__fish_print_pipestatus "[" "] " "|" "$(set_color --bold $material_red)" "" $laststatus)
 
+    set njobs (jobs | count)
+    switch $njobs
+        case 0
+            set job_status ""
+        case 1
+            set job_status " ⚡"
+        case '*'
+            set job_status " ⚡($njobs)"
+    end
+
+
     # FIRST LINE
     echo -s \
         (set_color $user_color)             "$USER"             \
@@ -25,7 +36,8 @@ function fish_prompt
         (set_color $material_darkpurple)    "$abbr_dir"         \
         (set_color $material_darkgreen)     (printf '%s' (__fish_vcs_prompt)) \
         (set_color normal)                  " "                 \
-        (set_color $material_gray)          "["(date "+%H:%M")"] "
+        (set_color $material_gray)          "["(date "+%H:%M")"]" \
+        (set_color $material_yellow)        "$job_status"
 
     # SECOND LINE
     set_color normal

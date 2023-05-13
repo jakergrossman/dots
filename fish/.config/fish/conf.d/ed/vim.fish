@@ -1,6 +1,9 @@
 # fallback to vim if nvim is not found
-set vi vim
-test -x (command -v nvim); and set vi nvim
+if type -q nvim
+    set vi nvim
+else
+    set vi vim
+end
 
 abbr -a vim $vi # nvim if found
 
