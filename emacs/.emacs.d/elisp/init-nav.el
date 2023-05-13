@@ -13,7 +13,7 @@
   ;; darken IMMEDIATELY instead of after choosing a char (yes, it's hacky)
   ("C-=" . (lambda ()
              (interactive)
-             (unwind-protect _unused
+             (unwind-protect
                  (progn
                    (let ((avy-background t))
                      ;; avy-background=t required (because avy--make-backgrounds
