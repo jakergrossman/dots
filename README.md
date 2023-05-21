@@ -5,8 +5,8 @@ my system configuration files
 - fish: [fish](https://fishshell.com) configuration
 - shell: shell environment configuration
   - minimal `bash`
-  - tmux
   - git
+- tmux: terminal multiplexer configuration
 - vim: [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim) configuration.
 - emacs: [emacs](https://www.gnu.org/software/emacs/) configuration.
 
