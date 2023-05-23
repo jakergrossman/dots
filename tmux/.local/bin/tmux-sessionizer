@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
 
+if [[ ! -z "$TMUX_SESSIONIZER_DIRS" ]]; then
+    dirs="$TMUX_SESSIONIZER_DIRS"
+else
+    dirs=""
+fi
+
+# some default dirs to always add if present
+for dir in ~/ ~/projects ~/dev ~/code ~/.dots; do
+    [ -d "$dir" ] && dirs="$dir $dirs"
+done
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/projects ~/ ~/.dots -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find $dirs -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
