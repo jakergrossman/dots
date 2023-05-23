@@ -7,7 +7,9 @@ function fish_greeting
         set_color normal
     else
         set_color -i -d
+        echo
         echo "  it's a little too quiet..."
+        echo
         set_color normal
     end
 end

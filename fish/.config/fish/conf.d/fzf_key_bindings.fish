@@ -146,3 +146,6 @@ function fzf_key_bindings
   end
 
 end
+
+# setup fzf key bindings
+fzf_key_bindings
