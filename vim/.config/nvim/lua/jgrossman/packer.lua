@@ -1,5 +1,3 @@
---vim.cmd.packadd "packer.nvim"
-
 return require("packer").startup(function(use)
     -- packer can manage itself
     use "wbthomason/packer.nvim"
@@ -10,20 +8,10 @@ return require("packer").startup(function(use)
     }
 
     use {
-        "ahmedkhalf/project.nvim",
-        after = "telescope.nvim",
-        config = function()
-            require("project_nvim").setup {
-                exclude_dirs = { "~/.config/nvim/*" }
-            }
-        end
-    }
-
-    use {
-        "folke/tokyonight.nvim",
+        "sainnhe/sonokai",
         config = function()
             vim.opt.background = "dark"
-            vim.cmd.colorscheme "tokyonight-night"
+            vim.cmd.colorscheme "sonokai"
         end
     }
 
@@ -36,6 +24,7 @@ return require("packer").startup(function(use)
 
     use "tpope/vim-commentary"
     use "tpope/vim-fugitive"
+    use "airblade/vim-gitgutter"
     use "mbbill/undotree"
 
     -- LSP

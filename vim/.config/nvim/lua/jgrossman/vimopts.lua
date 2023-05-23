@@ -37,6 +37,8 @@ local options = {
     signcolumn = "yes",
 
     updatetime = 50,
+
+    termguicolors = true,
 }
 
 -- take action!
