@@ -50,4 +50,6 @@ return require("packer").startup(function(use)
             {'rafamadriz/friendly-snippets'},
         }
     }
+
+    use "ThePrimeagen/harpoon";
 end)
