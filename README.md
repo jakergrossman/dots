@@ -7,8 +7,9 @@ my system configuration files
   - minimal `bash`
   - git
 - tmux: terminal multiplexer configuration
-- vim: [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim) configuration.
-- emacs: [emacs](https://www.gnu.org/software/emacs/) configuration.
+- vim: [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim) configuration
+- emacs: [emacs](https://www.gnu.org/software/emacs/) configuration
+- sway: [sway window manager](https://swaywm.org) configuration
 
 ## submodules
 Some configuration options depend on git submodules. Either use `--recursive` when cloning
