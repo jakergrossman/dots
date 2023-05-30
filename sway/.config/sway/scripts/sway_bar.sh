@@ -3,11 +3,12 @@ date_and_week=$(date +'%Y-%m-%d %I:%M:%S %p')
 
 # volume
 if [ $(amixer sget Master | awk '/Left:/ { print $6 }') = "[off]" ]; then
-    volume_text="🔇"
+    volume_icon="🔇"
 else
-    volume_pct=$(pactl list sinks | grep -C 10 "RUNNING" | grep "Volume:" | awk '{ print $12 }')
-    volume_text="🔊 $volume_pct"
+    volume_icon="🔊"
 fi
+volume_pct=$(pactl list sinks | grep -C 10 "RUNNING" | grep "Volume:" | awk '{ print $12 }')
+volume_text="$volume_icon $volume_pct"
 
 # network
 network=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
