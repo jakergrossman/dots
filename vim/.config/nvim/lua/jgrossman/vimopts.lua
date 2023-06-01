@@ -39,6 +39,8 @@ local options = {
     updatetime = 50,
 
     termguicolors = true,
+
+
 }
 
 -- take action!
