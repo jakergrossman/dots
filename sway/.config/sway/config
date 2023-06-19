@@ -13,7 +13,6 @@ set $term alacritty
 # preferred application launcher
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-# default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/gnome/blobs-d.svg fill
 
 # monitor configuration
@@ -64,33 +63,34 @@ bindsym $mod+Shift+Right move right
 #
 # workspaces:
 #
-# switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+# switch to workspace (modified programmers dvorak)
+# https://github.com/jakergrossman/qmk_keymaps/blob/b0c30c6682999964cacdfeab063d08b95469006f/ergodox_modified_dvorak/ergodox_ez/keymaps/modified_dvorak/keymap.c#L30
+bindsym $mod+plus workspace number 1
+bindsym $mod+bracketleft workspace number 2
+bindsym $mod+braceleft workspace number 3
+bindsym $mod+parenleft workspace number 4
+bindsym $mod+ampersand workspace number 5
+bindsym $mod+equal workspace number 6
+bindsym $mod+parenright workspace number 7
+bindsym $mod+braceright workspace number 8
+bindsym $mod+bracketright workspace number 9
+bindsym $mod+asterisk workspace number 0
+
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
-# note: workspaces can have any name you want, not just numbers.
-# we just use 1-10 as the default.
-#
-# layout stuff:
-#
+bindsym $mod+1 move container to workspace number 1
+bindsym $mod+2 move container to workspace number 2
+bindsym $mod+3 move container to workspace number 3
+bindsym $mod+4 move container to workspace number 4
+bindsym $mod+5 move container to workspace number 5
+bindsym $mod+6 move container to workspace number 6
+bindsym $mod+7 move container to workspace number 7
+bindsym $mod+8 move container to workspace number 8
+bindsym $mod+9 move container to workspace number 9
+bindsym $mod+0 move container to workspace number 0
+
+# second moniter starts with workspace 0
+workspace 0 output DP-2
+
 # you can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
