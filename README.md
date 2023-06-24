@@ -8,7 +8,6 @@ my system configuration files
   - git
 - tmux: terminal multiplexer configuration
 - vim: [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim) configuration
-- emacs: [emacs](https://www.gnu.org/software/emacs/) configuration
 - sway: [sway window manager](https://swaywm.org) configuration
 
 ## submodules
