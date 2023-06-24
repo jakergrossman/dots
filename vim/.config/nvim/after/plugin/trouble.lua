@@ -1,6 +1,13 @@
-vim.keymap.set("n", "<leader>tt", "<cmd>TroubleToggle<cr>")
+local ok, trouble = pcall(require, "trouble")
+if not ok then
+    return
+end
 
-require("trouble").setup {
+local nmap = require("jgrossman.map").nmap
+
+nmap { "<leader>tt", function() vim.cmd "TroubleToggle" end }
+
+trouble.setup {
     icons = false,
     fold_open = "v",
     fold_closed = ">",

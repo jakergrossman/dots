@@ -1,4 +1,10 @@
-require'nvim-treesitter.configs'.setup {
+if not pcall(require, "nvim-treesitter") then
+    return
+end
+
+local configs = require("nvim-treesitter.configs")
+
+configs.setup {
     ensure_installed = { "rust", "c", "lua", "vim", "vimdoc", "query" },
 
     sync_install = false,

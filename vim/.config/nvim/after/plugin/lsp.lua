@@ -1,4 +1,10 @@
-local lsp = require("lsp-zero")
+local ok, lsp = pcall(require, "lsp-zero")
+if  not ok then
+    return
+end
+
+local nmap = require("jgrossman.map").nmap
+local imap = require("jgrossman.map").imap
 
 lsp.preset("recommended")
 
@@ -47,15 +53,15 @@ lsp.set_preferences({
 lsp.on_attach(function(_, bufnr)
     local bindopts = {buffer = bufnr, remap = false }
 
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bindopts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, bindopts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bindopts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bindopts)
-    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, bindopts)
+    nmap { "gd", vim.lsp.buf.definition, bindopts }
+    nmap { "K", vim.lsp.buf.hover, bindopts }
+    nmap { "[d", vim.diagnostic.goto_prev, bindopts }
+    nmap { "]d", vim.diagnostic.goto_next, bindopts }
+    imap { "<C-h>", vim.lsp.buf.signature_help, bindopts }
 
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bindopts)
-    vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, bindopts)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bindopts)
+    nmap { "<leader>ca", vim.lsp.buf.code_action, bindopts }
+    nmap { "<leader>rr", vim.lsp.buf.references, bindopts }
+    nmap { "<leader>rn", vim.lsp.buf.rename, bindopts }
 end)
 
 
