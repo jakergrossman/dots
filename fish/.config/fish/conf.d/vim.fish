@@ -1,12 +1,10 @@
 # fallback to vim if nvim is not found
 if type -q nvim
-    set vi nvim
+    set -x EDITOR nvim
+else if type -q vim
+    set -x EDITOR vim
 else
-    set vi vim
+    set -x EDITOR vi
 end
 
-abbr -a vim $vi # nvim if found
-
-abbr -a e $vi
-
-set -x EDITOR $vi
+abbr -a e $EDITOR

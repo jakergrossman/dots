@@ -1,5 +1,11 @@
 # fish creates some stuff if they don't exist when running fish
 # https://github.com/fish-shell/fish-shell/pull/7796
 
+# we only use conf.d
+config.fish
+
 # universal variable store
 fish_variables
+
+# symlinked (supposedly) by fzf install script
+functions/fzf_key_bindings.fish

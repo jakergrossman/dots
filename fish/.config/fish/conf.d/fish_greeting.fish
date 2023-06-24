@@ -1,6 +1,6 @@
 function fish_greeting
     if command -vq fortune
-        set_color -i -d
+        set_color -i $jg_comment
         echo
         fortune | sed "s/^/  /"
         echo

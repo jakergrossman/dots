@@ -1,10 +1,10 @@
 function fish_prompt
     set laststatus $status
 
-    set user_color $material_pink
+    set user_color $jg_pink
     set suffix "\$"
     if fish_is_root_user
-        set user_color $material_error
+        set user_color $jg_red
         set suffix "#"
     end
 
@@ -14,7 +14,7 @@ function fish_prompt
         set abbr_dir "$HOME"
     end
 
-    set prompt_status (__fish_print_pipestatus "[" "] " "|" "$(set_color --bold $material_red)" "" $laststatus)
+    set prompt_status (__fish_print_pipestatus "[" "] " "|" "$(set_color --bold $jg_red)" "" $laststatus)
 
     set njobs (jobs | count)
     switch $njobs
@@ -28,18 +28,16 @@ function fish_prompt
 
 
     # FIRST LINE
-    echo -s \
+    echo -s -n \
+        (set_color normal) "$prompt_status" \
         (set_color $user_color)             "$USER"             \
-        (set_color $material_red)           "@"                 \
-        (set_color $material_pink)          (prompt_hostname)   \
+        (set_color $jg_red)           "@"                 \
+        (set_color $jg_pink)          (prompt_hostname)   \
         (set_color normal)                  " "                 \
-        (set_color $material_darkpurple)    "$abbr_dir"         \
-        (set_color $material_darkgreen)     (printf '%s' (__fish_vcs_prompt)) \
+        (set_color $jg_magenta)    "$abbr_dir"         \
+        (set_color $jg_green)     (printf '%s' (__fish_vcs_prompt)) \
         (set_color normal)                  " "                 \
-        (set_color $material_gray)          "["(date "+%H:%M")"]" \
-        (set_color $material_yellow)        "$job_status"
-
-    # SECOND LINE
-    set_color normal
-    echo -s -n "$prompt_status" "$suffix "
+        (set_color $jg_comment)          "["(date "+%H:%M")"]" \
+        (set_color $jg_yellow)        "$job_status" \
+        (set_color normal) " $suffix "
 end
