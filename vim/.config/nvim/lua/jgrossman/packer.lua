@@ -8,10 +8,10 @@ return require("packer").startup(function(use)
     }
 
     use {
-        "sainnhe/sonokai",
+        "EdenEast/nightfox.nvim",
         config = function()
-            vim.opt.background = "dark"
-            vim.cmd.colorscheme "sonokai"
+            vim.opt.background = "light"
+            vim.cmd.colorscheme "dawnfox"
         end
     }
 
