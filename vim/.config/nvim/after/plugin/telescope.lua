@@ -1,10 +1,17 @@
-local builtin = require('telescope.builtin')
+local ok, telescope = pcall(require, "telescope")
+if not ok then
+    return
+end
 
-vim.keymap.set('n', '<leader>pf', builtin.find_files)
-vim.keymap.set('n', '<leader>pg', builtin.live_grep)
-vim.keymap.set('n', '<C-p>', builtin.git_files)
+local builtin = require("telescope.builtin")
 
-require('telescope').setup {
+local nmap = require("jgrossman.map").nmap
+
+nmap { "<leader>pf", builtin.find_files }
+nmap { "<leader>pg", builtin.live_grep }
+nmap { "<C-p>", builtin.git_files }
+
+telescope.setup {
     pickers = {
         find_files = {
             hidden = true

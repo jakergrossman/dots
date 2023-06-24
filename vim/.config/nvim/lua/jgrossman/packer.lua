@@ -23,7 +23,14 @@ return require("packer").startup(function(use)
     use "nvim-treesitter/playground"
 
     use "tpope/vim-commentary"
-    use "tpope/vim-fugitive"
+    -- use "tpope/vim-fugitive"
+    use {
+        "TimUntersberger/neogit",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim"
+        }
+    }
     use "airblade/vim-gitgutter"
     use "mbbill/undotree"
 
