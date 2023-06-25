@@ -7,74 +7,44 @@ set $down j
 set $up k
 set $right l
 
-# your preferred terminal emulator
+# preferred applications
 set $term alacritty
-
-# preferred application launcher
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $browser firefox
 
-output * bg /usr/share/backgrounds/gnome/blobs-d.svg fill
-
-# monitor configuration
-output DP-1 pos 1920 0 mode 2560x1440@164.834Hz
-output DP-2 pos 0 232 mode 1920x1080@144.001Hz
-
-# start a terminal
 bindsym $mod+Return exec $term
-
-# kill focused window
+bindsym $mod+d      exec $menu
+bindsym $mod+i      exec $browser
 bindsym $mod+Shift+q kill
-
-# start your launcher
-bindsym $mod+d exec $menu
-
-# drag floating windows by holding down $mod and left mouse button.
-# resize them with right mouse button + $mod.
-# despite the name, also works for non-floating windows.
-# change normal to inverse to use left mouse button for resizing and right
-# mouse button for dragging.
-floating_modifier $mod normal
-
-# reload the configuration file
 bindsym $mod+Shift+c reload
 
-# exit sway (logs you out of your Wayland session)
+floating_modifier $mod normal
+
+# exit sway 
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-#
-# moving around:
-#
-# move your focus around
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+# move
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
 
-# move the focused window with the same, but add Shift
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-# ditto, with arrow keys
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-#
-# workspaces:
-#
 # switch to workspace (modified programmers dvorak)
 # https://github.com/jakergrossman/qmk_keymaps/blob/b0c30c6682999964cacdfeab063d08b95469006f/ergodox_modified_dvorak/ergodox_ez/keymaps/modified_dvorak/keymap.c#L30
-bindsym $mod+plus workspace number 1
-bindsym $mod+bracketleft workspace number 2
-bindsym $mod+braceleft workspace number 3
-bindsym $mod+parenleft workspace number 4
-bindsym $mod+ampersand workspace number 5
-bindsym $mod+equal workspace number 6
-bindsym $mod+parenright workspace number 7
-bindsym $mod+braceright workspace number 8
+bindsym $mod+plus         workspace number 1
+bindsym $mod+bracketleft  workspace number 2
+bindsym $mod+braceleft    workspace number 3
+bindsym $mod+parenleft    workspace number 4
+bindsym $mod+ampersand    workspace number 5
+bindsym $mod+equal        workspace number 6
+bindsym $mod+parenright   workspace number 7
+bindsym $mod+braceright   workspace number 8
 bindsym $mod+bracketright workspace number 9
-bindsym $mod+asterisk workspace number 0
+bindsym $mod+asterisk     workspace number 0
 
 # move focused container to workspace
 bindsym $mod+1 move container to workspace number 1
@@ -88,12 +58,9 @@ bindsym $mod+8 move container to workspace number 8
 bindsym $mod+9 move container to workspace number 9
 bindsym $mod+0 move container to workspace number 0
 
-# second moniter starts with workspace 0
-workspace 0 output DP-2
+bindsym $mod+r mode "resize"
+bindsym $mod+Ctrl+l exec swaylock
 
-# you can "split" the current object of your focus with
-# $mod+b or $mod+v, for horizontal and vertical splits
-# respectively.
 bindsym $mod+b splith
 bindsym $mod+v splitv
 
@@ -109,24 +76,16 @@ bindsym $mod+Ctrl+less move workspace to output left
 bindsym $mod+f fullscreen
 
 # toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # swap focus between the tiling area and the floating area
 bindsym $mod+space focus mode_toggle
 
 # move focus to the parent container
 bindsym $mod+a focus parent
-#
-# scratchpad:
-#
-# sway has a "scratchpad", which is a bag of holding for windows.
-# you can send windows there and get them back later.
 
-# move the currently focused window to the scratchpad
+# stratchpad
 bindsym $mod+Shift+minus move scratchpad
-
-# show the next scratchpad window or hide the focused scratchpad window.
-# if there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
 # volume controls
@@ -137,35 +96,33 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-#
-# resizing containers:
-#
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Shift+$left resize shrink width 80px
+    bindsym Shift+$down resize grow height 80px
+    bindsym Shift+$up resize shrink height 80px
+    bindsym Shift+$right resize grow width 80px
 
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
 
-bindsym $mod+Ctrl+l exec swaylock
 
 # font
 font pango:JetBrains Mono 16
+
+# monitor configuration
+output DP-1 pos 1920 0 mode 2560x1440@164.834Hz
+output DP-2 pos 0 232 mode 1920x1080@144.001Hz
+output * bg /usr/share/backgrounds/gnome/blobs-d.svg fill
+
+# second moniter starts with workspace 0
+workspace 0 output DP-2
 
 #
 # status Bar:
