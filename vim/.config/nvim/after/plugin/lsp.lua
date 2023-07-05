@@ -62,6 +62,8 @@ lsp.on_attach(function(_, bufnr)
     nmap { "<leader>ca", vim.lsp.buf.code_action, bindopts }
     nmap { "<leader>rr", vim.lsp.buf.references, bindopts }
     nmap { "<leader>rn", vim.lsp.buf.rename, bindopts }
+
+    nmap { "<leader>ff", vim.lsp.buf.format, bindopts }
 end)
 
 
