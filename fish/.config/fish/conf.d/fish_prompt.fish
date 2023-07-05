@@ -31,7 +31,7 @@ function fish_prompt
     echo -s -n \
         (set_color normal) "$prompt_status" \
         (set_color $user_color)             "$USER"             \
-        (set_color $jg_red)           "@"                 \
+        (set_color $jg_red)           "::"                 \
         (set_color $jg_pink)          (prompt_hostname)   \
         (set_color normal)                  " "                 \
         (set_color $jg_magenta)    "$abbr_dir"         \
