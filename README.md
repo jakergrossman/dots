@@ -2,13 +2,14 @@
 my system configuration files
 
 ## packages
-- fish: [fish](https://fishshell.com) configuration
-- shell: shell environment configuration
+- fish: [fish](https://fishshell.com)
+- shell: shell environment
   - minimal `bash`
   - git
-- tmux: terminal multiplexer configuration
-- vim: [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim) configuration
-- sway: [sway window manager](https://swaywm.org) configuration
+- term: terminal emulator (currently [wezterm](https://wezfurlong.org/wezterm/))
+- tmux: terminal multiplexer
+- vim: [neovim](https://github.com/neovim/neovim) and [vim](https://github.com/vim/vim)
+- sway: [sway window manager](https://swaywm.org)
 
 ## submodules
 Some configuration options depend on git submodules. Either use `--recursive` when cloning

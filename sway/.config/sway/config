@@ -8,7 +8,7 @@ set $up k
 set $right l
 
 # preferred applications
-set $term alacritty
+set $term wezterm
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $browser firefox
 
@@ -142,3 +142,6 @@ bar {
 }
 
 client.focused #9b75d9 #6a4c99 #ffffff
+
+gaps outer 5
+gaps inner 5
