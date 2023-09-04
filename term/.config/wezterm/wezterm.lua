@@ -11,4 +11,6 @@ end
 ui.apply_config(config)
 mapping.apply_config(config)
 
+config.check_for_updates = false
+
 return config

@@ -10,7 +10,7 @@ local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
 nmap { "<leader>a", mark.add_file }
-nmap { "<C-e>", function() vim.cmd "Telescope harpoon marks" end }
+nmap { "<C-e>", ui.toggle_quick_menu }
 
 nmap { "<C-h>", function() ui.nav_file(1) end }
 nmap { "<C-t>", function() ui.nav_file(2) end }

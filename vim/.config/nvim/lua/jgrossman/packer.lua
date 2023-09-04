@@ -59,5 +59,4 @@ return require("packer").startup(function(use)
 
     use "ThePrimeagen/harpoon"
     use "folke/trouble.nvim"
-    use "github/copilot.vim"
 end)
