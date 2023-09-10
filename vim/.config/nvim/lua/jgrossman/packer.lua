@@ -59,4 +59,11 @@ return require("packer").startup(function(use)
 
     use "ThePrimeagen/harpoon"
     use "folke/trouble.nvim"
+
+    use {
+        "simrat39/symbols-outline.nvim",
+        config = function()
+            require("symbols-outline").setup()
+        end
+    }
 end)
