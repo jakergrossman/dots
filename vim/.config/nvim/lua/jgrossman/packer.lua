@@ -3,7 +3,7 @@ return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
     use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.1",
+        "nvim-telescope/telescope.nvim",
         requires = "nvim-lua/plenary.nvim"
     }
 
@@ -57,7 +57,11 @@ return require("packer").startup(function(use)
         }
     }
 
-    use "ThePrimeagen/harpoon"
+    use {
+        "ThePrimeagen/harpoon",
+        branch = 'harpoon2',
+    }
+
     use "folke/trouble.nvim"
 
     use {

@@ -21,7 +21,8 @@ telescope.setup {
     defaults = {
         file_ignore_patterns = {
             "^.git/.*",
-            "^.svn/.*"
+            "^.svn/.*",
+            "^build/.*"
         }
     }
 }

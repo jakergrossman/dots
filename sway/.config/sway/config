@@ -121,7 +121,7 @@ font pango:JetBrains Mono 16
 # monitor configuration
 output DP-1 pos 1920 0 mode 2560x1440@164.834Hz
 output DP-2 pos 0 232 mode 1920x1080@144.001Hz
-output * bg /usr/share/backgrounds/gnome/blobs-d.svg fill
+
 
 # second moniter starts with workspace 0
 workspace 0 output DP-2
