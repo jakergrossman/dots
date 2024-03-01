@@ -2,11 +2,11 @@ local options = {
     -- line numbers
     number = true,
 
-    -- default 4-wide soft tabs (may be overridden)
+    -- default 4-wide hard tabs (may be overridden)
     tabstop = 4,
     softtabstop = 4,
     shiftwidth = 4,
-    expandtab = true,
+    expandtab = false,
 
     -- always show statusline w/ line number
     laststatus = 2,

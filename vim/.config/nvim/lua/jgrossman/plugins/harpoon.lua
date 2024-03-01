@@ -23,12 +23,14 @@ local function on_attach()
     local nmap = require("jgrossman.map").nmap
 
     nmap { "<leader>a", function() harpoon:list():append() end }
-    nmap { "<C-e>", function() toggle_telescope(harpoon:list()) end }
+    nmap { "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end }
 
     nmap { "<C-h>", function() harpoon:list():select(1) end }
     nmap { "<C-t>", function() harpoon:list():select(2) end }
     nmap { "<C-n>", function() harpoon:list():select(3) end }
     nmap { "<C-s>", function() harpoon:list():select(4) end }
+
+    nmap { "<leader>ph", function() toggle_telescope(harpoon:list()) end }
 end
 
 return {
