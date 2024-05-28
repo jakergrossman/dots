@@ -7,3 +7,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank { timeout = 300 }
     end
 })
+
+vim.cmd[[colorscheme deepwhite]]
