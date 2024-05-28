@@ -21,7 +21,7 @@ local options = {
     incsearch = true,
 
     -- line length with color column at &textwidth
-    textwidth = 120,
+    textwidth = 100,
     colorcolumn = "+0",
 
     smartindent = true,
@@ -39,8 +39,6 @@ local options = {
     updatetime = 50,
 
     termguicolors = true,
-
-
 }
 
 -- take action!
