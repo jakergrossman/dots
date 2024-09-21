@@ -62,7 +62,7 @@ local colors = {
 
 local function apply_config(config)
     local wez = require("wezterm")
-    config.color_scheme = "deepwhite"
+    config.color_scheme = "sonokai"
 
     config.font = wez.font("JetBrains Mono NL")
     config.font_size = 15.0
