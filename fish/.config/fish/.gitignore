@@ -6,6 +6,3 @@ config.fish
 
 # universal variable store
 fish_variables
-
-# symlinked (supposedly) by fzf install script
-functions/fzf_key_bindings.fish
