@@ -18,10 +18,7 @@ function fish_prompt
     echo -e "$brblack$sep$normal"
 
     # main line
-    set host ''
-    if test -n "$SSH_TTY"
-        set host "$(prompt_hostname)"
-    end
+    set host "$(prompt_hostname)"
 
     set caret '$'
     set caret_color $yellow
@@ -31,11 +28,10 @@ function fish_prompt
     end
 
     set prompt_status (__fish_print_pipestatus "[" "]" "|" "$(set_color red)" "" "$laststatus")
-    if test -n "$host"
-        echo -e -n "$brblue$host$normal:"
-    end
-    echo -e -n "$yellow$USER$normal"
-    echo -e -n " "
+    echo -e -n "$brblue$host"
+    echo -e -n "$normal:"
+    echo -e -n "$yellow$USER"
+    echo -e -n "$normal "
 
     set -l pwd $(prompt_pwd --dir-length=8 --full-length-dirs=3)
     set -l vcs $(fish_vcs_prompt | cut -c 2-)
