@@ -28,7 +28,7 @@ function fish_prompt
     end
 
     set prompt_status (__fish_print_pipestatus "[" "]" "|" "$(set_color red)" "" "$laststatus")
-    echo -e -n "$brblue$host"
+    echo -e -n "$brpurple$host"
     echo -e -n "$normal:"
     echo -e -n "$yellow$USER"
     echo -e -n "$normal "
@@ -37,7 +37,7 @@ function fish_prompt
     set -l vcs $(fish_vcs_prompt | cut -c 2-)
 
     echo -e -n "$bryellow$pwd$normal "
-    test -n "$vcs" && echo -e -n "$brpurple$vcs$normal "
+    test -n "$vcs" && echo -e -n "$green$vcs$normal "
     test -n "$prompt_status" && echo -e -n "$prompt_status "
     test -n "$caret" && echo -e -n "$caret_color$caret$normal "
 end
