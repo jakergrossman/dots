@@ -1,3 +1,6 @@
 [submodule "vim/.local/share/nvim/site/packer.nvim"]
 	path = vim/.local/share/nvim/site/pack/packer/start/packer.nvim
 	url = https://github.com/wbthomason/packer.nvim
+[submodule "zsh/antidote"]
+	path = zsh/antidote
+	url = https://github.com/mattmc3/antidote

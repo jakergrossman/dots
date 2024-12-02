@@ -1,0 +1,6 @@
+# fish-like syntax coloring and auto completion
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+
+sindresorhus/pure
