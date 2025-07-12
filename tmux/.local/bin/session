@@ -1,40 +1,53 @@
 #!/usr/bin/env bash
 
-if [[ ! -z "$TMUX_SESSIONIZER_DIRS" ]]; then
-    dirs="$TMUX_SESSIONIZER_DIRS"
+set -e
+
+# session - manage TMUX sessions
+#
+# Usage: session [session_name]
+
+session_dirs=($TMUX_SESSIONIZER_SESSION_DIRS)
+
+# add all arguments to $session_dirs. for each added directory,
+# recursively add directories containing a file '.sessionizer'
+extend_session_dirs () {
+    while [ "$#" -gt 0  ]; do
+        dir="${1}"
+        [ -d "${dir}" ] && session_dirs+=("$dir")
+        extensions=($(find "${dir}" -mindepth 2 -maxdepth 2 -type f -name .sessionizer))
+        for extension in "${extensions[@]}"; do
+            extend_session_dirs "$(dirname "${extension}")"
+        done
+        shift 1
+    done
+}
+
+extend_session_dirs ~/devel/*/
+
+if [ "$#" -eq 1 ]; then
+    session="${1}"
 else
-    dirs=""
+    session="$(find "${session_dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)"
 fi
 
-# some default dirs to always add if present
-for dir in ~/ ~/projects ~/dev ~/code ~/.dots; do
-    [ -d "$dir" ] && dirs="$dir $dirs"
-done
-
-if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    selected=$(find $dirs -mindepth 1 -maxdepth 1 -type d | fzf)
-fi
-
-if [[ -z $selected ]]; then
+if [ -z "${session}" ]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+session_name=$(basename "$session" | tr . _)
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
+if [ -z "${TMUX}${tmux_running}" ]; then
+    tmux new-session -s "${session_name}" -c "${session}"
     exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="${session_name}" 2> /dev/null; then
+    tmux new-session -ds "${session_name}" -c "${session}"
 fi
 
-if [[ -z $TMUX ]]; then
-    tmux attach-session -t $selected_name
+if [ -z "${TMUX}" ]; then
+    tmux attach-session -t "${session_name}"
 else
-    tmux switch-client -t $selected_name
+    tmux switch-client -t "${session_name}"
 fi
